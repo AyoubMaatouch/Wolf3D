@@ -1,0 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_filecheck.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/05 11:49:26 by aymaatou          #+#    #+#             */
+/*   Updated: 2020/11/25 12:01:24 by aymaatou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cub3d.h"
+
+void ft_get_resolution(int hight, int width)
+{
+    g_file.height_resolution = hight;
+    g_file.width_resolution = width;
+}
+
+void ft_get_texture(char c, char *value)
+{
+    if (c == 'N')
+        g_file.no_t = value;
+    else if (c == 'W')
+        g_file.we_t = value;
+    else if (c == 'E')
+        g_file.ea_t = value;
+    else
+        g_file.so_t = value;
+}
+
+void ft_get_sprit(char *value)
+{
+    g_file.sprit = value;
+}
+
+void ft_get_cf(char c, char *value)
+{
+    if (c == 'F')
+    {
+        g_file.flor = value;
+    }
+    else
+    {
+        g_file.cilng = value;
+    }
+}
+
+void ft_get_handle(char *g_value)
+{
+    char **temp;
+
+    temp = ft_split(g_value, ' ');
+    if (g_value[0] == 'R')
+        ft_get_resolution(ft_atoi(temp[2]), ft_atoi(temp[1]));
+    if (g_value[0] == 'W' || g_value[0] == 'N' || (g_value[0] == 'S' && g_value[1] == 'O') || g_value[0] == 'E')
+        ft_get_texture(g_value[0], temp[1]);
+    if (g_value[0] == 'F' || g_value[0] == 'C')
+        ft_get_cf(g_value[0], temp[1]);
+    if (g_value[0] == 'S' && g_value[1] != 'O')
+        ft_get_sprit(temp[1]);
+    free(temp);
+}
+
+void ft_map_handle(char *r_file, int map_size)
+{
+    int fd = open(r_file, O_RDONLY);
+    char *line;
+    int i = 0;
+    g_file.hight = map_size;
+    g_file.map = malloc(sizeof(char *) * (map_size + 1));
+    g_file.map[map_size + 1] = NULL;
+    while ((get_next_line(fd, &line)))
+    { 
+        if (!g_file.width || g_file.width < (int)ft_strlen(line))
+            g_file.width = (int)ft_strlen(line);
+        
+        if (ft_isdigit(ft_strtrim(line, " ")[0]))
+        {
+            g_file.map[i] = ft_strdup(line);
+            i++;
+        }
+        free(line);
+    }
+    if (ft_isdigit(ft_strtrim(line, " ")[0]))
+        g_file.map[i] = ft_strdup(line);
+    g_file.map[i + 1] = ft_strdup("");
+}
