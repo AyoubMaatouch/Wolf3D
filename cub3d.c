@@ -6,21 +6,33 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 20:37:11 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/25 12:08:57 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/25 18:20:01 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void ft_init (void)
+{
+	g_myplayer.turnDirection = 0;   // -1 left && +1 right
+	g_myplayer.walkDirection = 0;  // -1 down && +1 up
+	g_myplayer.move_speed = 3.0;
+	g_myplayer.radius = 3;
+	g_myplayer.rotationAngle = M_PI / 2;
+	g_myplayer.rotation_speed = 3 * (M_PI / 180);
+	
+}
 void update(int key)
 {
+	if (key == 53)
+		exit(0);
 
 }
 int ft_key_input(int key)
 {
    // printf ("[%d]]\n", key);
-   update(key);
    
+   update(key);
     return key;
 }
 
@@ -64,6 +76,7 @@ int main(int ac, char **av)
 {
     if (ac == 2)
     {
+		ft_init ();
         ft_openfile(av[1]);
         g_mymlx.mlx_ptr = mlx_init();
         g_mymlx.win_ptr = mlx_new_window(g_mymlx.mlx_ptr, g_file.width_resolution, g_file.height_resolution, av[1]);

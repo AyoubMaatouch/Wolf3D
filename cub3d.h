@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/25 12:07:16 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/25 18:34:59 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,21 @@ typedef struct
     
 } t_file;
 
+typedef struct 
+{
+    float x;
+    float y;
+    float radius;
+    int turnDirection;
+    int walkDirection;
+    float rotationAngle;
+    float move_speed;
+    float rotation_speed;  
+} t_player;
+
+t_player g_myplayer;
+
+
 t_file g_file;
 
 /**************************************
@@ -109,6 +124,7 @@ void	*ft_bzero(void *b, size_t len);
 /***********
  * file handele
  * ****/
+
 void ft_map_handle(char *r_file, int map_size);
 void ft_openfile(char *r_file);
 void ft_get_handle(char *g_value);
@@ -121,5 +137,6 @@ void ft_get_resolution(int v, int h);
  * Draw Functions
  * ********/
 void ft_map();
+
 
 #endif
