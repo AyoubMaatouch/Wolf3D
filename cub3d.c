@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 20:37:11 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/25 18:20:01 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:46:06 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,46 @@ void ft_init (void)
 {
 	g_myplayer.turnDirection = 0;   // -1 left && +1 right
 	g_myplayer.walkDirection = 0;  // -1 down && +1 up
-	g_myplayer.move_speed = 3.0;
+	g_myplayer.move_speed = 5;
 	g_myplayer.radius = 3;
-	g_myplayer.rotationAngle = M_PI / 2;
+	g_myplayer.rotationAngle = 270.0 * (M_PI / 180);
 	g_myplayer.rotation_speed = 3 * (M_PI / 180);
 	
 }
-void update(int key)
+void update()
 {
-	if (key == 53)
-		exit(0);
+	g_myplayer.rotationAngle += g_myplayer.turnDirection * g_myplayer.rotation_speed;
+	
+	float x = cos(g_myplayer.rotationAngle) * (g_myplayer.move_speed * g_myplayer.walkDirection);
+	float y = sin(g_myplayer.rotationAngle) * (g_myplayer.move_speed * g_myplayer.walkDirection);
+	
+	if (iswall(g_myplayer.x+ x, g_myplayer.y + y) != 1)
+	{
+		g_myplayer.x += x;
+		g_myplayer.y += y;
+	}
+ 
+	g_myplayer.turnDirection = 0;
+	g_myplayer.walkDirection = 0;
+	
 
 }
 int ft_key_input(int key)
 {
-   // printf ("[%d]]\n", key);
+    printf ("[%d]]\n", key);
+	if (key == UP || key == UP_l)
+		g_myplayer.walkDirection = 1;
+	if (key == DOWN || key == DOWN_l)
+		g_myplayer.walkDirection = -1;
+	if (key == RIGHT || key == RIGHT_l)
+		g_myplayer.turnDirection = -1;
+	if (key == LEFT || key == LEFT_l)
+		g_myplayer.turnDirection = 1;
+	if (key == 53)
+		exit(0);
+   //update();
+   //ft_map();
    
-   update(key);
     return key;
 }
 
@@ -43,6 +66,8 @@ int check()
 	/*********
 	 * put here the hooked fuctions
 	 * *********/
+	update();
+	//cast_rays();
 	ft_map();
 	
 	mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);
@@ -84,7 +109,6 @@ int main(int ac, char **av)
         g_data.addr = mlx_get_data_addr(g_data.img, &g_data.bits_per_pixel, &g_data.line_length, &g_data.endian);
         mlx_loop_hook(g_mymlx.mlx_ptr, check, 0);
         mlx_loop(g_mymlx.mlx_ptr);
-
         return (0);
     }
 }

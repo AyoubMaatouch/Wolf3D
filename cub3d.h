@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/25 18:34:59 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:22:42 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@
 #define GRAY 0x808080
 #define BLACK 0x000000
 
+/////////////////////////////
+#define UP 126 
+#define UP_l 13
+#define DOWN 125 
+#define DOWN_l 1
+#define RIGHT 123 
+#define RIGHT_l 0
+#define LEFT 124
+#define LEFT_l 2
+
 //////////////////////////
 #define BUFFER_SIZE 1024
 #define TILE 32
@@ -49,6 +59,24 @@
 /********
  * Structs
  * *****/
+typedef struct
+{
+    float ray_angle;
+    float wallHitx;
+    float wallHity;
+    float distance;
+    int wasVerticale;
+    int rayfacingUP;
+    int rayfacingDown;
+    int wallhitcont;
+    int top;
+    int bottom;
+    float wallheight;
+
+} t_ray;
+
+ t_ray g_ray[3200];
+ 
 
 typedef struct  s_data {
     void        *img;
@@ -137,6 +165,10 @@ void ft_get_resolution(int v, int h);
  * Draw Functions
  * ********/
 void ft_map();
+void   draw_line(int x0,int y0,int x1,int y1);
+int		iswall(float x, float y);
+void    cast_rays(void);
+void ft_rayCaster(int i, double rayAngle);
 
 
 #endif
