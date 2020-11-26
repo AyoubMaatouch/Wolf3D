@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/26 14:44:35 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/26 19:59:19 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ double Normlize_anlge(double angle)
 {
      //angle = angle % ((double)(2 * M_PI));
     angle = remainder(angle, (2 * M_PI));
-    ;
     if (angle < 0)
         angle = (2 * M_PI) + angle;
     return (angle);
@@ -34,7 +33,8 @@ void cast_rays(void)
     float ray_angle = 0;
     int i = 0;
     printf("angle   [%f]\n",g_myplayer.rotationAngle);
-    ray_angle = g_myplayer.rotationAngle - d2r(30);
+    ray_angle = 270 * ( M_PI / 180) ;//- d2r(30);
+    printf("outside [%f]\n", ray_angle);
     ft_rayCaster(i, ray_angle);
    
    /* while (i < g_file.width_resolution)
@@ -55,7 +55,10 @@ double ft_distance_between(double x1, double y1, double x2, double y2)
 }
 void ft_rayCaster(int i, double rayAngle)
 {
-     int isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
+
+    //rayAngle = Normlize_anlge(rayAngle);
+    printf("inside [%f]\n", rayAngle);
+    int isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
     int isRayFacingUp = isRayFacingDown;
 
     int isRayFacingRight = rayAngle > (0.5 * M_PI) || rayAngle < (1.5 * M_PI);
@@ -188,8 +191,8 @@ void ft_rayCaster(int i, double rayAngle)
 
     g_ray[i].rayfacingUP = isRayFacingUp;
     g_ray[i].rayfacingDown = isRayFacingDown;
-
-    
+    printf("inside [%f]\n", rayAngle);
+    //printf ("player x = %f  | playery = %f | wallx = %f | wally = %f\n",g_myplayer.x, g_myplayer.y, g_ray[i].wallHitx, g_ray[i].wallHity);
     draw_line(g_myplayer.x, g_myplayer.y, g_ray[i].wallHitx, g_ray[i].wallHity);
  //   printf ("======Final Calculation Distance OF RAY [%d]=========\nWallHitV X[%f], wallHitV Y[%f]\nWallHitH X[%f], wallHitH Y[%f]\n H Distance [%f]\nV Distance [%f]\n===========================================================\n", i, VertWallHitX,VertWallHitY , HorizWallHitX, HorizWallHitY, HorizDistance, VertDistance);
 }
