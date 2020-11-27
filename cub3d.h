@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/26 14:22:42 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/27 19:39:15 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <limits.h>
+#include <string.h>
 ///////////////////
 
 
@@ -127,6 +128,7 @@ typedef struct
 
 t_player g_myplayer;
 
+int check_angle;
 
 t_file g_file;
 
@@ -169,6 +171,7 @@ void   draw_line(int x0,int y0,int x1,int y1);
 int		iswall(float x, float y);
 void    cast_rays(void);
 void ft_rayCaster(int i, double rayAngle);
+double  d2r(double angle);
 
 
 #endif

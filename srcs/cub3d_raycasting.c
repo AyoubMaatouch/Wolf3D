@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/26 19:59:19 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/27 23:55:46 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,27 @@ double Normlize_anlge(double angle)
 
 double d2r(double degree)
 {
-  return (degree * (M_PI /180));
+  return (degree * (M_PI / 180));
 }
 
 
 
 void cast_rays(void)
 {
-    float ray_angle = 0;
+    double ray_angle = 0;
     int i = 0;
     printf("angle   [%f]\n",g_myplayer.rotationAngle);
-    ray_angle = 270 * ( M_PI / 180) ;//- d2r(30);
+    ray_angle = g_myplayer.rotationAngle - d2r(30);
     printf("outside [%f]\n", ray_angle);
-    ft_rayCaster(i, ray_angle);
+   // ft_rayCaster(i, ray_angle);
    
-   /* while (i < g_file.width_resolution)
+   while (i < (g_file.width * TILE))
     {
         ft_rayCaster(i, ray_angle);
-        ray_angle += d2r(60) / g_file.width_resolution;
+        ray_angle += d2r(60) / (g_file.width * TILE);
         i++;
     }
-*/
+
     
   
 }
@@ -51,17 +51,20 @@ void cast_rays(void)
 
 double ft_distance_between(double x1, double y1, double x2, double y2)
 {
-    return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+    return (sqrt(( (x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
 }
 void ft_rayCaster(int i, double rayAngle)
 {
 
     //rayAngle = Normlize_anlge(rayAngle);
-    printf("inside [%f]\n", rayAngle);
-    int isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
-    int isRayFacingUp = isRayFacingDown;
+    //printf("inside [%f]\n", rayAngle);
 
-    int isRayFacingRight = rayAngle > (0.5 * M_PI) || rayAngle < (1.5 * M_PI);
+    
+    int isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
+    
+    int isRayFacingUp = !isRayFacingDown;
+
+    int isRayFacingRight = rayAngle < (0.5 * M_PI) || rayAngle > (1.5 * M_PI);
     int isRayFacingLeft = !isRayFacingRight;
 
     float yinterse, xinterse;
@@ -71,7 +74,7 @@ void ft_rayCaster(int i, double rayAngle)
      * 
      * *************/
 
-    int HorizWallHit = 0;
+    int HorizWallHit    = 0;
     float HorizWallHitX = 0;
     float HorizWallHitY = 0;
   //  int HorizWallContent = 0;
@@ -79,12 +82,14 @@ void ft_rayCaster(int i, double rayAngle)
     //Calculating the Y cordination
     yinterse = floor(g_myplayer.y / TILE) * TILE;
    
-    yinterse += isRayFacingDown ? TILE : 0;
-    xinterse = g_myplayer.x + ((yinterse - g_myplayer.y) / tan(rayAngle));
+    yinterse += (isRayFacingDown) ? TILE : 0;
+    
+    xinterse = g_myplayer.x + (yinterse - g_myplayer.y) / tan(rayAngle);
 
     //ystep , xstep for the Horizontale part
-    ystep = TILE;
-    ystep *= isRayFacingUp ? -1 : 1;
+    ystep = TILE; 
+    
+    ystep *= (isRayFacingUp) ? -1 : 1;
 
     xstep = TILE / tan(rayAngle);
     xstep *= (isRayFacingLeft && xstep > 0) ? -1 : 1;
@@ -94,11 +99,11 @@ void ft_rayCaster(int i, double rayAngle)
     float nextHorizY = yinterse;
 
     //Finding Wall Hits at X && Y
-    while (nextHorizX >= 0 && nextHorizX <= g_file.width_resolution &&
-           nextHorizY >= 0 && nextHorizY <= g_file.height_resolution)
+    while (nextHorizX >= 0 && nextHorizX <= (g_file.width * TILE) &&
+           nextHorizY >= 0 && nextHorizY <= (g_file.hight * TILE))
     {
         float x_checkh = nextHorizX;
-        float y_checkh = nextHorizY + ((isRayFacingUp == 1) ? -1 : 0);
+        float y_checkh = nextHorizY + ((isRayFacingUp) ? -1 : 0);
         if (iswall(x_checkh, y_checkh) == 1)
         {
             HorizWallHitX = x_checkh;
@@ -112,38 +117,48 @@ void ft_rayCaster(int i, double rayAngle)
             nextHorizY += ystep;
         }
     }
+
+    xinterse = 0;
+    yinterse = 0;
+    xstep = 0;
+    ystep = 0;
+
+
+
+    
     /********
      * This part is Responsible for the Vertical INTERSECTIONS.
      * 
      * *************/
 
-    int VertWallHit = 0;
-    float VertWallHitX = 0;
-    float VertWallHitY = 0;
+    int VertWallHit     = 0;
+    float VertWallHitX  = 0;
+    float VertWallHitY  = 0;
 
     //Calculating the X cordination
     xinterse = floor(g_myplayer.x / TILE) * TILE;
-    xinterse += isRayFacingRight ? TILE : 0;
-    //Calculating the Y cordination
-    yinterse = g_myplayer.y + ((xinterse - g_myplayer.x) / tan(rayAngle));
-
+    xinterse += (isRayFacingRight) ? TILE : 0;
+    //Calculating the Y cordination 
+    yinterse = g_myplayer.y + (xinterse - g_myplayer.x) * tan(rayAngle);
+  
     //ystep , xstep for the Vertical part
     xstep = TILE;
-    xstep *= isRayFacingLeft ? -1 : 1;
+    xstep *= (isRayFacingLeft) ? -1 : 1;
 
-    ystep = TILE / tan(rayAngle);
-    ystep *= (isRayFacingUp && xstep > 0) ? -1 : 1;
-    ystep *= (isRayFacingDown && xstep < 0) ? -1 : 1;
+    ystep = TILE * tan(rayAngle);
+    ystep *= (isRayFacingUp && ystep > 0) ? -1 : 1;
+    ystep *= (isRayFacingDown && ystep < 0) ? -1 : 1;
 
     float nextVertX = xinterse;
     float nextVertY = yinterse;
 
     //Finding Wall Hits at X && Y
-    while (nextVertX > 0 && nextVertX < g_file.width_resolution &&
-           nextVertY > 0 && nextVertY < g_file.height_resolution)
+    while (nextVertX >= 0 && nextVertX <= (g_file.width * TILE) &&
+           nextVertY >= 0 && nextVertY <= (g_file.hight * TILE))
     {
-        float x_check = nextVertX + ((isRayFacingLeft == 1) ? -1 : 0);
+        float x_check = nextVertX + ((isRayFacingLeft) ? -1 : 0);
         float y_check = nextVertY;
+        
         if (iswall(x_check, y_check) == 1)
         {
             VertWallHitX = x_check;
@@ -165,6 +180,7 @@ void ft_rayCaster(int i, double rayAngle)
      */
 
     float HorizDistance = HorizWallHit ? ft_distance_between(g_myplayer.x, g_myplayer.y, HorizWallHitX, HorizWallHitY) : INT_MAX;
+    
     float VertDistance = VertWallHit ? ft_distance_between(g_myplayer.x, g_myplayer.y, VertWallHitX, VertWallHitY) : INT_MAX;
 
    // printf("======H[%f]=====V[%f]====\n", HorizDistance, VertDistance);
@@ -191,7 +207,7 @@ void ft_rayCaster(int i, double rayAngle)
 
     g_ray[i].rayfacingUP = isRayFacingUp;
     g_ray[i].rayfacingDown = isRayFacingDown;
-    printf("inside [%f]\n", rayAngle);
+    //printf("inside [%f]\n", rayAngle);
     //printf ("player x = %f  | playery = %f | wallx = %f | wally = %f\n",g_myplayer.x, g_myplayer.y, g_ray[i].wallHitx, g_ray[i].wallHity);
     draw_line(g_myplayer.x, g_myplayer.y, g_ray[i].wallHitx, g_ray[i].wallHity);
  //   printf ("======Final Calculation Distance OF RAY [%d]=========\nWallHitV X[%f], wallHitV Y[%f]\nWallHitH X[%f], wallHitH Y[%f]\n H Distance [%f]\nV Distance [%f]\n===========================================================\n", i, VertWallHitX,VertWallHitY , HorizWallHitX, HorizWallHitY, HorizDistance, VertDistance);
