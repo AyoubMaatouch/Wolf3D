@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:49:26 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/26 13:44:38 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/28 01:59:15 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void ft_map_handle(char *r_file, int map_size)
     int i = 0;
     g_file.hight = map_size;
     g_file.map = malloc(sizeof(char *) * (map_size + 1));
-    g_file.map[map_size + 1] = NULL;
+    g_file.map[map_size] = NULL;
     while ((get_next_line(fd, &line)))
     { 
         if (!g_file.width || g_file.width < (int)ft_strlen(line))
@@ -81,5 +81,5 @@ void ft_map_handle(char *r_file, int map_size)
     }
     if (ft_isdigit(ft_strtrim(line, " ")[0]))
         g_file.map[i] = ft_strdup(line);
-    g_file.map[i + 1] = ft_strdup("");
+    //g_file.map[i + 1] = NULL;
 }

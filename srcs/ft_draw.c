@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 12:03:12 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/27 23:00:41 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/28 01:41:19 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void ft_drw_player(char view)
     //g_myplayer.rotationAngle = 270.0 * (M_PI / 180);
     circle(g_myplayer.x, g_myplayer.y);
     //line(g_myplayer.x, g_myplayer.y);
-    draw_line(g_myplayer.x, g_myplayer.y, g_myplayer.x + (cos(g_myplayer.rotationAngle - d2r(30)) * 30), g_myplayer.y + (sin(g_myplayer.rotationAngle - d2r(30)) * 30));
-    draw_line(g_myplayer.x, g_myplayer.y, g_myplayer.x + (cos(g_myplayer.rotationAngle) * 30), g_myplayer.y + (sin(g_myplayer.rotationAngle) * 30));
+   /* draw_line(g_myplayer.x, g_myplayer.y, g_myplayer.x + (cos(g_myplayer.rotationAngle - d2r(30)) * 30), g_myplayer.y + (sin(g_myplayer.rotationAngle - d2r(30)) * 30));
+    draw_line(g_myplayer.x, g_myplayer.y, g_myplayer.x + (cos(g_myplayer.rotationAngle) * 30), g_myplayer.y + (sin(g_myplayer.rotationAngle) * 30));*/
   }
 }
 
@@ -128,8 +128,8 @@ void ft_map()
     {
       int tx = j * TILE;
       int ty = i * TILE;
-      if (g_file.map[i][j] == '1')
-        square(tx, ty, PURPLE);
+     /* if (g_file.map[i][j] == '1')
+        square(tx, ty, PURPLE);*/
       if (g_file.map[i][j] == 'N' || g_file.map[i][j] == 'S' || g_file.map[i][j] == 'E' || g_file.map[i][j] == 'W')
       {
         check_angle++;

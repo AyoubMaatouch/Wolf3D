@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/27 19:39:15 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/28 02:11:48 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <limits.h>
+#include <errno.h>
 #include <string.h>
 ///////////////////
 

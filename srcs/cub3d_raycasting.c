@@ -6,11 +6,68 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/27 23:55:46 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/28 02:25:19 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+/**********************************
+ *          3D RENDERING 
+ * ******************/
+
+void ft_wall_data (int i)
+{
+    float dis = g_ray[i].distance * cos(g_ray[i].ray_angle - g_myplayer.rotationAngle);
+    float projection = (g_file.width_resolution/2) / tan((60 / 2) * (M_PI / 180));
+    float wallHeight = (TILE / dis) * projection;
+    int top = (g_file.height_resolution/2) - ((int)wallHeight/2);
+    int bottom = top + wallHeight;
+    g_ray[i].top = top;
+    g_ray[i].bottom  = bottom;
+    g_ray[i].wallheight = wallHeight;
+    
+      printf ("TTT ==== [%d]\n",  g_ray[i].top);
+    printf ("BBB ==== [%d]\n", g_ray[i].bottom);
+    
+}
+
+void ft_draw_celling (int i)
+{
+    int a = 0;
+
+    while (a < g_ray[i].top)
+    {
+        my_mlx_pixel_put(&g_data, i, a, GRAY);
+        a++;
+    }
+    a = g_ray[i].bottom;
+    
+    while (a < g_file.height_resolution)
+    {
+        my_mlx_pixel_put(&g_data,i, a, YELLOW);
+        a++;
+    }
+
+
+ 
+}
+void BuildWall(int i)
+{
+    float t = g_ray[i].top;
+    float b  = g_ray[i].bottom;
+  
+    while (t < b)
+    {  
+    if (i <= g_file.height_resolution && i >= 0) 
+     {my_mlx_pixel_put(&g_data, i, t, WHITE);}
+     
+     t++;
+    }
+
+  
+}
+/***********************************************************************************************************************/
 
 double Normlize_anlge(double angle)
 {
@@ -30,21 +87,45 @@ double d2r(double degree)
 
 void cast_rays(void)
 {
-    double ray_angle = 0;
+    float ray_angle = 0;
     int i = 0;
     printf("angle   [%f]\n",g_myplayer.rotationAngle);
     ray_angle = g_myplayer.rotationAngle - d2r(30);
     printf("outside [%f]\n", ray_angle);
    // ft_rayCaster(i, ray_angle);
    
-   while (i < (g_file.width * TILE))
+   while (i < g_file.width_resolution)
     {
         ft_rayCaster(i, ray_angle);
-        ray_angle += d2r(60) / (g_file.width * TILE);
+        ray_angle += d2r(60) / g_file.width_resolution;
         i++;
     }
 
+
     
+    i = 0;
+    
+    while ( i  < g_file.width_resolution)
+    {
+        ft_wall_data(i);
+        i++;    
+    }
+    
+    i = 0;
+    while (i < g_file.width_resolution)
+    {    
+     ft_draw_celling(i);
+    
+     i++;
+    }
+   
+   i = 0;
+    while (i < g_file.width_resolution)
+    {
+        BuildWall(i);
+        i++;
+    }
+
   
 }
 
@@ -56,7 +137,7 @@ double ft_distance_between(double x1, double y1, double x2, double y2)
 void ft_rayCaster(int i, double rayAngle)
 {
 
-    //rayAngle = Normlize_anlge(rayAngle);
+    rayAngle = Normlize_anlge(rayAngle);
     //printf("inside [%f]\n", rayAngle);
 
     
@@ -212,10 +293,6 @@ void ft_rayCaster(int i, double rayAngle)
     draw_line(g_myplayer.x, g_myplayer.y, g_ray[i].wallHitx, g_ray[i].wallHity);
  //   printf ("======Final Calculation Distance OF RAY [%d]=========\nWallHitV X[%f], wallHitV Y[%f]\nWallHitH X[%f], wallHitH Y[%f]\n H Distance [%f]\nV Distance [%f]\n===========================================================\n", i, VertWallHitX,VertWallHitY , HorizWallHitX, HorizWallHitY, HorizDistance, VertDistance);
 }
-
-
-
-
 
 
 

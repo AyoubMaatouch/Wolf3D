@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 20:37:11 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/27 13:54:51 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/28 00:34:19 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ int check()
 	 * put here the hooked fuctions
 	 * *********/
 	update();
-	cast_rays();
 	ft_map();
+	cast_rays();
+	
 	/***********************/
 	mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);
 	mlx_put_image_to_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr, g_data.img, 0, 0);
