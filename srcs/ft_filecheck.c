@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:49:26 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/28 01:59:15 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/28 04:57:28 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,5 @@ void ft_map_handle(char *r_file, int map_size)
     }
     if (ft_isdigit(ft_strtrim(line, " ")[0]))
         g_file.map[i] = ft_strdup(line);
-    //g_file.map[i + 1] = NULL;
+    free(line);
 }
