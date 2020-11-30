@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/29 01:22:24 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/30 17:19:04 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void ft_wall_data(int i)
 {
     float dis = g_ray[i].distance * cos(g_ray[i].ray_angle - g_myplayer.rotationAngle);
-    float projection = (g_file.width_resolution / 2) / tan((60 / 2) * (M_PI / 180));
+    float projection = (g_file.width_resolution / 2) / tan(d2r(30));
     float wallHeight = (TILE / dis) * projection;
     int top = (g_file.height_resolution / 2) - ((int)wallHeight / 2);
     int bottom = top + wallHeight;
@@ -32,7 +32,7 @@ void ft_draw_celling(int i)
 {
     int a = 0;
 
-    while (a < g_ray[i].top)
+    while (a < g_ray[i].top )
     {
         my_mlx_pixel_put(&g_data, i, a, GRAY);
         a++;
@@ -47,9 +47,14 @@ void ft_draw_celling(int i)
 }
 void BuildWall(int i)
 {
-    float t = g_ray[i].top;
-    float b = g_ray[i].bottom;
-
+    int t = g_ray[i].top;
+    int b = g_ray[i].bottom;
+ 
+    if (t < 0)
+        t =  0;
+    if (b > g_file.height_resolution)
+        b = g_file.height_resolution;
+        
     while (t < b)
     {
         my_mlx_pixel_put(&g_data, i, t, WHITE);
@@ -86,14 +91,34 @@ void cast_rays(void)
         ray_angle += d2r(60) / g_file.width_resolution;
         i++;
     }
-    i = 0;
+   i = 0;
     while (i < g_file.width_resolution)
     {
         ft_wall_data(i);
+        // ft_draw_celling(i);
+        // BuildWall(i);
+        i++;
+    }
+      i = 0;
+    while (i < g_file.width_resolution)
+    {
+       // ft_wall_data(i);
         ft_draw_celling(i);
+       // BuildWall(i);
+        i++;
+    }
+      i = 0;
+    while (i < g_file.width_resolution)
+    {
+        // ft_wall_data(i);
+        // ft_draw_celling(i);
         BuildWall(i);
         i++;
     }
+
+
+
+    
 }
 
 double ft_distance_between(double x1, double y1, double x2, double y2)
@@ -144,6 +169,8 @@ void ft_rayCaster(int i, double rayAngle)
     {
         float x_checkh = nextHorizX;
         float y_checkh = nextHorizY + ((isRayFacingUp) ? -1 : 0);
+
+
         if (iswall(x_checkh, y_checkh) == 1)
         {
             HorizWallHitX = x_checkh;
@@ -196,6 +223,7 @@ void ft_rayCaster(int i, double rayAngle)
         float x_check = nextVertX + ((isRayFacingLeft) ? -1 : 0);
         float y_check = nextVertY;
 
+                                                           
         if (iswall(x_check, y_check) == 1)
         {
             VertWallHitX = x_check;

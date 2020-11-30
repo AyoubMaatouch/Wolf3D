@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 20:37:11 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/28 04:39:02 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/29 04:22:27 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void update()
 	float x = cos(g_myplayer.rotationAngle) * (g_myplayer.move_speed * g_myplayer.walkDirection);
 	float y = sin(g_myplayer.rotationAngle) * (g_myplayer.move_speed * g_myplayer.walkDirection);
 	
-	if (iswall(g_myplayer.x+ x, g_myplayer.y + y) != 1)
+	if (iswall(g_myplayer.x + x, g_myplayer.y + y) != 1)
 	{
 		g_myplayer.x += x;
 		g_myplayer.y += y;
@@ -42,7 +42,7 @@ void update()
 }
 int ft_key_input(int key)
 {
-    printf ("[%d]]\n", key);
+    //printf ("[%d]]\n", key);
 	if (key == UP || key == UP_l)
 		g_myplayer.walkDirection = 1;
 	if (key == DOWN || key == DOWN_l)

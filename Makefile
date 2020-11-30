@@ -6,7 +6,7 @@
 #    By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/09 18:00:47 by aymaatou          #+#    #+#              #
-#    Updated: 2020/11/29 01:07:38 by aymaatou         ###   ########.fr        #
+#    Updated: 2020/11/30 17:19:13 by aymaatou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = cub3D
 
 LIB = Lib/*.c
 SRC = srcs/*.c
-CC = gcc -g -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror -fsanitize=address
+CC = gcc  -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror 
 
 #CC = gcc -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror
 

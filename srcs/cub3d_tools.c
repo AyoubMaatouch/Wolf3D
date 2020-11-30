@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 09:51:27 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/28 02:13:10 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/30 17:11:27 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int		iswall(float x, float y)
 	if ((int)x >= g_file.width * TILE || (int)x <= 0 ||
 	(int)y >= g_file.hight * TILE || (int)y <= 0)
 		return (1);
-	return (g_file.map[(int)floor(y / TILE)][(int)
-		floor(x / TILE)] - '0');
+	return (g_file.map[(int)(y / TILE)][(int)
+		(x / TILE)] - '0');
 }
