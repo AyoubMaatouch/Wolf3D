@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/29 00:57:17 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/11/30 19:33:03 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,31 @@
 /********
  * Structs
  * *****/
+typedef struct {
+    int isRayFacingDown ;
+    int isRayFacingUp ;
+    int isRayFacingRight;
+    int isRayFacingLeft;
+
+}t_cast;
+
+t_cast g_cast;
+
+typedef struct{
+   double    HorizWallHitX;
+   double    HorizWallHitY;
+   int       HorizWallHit;
+   double    VertWallHitX;
+   double   VertWallHitY;
+   int      VertWallHit;
+    
+}t_wallhits;
+
+t_wallhits g_wallhits;
+
+
+
+
 typedef struct
 {
     float ray_angle;
