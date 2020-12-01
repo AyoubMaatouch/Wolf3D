@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/01 03:26:30 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/01 04:46:54 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void ft_wall_data(int i)
     g_ray[i].top = top;
     g_ray[i].bottom = bottom;
     g_ray[i].wallheight = wallHeight;
+
 }
 
 void ft_draw_celling(int i)
