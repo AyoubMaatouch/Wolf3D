@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/01 02:56:40 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/01 03:26:30 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void ft_get_distance(double rayAngle, int i);
 
 void ft_wall_data(int i)
 {
-    //float dis = g_ray[i].distance * cos(g_ray[i].ray_angle - g_myplayer.rotationAngle);
+    float correct_dis = g_ray[i].distance * cos(g_ray[i].ray_angle - g_myplayer.rotationAngle);
     float projection = (g_file.width_resolution / 2) / tan(d2r(30));
-    float wallHeight = (TILE / g_ray[i].distance) * projection;
+    float wallHeight = (TILE / correct_dis) * projection;
     int top = (g_file.height_resolution / 2) - ((int)wallHeight / 2);
     int bottom = top + wallHeight;
     g_ray[i].top = top;
