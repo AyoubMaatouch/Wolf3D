@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/30 19:33:03 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/01 02:53:47 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 #include <string.h>
 ///////////////////
 
-
 /*************
  *  DEFINE
  * * */
@@ -41,50 +40,45 @@
 #define BLACK 0x000000
 
 /////////////////////////////
-#define UP 126 
+#define UP 126
 #define UP_l 13
-#define DOWN 125 
+#define DOWN 125
 #define DOWN_l 1
-#define RIGHT 123 
+#define RIGHT 123
 #define RIGHT_l 0
 #define LEFT 124
 #define LEFT_l 2
 
 //////////////////////////
 #define BUFFER_SIZE 1024
-#define TILE 32
-
-
-
-
+#define TILE 10
 
 /********
  * Structs
  * *****/
-typedef struct {
-    int isRayFacingDown ;
-    int isRayFacingUp ;
+typedef struct
+{
+    int isRayFacingDown;
+    int isRayFacingUp;
     int isRayFacingRight;
     int isRayFacingLeft;
 
-}t_cast;
+} t_cast;
 
 t_cast g_cast;
 
-typedef struct{
-   double    HorizWallHitX;
-   double    HorizWallHitY;
-   int       HorizWallHit;
-   double    VertWallHitX;
-   double   VertWallHitY;
-   int      VertWallHit;
-    
-}t_wallhits;
+typedef struct
+{
+    double HorizWallHitX;
+    double HorizWallHitY;
+    int HorizWallHit;
+    double VertWallHitX;
+    double VertWallHitY;
+    int VertWallHit;
+
+} t_wallhits;
 
 t_wallhits g_wallhits;
-
-
-
 
 typedef struct
 {
@@ -102,18 +96,18 @@ typedef struct
 
 } t_ray;
 
- t_ray g_ray[3200];
- 
+t_ray g_ray[3200];
 
-typedef struct  s_data {
-    void        *img;
-    char        *addr;
-    int         bits_per_pixel;
-    int         line_length;
-    int         endian;
-}               t_data;
+typedef struct s_data
+{
+    void *img;
+    char *addr;
+    int bits_per_pixel;
+    int line_length;
+    int endian;
+} t_data;
 
-t_data  g_data;
+t_data g_data;
 
 typedef struct
 {
@@ -132,15 +126,15 @@ typedef struct
     char *we_t;
     char *ea_t;
     char *sprit;
-    char *flor;
-    char *cilng;
+    int flor;
+    int cilng;
     char **map;
     int hight;
     int width;
-    
+
 } t_file;
 
-typedef struct 
+typedef struct
 {
     float x;
     float y;
@@ -149,33 +143,32 @@ typedef struct
     int walkDirection;
     float rotationAngle;
     float move_speed;
-    float rotation_speed;  
+    float rotation_speed;
+    int ishere;
 } t_player;
 
 t_player g_myplayer;
-
-int check_angle;
 
 t_file g_file;
 
 /**************************************
  *              Functions
  * ****************************/
-void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
-size_t	ft_strlen(const char *str);
-char	*ft_strdup(char const *s1);
-char	*ft_strjoin(char   *s1, char *s2);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-int	    get_next_line(int fd, char **line);
+void my_mlx_pixel_put(t_data *data, int x, int y, int color);
+size_t ft_strlen(const char *str);
+char *ft_strdup(char const *s1);
+char *ft_strjoin(char *s1, char *s2);
+char *ft_substr(char const *s, unsigned int start, size_t len);
+int get_next_line(int fd, char **line);
 void ft_get_handle(char *g_value);
-int	ft_isalnum(int str);
-int	ft_isalpha(int c);
-int	ft_isdigit(int str);
-char		*ft_strtrim(char const *s1, char const *set);
-int		ft_atoi(const char *str);
-char		**ft_split(char const *s, char c);
-void	*ft_calloc(size_t count, size_t size);
-void	*ft_bzero(void *b, size_t len);
+int ft_isalnum(int str);
+int ft_isalpha(int c);
+int ft_isdigit(int str);
+char *ft_strtrim(char const *s1, char const *set);
+int ft_atoi(const char *str);
+char **ft_split(char const *s, char c);
+void *ft_calloc(size_t count, size_t size);
+void *ft_bzero(void *b, size_t len);
 
 /***********
  * file handele
@@ -188,16 +181,15 @@ void ft_get_sprit(char *value);
 void ft_get_texture(char c, char *value);
 void ft_get_resolution(int v, int h);
 
-
 /*********
  * Draw Functions
  * ********/
 void ft_map();
-void   draw_line(int x0,int y0,int x1,int y1);
-int		iswall(float x, float y);
-void    cast_rays(void);
+void draw_line(int x0, int y0, int x1, int y1);
+int iswall(float x, float y);
+void cast_rays(void);
 void ft_rayCaster(int i, double rayAngle);
-double  d2r(double angle);
-
+double d2r(double angle);
+void ft_drw_player(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 20:37:11 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/29 04:22:27 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/01 01:57:06 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ int check()
 	 * *********/
 	update();
 	ft_map();
+	ft_drw_player();
 	cast_rays();
-	
+	ft_map();
+
 	/***********************/
 	mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);
 	mlx_put_image_to_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr, g_data.img, 0, 0);

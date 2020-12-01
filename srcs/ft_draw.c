@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 12:03:12 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/29 04:20:28 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/01 01:56:15 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void line(float X, float Y)
 
   while (i < 20)
   {
-    my_mlx_pixel_put(&g_data, X + (cos(g_myplayer.rotationAngle) * i), Y + (sin(g_myplayer.rotationAngle) * i), RED);
+    my_mlx_pixel_put(&g_data, (X + (cos(g_myplayer.rotationAngle) * i))  * 0.2, (Y + (sin(g_myplayer.rotationAngle) * i)) * 0.2, RED);
     i++;
   }
 }
@@ -34,7 +34,7 @@ void draw_line(int x0, int y0, int x1, int y1)
   int p2;
   while (1)
   {
-    my_mlx_pixel_put(&g_data, x0, y0, YELLOW);
+    my_mlx_pixel_put(&g_data, x0 * 0.2, y0 * 0.2, YELLOW);
     if (x0 == x1 && y0 == y1)
       break;
     p2 = 2 * p;
@@ -61,7 +61,7 @@ void square(int y, int x, int color)
   {
     while (leny < TILE)
     {
-      my_mlx_pixel_put(&g_data, y, x, color);
+      my_mlx_pixel_put(&g_data, (int)floor(y * 0.2), (int)floor(x * 0.2), color);
       leny++;
       y++;
     }
@@ -79,34 +79,32 @@ void circle(float x, float y)
   {
     x += 2 * cos(angle);
     y += 2 * sin(angle);
-    my_mlx_pixel_put(&g_data, x, y, YELLOW);
+    my_mlx_pixel_put(&g_data, x * 0.2, y * 0.2, YELLOW);
     angle++;
   }
 }
-void ft_drw_player(char view)
+void ft_drw_player(void)
 {
-  if (view == 'N')
-  {
+
     //g_myplayer.rotationAngle = 270.0 * (M_PI / 180);
     circle(g_myplayer.x, g_myplayer.y);
     //line(g_myplayer.x, g_myplayer.y);
    /* draw_line(g_myplayer.x, g_myplayer.y, g_myplayer.x + (cos(g_myplayer.rotationAngle - d2r(30)) * 30), g_myplayer.y + (sin(g_myplayer.rotationAngle - d2r(30)) * 30));
     draw_line(g_myplayer.x, g_myplayer.y, g_myplayer.x + (cos(g_myplayer.rotationAngle) * 30), g_myplayer.y + (sin(g_myplayer.rotationAngle) * 30));*/
-  }
+  
 }
-
+int check_angle;
 void df_player_angle(char position)
 {
+  g_myplayer.ishere += 1;
+  if (g_myplayer.ishere > 1)
+      {
+        puts("MORE THEN ONE PLAYER IN MAP");
+        exit(0);
+      }
  
- /* if (check_angle > 1 )
-    {
-      strerror(1);
-      //exit(0);
-    }*/
-    
-  if (check_angle == 1)
-  {
-    if (position == 'N')
+  if (g_myplayer.ishere == 1)
+    {if (position == 'N')
       g_myplayer.rotationAngle = 270.0 * (M_PI / 180);
     if (position == 'S')
       g_myplayer.rotationAngle = 90.0 * (M_PI / 180);
@@ -114,13 +112,16 @@ void df_player_angle(char position)
       g_myplayer.rotationAngle = 0.0 * (M_PI / 180);
     if (position == 'W')
       g_myplayer.rotationAngle = 180.0 * (M_PI / 180);
-  }
+      }
+      
+      
 }
 void ft_map()
 {
-  int i = 0;
-  size_t j = 0;
+  int i;
+  size_t j;
 
+  i = 0;
   while (i < g_file.hight)
   {
     j = 0;
@@ -132,18 +133,22 @@ void ft_map()
         square(tx, ty, PURPLE);
       if (g_file.map[i][j] == 'N' || g_file.map[i][j] == 'S' || g_file.map[i][j] == 'E' || g_file.map[i][j] == 'W')
       {
-        check_angle++;
         df_player_angle(g_file.map[i][j]);
         if (!g_myplayer.x && !g_myplayer.y)
         {
           g_myplayer.x = tx;
           g_myplayer.y = ty;
-        }
-        ft_drw_player(g_file.map[i][j]);
+        } 
+        g_file.map[i][j] = '0';
       };
-
       j++;
     }
     i++;
   }
+  if (g_myplayer.ishere == 0)
+      {
+       puts ("NO PLAYER IN MAP");
+       exit(0); 
+      }
+  ft_drw_player();
 }

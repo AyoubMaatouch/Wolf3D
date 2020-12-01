@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:49:26 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/28 04:57:28 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/01 03:00:38 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,15 @@ void ft_get_sprit(char *value)
 void ft_get_cf(char c, char *value)
 {
     if (c == 'F')
-        g_file.flor = value;
+    {
+        char **temp = ft_split(value , ',');
+        g_file.flor = 65536 * ft_atoi(temp[0]) + 256 *ft_atoi(temp[1]) + ft_atoi(temp[2]);;
+        }
     else
-        g_file.cilng = value;
+       {
+        char **temp = ft_split(value , ',');
+        g_file.cilng = 65536 * ft_atoi(temp[0]) + 256 *ft_atoi(temp[1]) + ft_atoi(temp[2]);;; 
+       }
 }
 
 void ft_get_handle(char *g_value)
