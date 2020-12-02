@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:49:26 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/01 03:00:38 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/01 20:19:26 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void ft_get_resolution(int hight, int width)
 {
     g_file.height_resolution = hight;
     g_file.width_resolution = width;
+    g_file.counter++;
 }
 
 void ft_get_texture(char c, char *value)

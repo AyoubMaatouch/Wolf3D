@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/01 02:53:47 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/02 06:18:32 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 
 //////////////////////////
 #define BUFFER_SIZE 1024
-#define TILE 10
+#define TILE 64
 
 /********
  * Structs
@@ -131,6 +131,7 @@ typedef struct
     char **map;
     int hight;
     int width;
+    int counter;
 
 } t_file;
 

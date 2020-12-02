@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 20:37:11 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/01 01:57:06 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/02 06:05:00 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void ft_init (void)
 {
 	g_myplayer.turnDirection = 0;   // -1 left && +1 right
 	g_myplayer.walkDirection = 0;  // -1 down && +1 up
-	g_myplayer.move_speed = 5;
+	g_myplayer.move_speed = 50;
 	g_myplayer.radius = 3;
 	//g_myplayer.rotationAngle = 2 * M_PI;
-	g_myplayer.rotation_speed = 3 * (M_PI / 180);
+	g_myplayer.rotation_speed = 2 * (M_PI / 180);
 	
 }
 void update()
@@ -68,9 +68,9 @@ int check()
 	 * *********/
 	update();
 	ft_map();
-	ft_drw_player();
+	//ft_drw_player();
 	cast_rays();
-	ft_map();
+	//ft_map();
 
 	/***********************/
 	mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);

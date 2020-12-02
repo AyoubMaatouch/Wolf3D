@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 09:51:27 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/01 02:42:43 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/01 20:08:48 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,3 @@ int iswall(float x, float y)
 		return (1);
 	return (g_file.map[(int)(y / TILE)][(int)(x / TILE)] - '0');
 }
-
-// char *decToHexa(int n)
-// {
-// 	char hex[2];
-
-// 	int temp;
-// 	int i = 0;
-// 	while (n != 0)
-// 	{
-// 		{
-// 			int temp = 0;
-// 			temp = n % 16;
-// 			if (temp < 10)
-// 			{
-// 				hex[i] = temp + 48;
-// 				i++;
-// 			}
-// 			else
-// 			{
-// 				hex[i] = temp + 55;
-// 				i++;
-// 			}
-// 			n = n / 16;
-// 		}
-// 	}
