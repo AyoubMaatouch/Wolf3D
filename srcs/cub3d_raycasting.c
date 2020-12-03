@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/03 12:52:26 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/03 14:29:17 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void BuildWall(int i)
     while (t < b)
     {
         offeset_y = (t - g_ray[i].top) * ((float)TILE / g_ray[i].wallheight);
-        unsigned int color = g_txt[nb].data[(64 * offeset_y) + offeset_x];
+        unsigned int color = g_txt[nb].data[(g_txt[nb].img_width * offeset_y) + offeset_x];
     
         my_mlx_pixel_put(&g_data, i, t, color);
         t++;
