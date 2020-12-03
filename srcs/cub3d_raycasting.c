@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/02 06:25:26 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/03 12:52:26 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,29 @@ void ft_draw_celling(int i)
     }
 }
 
+int    get_side(int i)
+{
+    int nb = 0;
+    if (g_ray[i].rayfacingUP && !g_ray[i].wasVerticale)
+        nb = 0;
+    if (g_ray[i].rayfacingDown && !g_ray[i].wasVerticale)
+        nb = 1;
+    if (g_ray[i].rayfacingLeft && g_ray[i].wasVerticale)
+        nb = 2;
+    if (g_ray[i].rayfacingRight && g_ray[i].wasVerticale)
+        nb = 3;
+    return (nb);
+}
+
 void BuildWall(int i)
 {
     int t = g_ray[i].top;
     int b = g_ray[i].bottom;
 
 
-    /************
-     *  playing around with textures
-     * ***********/
+//     /************
+//      *  playing around with textures
+//      * ***********/
 
     int offeset_y, offeset_x;
      if(g_ray[i].wasVerticale)
@@ -73,36 +87,7 @@ void BuildWall(int i)
          offeset_x = (int)g_ray[i].wallHitx % TILE;
      }
      
-    //creating a texture
-   unsigned int *wal = (unsigned int *)malloc(sizeof(unsigned int *) * TILE * TILE);
-    
-    for(int x = 0 ; x < TILE ; x++)
-        for(int y = 0; y < TILE; y++)
-            wal[(TILE * y) + x] = (x % 8 && y %8) ? 0x808080 : 0xFF000000;
-            
-            
- /*********************************
-  * 
-  *     Tesitng Textures
-  *  
-  ************/
-    
-    void    *img;
-    char    *relative_path = "./wood.xpm";
-    int     img_width = 0;
-    int     img_height = 0;
-
-    img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, relative_path, &img_width, &img_height);
-
-    int *data;
-    int bbp;
-    int size, end;
-    data = (int*)mlx_get_data_addr(img,&bbp, &size, &end );
-
-   // printf("[%d]==========[%d]\n", img_height, img_width);
-
-
-
+    int nb = get_side(i);
     /************************************************/
     if (t < 0)
         t = 0;
@@ -111,7 +96,7 @@ void BuildWall(int i)
     while (t < b)
     {
         offeset_y = (t - g_ray[i].top) * ((float)TILE / g_ray[i].wallheight);
-        unsigned int color = data[(64 * offeset_y) + offeset_x];
+        unsigned int color = g_txt[nb].data[(64 * offeset_y) + offeset_x];
     
         my_mlx_pixel_put(&g_data, i, t, color);
         t++;
@@ -151,6 +136,7 @@ void cast_rays(void)
     {
         ft_wall_data(i);
         ft_draw_celling(i);
+        // get_texture_data2(i);
         BuildWall(i);
         i++;
     }
@@ -303,5 +289,7 @@ void ft_get_distance(double rayAngle, int i)
     g_ray[i].distance = finalDistace;
     g_ray[i].rayfacingUP = g_cast.isRayFacingUp;
     g_ray[i].rayfacingDown = g_cast.isRayFacingDown;
+    g_ray[i].rayfacingRight = g_cast.isRayFacingRight;
+    g_ray[i].rayfacingLeft = g_cast.isRayFacingLeft;
     draw_line(g_myplayer.x, g_myplayer.y, g_ray[i].wallHitx, g_ray[i].wallHity);
 }

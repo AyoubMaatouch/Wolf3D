@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/02 06:18:32 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/03 12:24:40 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct
     int wasVerticale;
     int rayfacingUP;
     int rayfacingDown;
+    int rayfacingRight;
+    int rayfacingLeft;
     int wallhitcont;
     int top;
     int bottom;
@@ -135,6 +137,8 @@ typedef struct
 
 } t_file;
 
+t_file g_file;
+
 typedef struct
 {
     float x;
@@ -150,11 +154,20 @@ typedef struct
 
 t_player g_myplayer;
 
-t_file g_file;
+typedef struct 
+{
+    void *img;
+    int *data;
+    int img_width;
+    int img_height;  
+    
+} t_txt;
 
+t_txt g_txt[4];
 /**************************************
  *              Functions
  * ****************************/
+
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 size_t ft_strlen(const char *str);
 char *ft_strdup(char const *s1);
@@ -192,5 +205,6 @@ void cast_rays(void);
 void ft_rayCaster(int i, double rayAngle);
 double d2r(double angle);
 void ft_drw_player(void);
+void get_data_textures ();
 
 #endif
