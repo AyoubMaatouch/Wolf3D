@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 12:03:12 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/01 01:56:15 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:07:12 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void line(float X, float Y)
   }
 }
 
-void draw_line(int x0, int y0, int x1, int y1)
+void draw_line(int x0, int y0, int x1, int y1, int color)
 {
   //Bresenham's Line Drawing Algorithm
   int dx = abs(x1 - x0);
@@ -34,7 +34,7 @@ void draw_line(int x0, int y0, int x1, int y1)
   int p2;
   while (1)
   {
-    my_mlx_pixel_put(&g_data, x0 * 0.2, y0 * 0.2, YELLOW);
+    my_mlx_pixel_put(&g_data, x0 , y0 , color);
     if (x0 == x1 && y0 == y1)
       break;
     p2 = 2 * p;
@@ -61,7 +61,7 @@ void square(int y, int x, int color)
   {
     while (leny < TILE)
     {
-      my_mlx_pixel_put(&g_data, (int)floor(y * 0.2), (int)floor(x * 0.2), color);
+      my_mlx_pixel_put(&g_data, (int)floor(y), (int)floor(x), color);
       leny++;
       y++;
     }
@@ -79,7 +79,7 @@ void circle(float x, float y)
   {
     x += 2 * cos(angle);
     y += 2 * sin(angle);
-    my_mlx_pixel_put(&g_data, x * 0.2, y * 0.2, YELLOW);
+    my_mlx_pixel_put(&g_data, x , y , YELLOW);
     angle++;
   }
 }

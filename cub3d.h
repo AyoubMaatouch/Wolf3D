@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/03 12:24:40 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:03:31 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void ft_get_resolution(int v, int h);
  * Draw Functions
  * ********/
 void ft_map();
-void draw_line(int x0, int y0, int x1, int y1);
+void draw_line(int x0, int y0, int x1, int y1, int color);
 int iswall(float x, float y);
 void cast_rays(void);
 void ft_rayCaster(int i, double rayAngle);

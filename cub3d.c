@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 20:37:11 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/03 14:34:04 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/04 10:11:42 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void ft_init(void)
 	g_myplayer.walkDirection = 0; // -1 down && +1 up
 	g_myplayer.move_speed = 50;
 	g_myplayer.radius = 10;
-	//g_myplayer.rotationAngle = 2 * M_PI;
 	g_myplayer.rotation_speed = 5 * (M_PI / 180);
 }
 void update()
@@ -64,20 +63,17 @@ void get_data_textures ()
   ************/
     //void    *img;
  
-    char    *path_one = "./wood.xpm";
-    char    *path_two = "./redbrick.xpm";
-    char    *path_three = "./nazi.xpm";
-    char    *path_four = "./greystone.xpm";
+
     int bbp;
     int size, end;
   
-	g_txt[0].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, path_one, &g_txt[0].img_width, &g_txt[0].img_height);
+	g_txt[0].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, g_file.no_t, &g_txt[0].img_width, &g_txt[0].img_height);
 	g_txt[0].data = (int*)mlx_get_data_addr(g_txt[0].img,&bbp, &size, &end ); 
-	g_txt[1].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, path_two, &g_txt[1].img_width, &g_txt[1].img_height);
+	g_txt[1].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr,g_file.so_t, &g_txt[1].img_width, &g_txt[1].img_height);
 	g_txt[1].data = (int*)mlx_get_data_addr(g_txt[1].img,&bbp, &size, &end ); 
-	g_txt[2].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, path_three, &g_txt[2].img_width, &g_txt[2].img_height);
+	g_txt[2].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, g_file.ea_t, &g_txt[2].img_width, &g_txt[2].img_height);
 	g_txt[2].data = (int*)mlx_get_data_addr(g_txt[2].img,&bbp, &size, &end ); 
-	g_txt[3].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, path_four, &g_txt[3].img_width, &g_txt[3].img_height);
+	g_txt[3].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, g_file.we_t, &g_txt[3].img_width, &g_txt[3].img_height);
 	g_txt[3].data = (int*)mlx_get_data_addr(g_txt[3].img,&bbp, &size, &end ); 
 
 
@@ -101,7 +97,7 @@ int check()
 	ft_map();
 	//ft_drw_player();
 	cast_rays();
-	ft_map();
+	// ft_map();
 
 	/***********************/
 	mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);

@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/03 14:29:17 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:04:02 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,12 @@ void BuildWall(int i)
      if(g_ray[i].wasVerticale)
      {
          offeset_x = (int)g_ray[i].wallHity % TILE;
+         printf("isVer [%d]\n",offeset_x);
      }
      else
      {
          offeset_x = (int)g_ray[i].wallHitx % TILE;
+         printf("Not isVer [%d]\n",offeset_x);
      }
      
     int nb = get_side(i);
@@ -135,9 +137,9 @@ void cast_rays(void)
     while (i < g_file.width_resolution)
     {
         ft_wall_data(i);
-        ft_draw_celling(i);
+        // ft_draw_celling(i);
         // get_texture_data2(i);
-        BuildWall(i);
+       // BuildWall(i);
         i++;
     }
 }
@@ -173,6 +175,10 @@ void ft_ray(int i, double rayAngle)
     g_cast.isRayFacingUp = !g_cast.isRayFacingDown;
     g_cast.isRayFacingRight = rayAngle < (0.5 * M_PI) || rayAngle > (1.5 * M_PI);
     g_cast.isRayFacingLeft = !g_cast.isRayFacingRight;
+
+    
+
+    
     
     ft_horizntale_inter(rayAngle);
     ft_verticale_inter(rayAngle);
@@ -199,11 +205,11 @@ void ft_horizntale_inter(double rayAngle)
     xstep *= (g_cast.isRayFacingRight && xstep < 0) ? -1 : 1;
 
     //Finding Wall Hits at X && Y
-    while (xinterse > 0 && xinterse < (g_file.width * TILE) &&
-           yinterse > 0 && yinterse < (g_file.hight * TILE))
+    while (xinterse >= 0 && xinterse <= (g_file.width * TILE) &&
+           yinterse >= 0 && yinterse <= (g_file.hight * TILE))
     {
         float x_checkh = xinterse;
-        float y_checkh = yinterse - ((g_cast.isRayFacingUp) ? 1 : 0);
+        float y_checkh = yinterse + ((g_cast.isRayFacingUp == 1) ? -1 : 0);
 
         if (iswall(x_checkh, y_checkh) == 1)
         {
@@ -223,7 +229,7 @@ void ft_verticale_inter(double rayAngle)
     float yinterse = 0;
     float xstep = 0;
     float ystep = 0;
-    g_wallhits.VertWallHit = 0;
+   // g_wallhits.VertWallHit = 0;
     /********
      * This part is Responsible for the Vertical INTERSECTIONS.
      * 
@@ -243,10 +249,10 @@ void ft_verticale_inter(double rayAngle)
     ystep *= (g_cast.isRayFacingDown && ystep < 0) ? -1 : 1;
 
     //Finding Wall Hits at X && Y
-    while (xinterse > 0 && xinterse < (g_file.width * TILE) &&
-           yinterse > 0 && yinterse < (g_file.hight * TILE))
+    while (xinterse >= 0 && xinterse <= (g_file.width * TILE) &&
+           yinterse >= 0 && yinterse <= (g_file.hight * TILE))
     {
-        float x_check = xinterse - ((g_cast.isRayFacingLeft) ? 1 : 0);
+        float x_check = xinterse - ((g_cast.isRayFacingLeft == 1) ? 1 : 0);
         float y_check = yinterse;
 
         if (iswall(x_check, y_check) == 1)
@@ -271,19 +277,22 @@ void ft_get_distance(double rayAngle, int i)
     // printf("======H[%f]=====V[%f]====\n", HorizDistance, VertDistance);
     float finalDistace = 0;
 
-    if (HorizDistance > VertDistance)
-    {
-        finalDistace = VertDistance;
-        g_ray[i].wasVerticale = 1;
-        g_ray[i].wallHitx = g_wallhits.VertWallHitX;
-        g_ray[i].wallHity = g_wallhits.VertWallHitY;
-    }
-    else
+    if (HorizDistance < VertDistance)
     {
         finalDistace = HorizDistance;
         g_ray[i].wasVerticale = 0;
         g_ray[i].wallHitx = g_wallhits.HorizWallHitX;
         g_ray[i].wallHity = g_wallhits.HorizWallHitY;
+         draw_line(g_myplayer.x, g_myplayer.y, g_wallhits.HorizWallHitX, g_wallhits.HorizWallHitY, YELLOW);
+        
+    }
+    else
+    {
+        finalDistace = VertDistance;
+        g_ray[i].wasVerticale = 1;
+        g_ray[i].wallHitx = g_wallhits.VertWallHitX;
+        g_ray[i].wallHity = g_wallhits.VertWallHitY;
+         draw_line(g_myplayer.x, g_myplayer.y, g_wallhits.VertWallHitX, g_wallhits.VertWallHitY, PURPLE);
     }
     g_ray[i].ray_angle = rayAngle;
     g_ray[i].distance = finalDistace;
@@ -291,5 +300,6 @@ void ft_get_distance(double rayAngle, int i)
     g_ray[i].rayfacingDown = g_cast.isRayFacingDown;
     g_ray[i].rayfacingRight = g_cast.isRayFacingRight;
     g_ray[i].rayfacingLeft = g_cast.isRayFacingLeft;
-    draw_line(g_myplayer.x, g_myplayer.y, g_ray[i].wallHitx, g_ray[i].wallHity);
+
+   
 }
