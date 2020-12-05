@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 20:37:11 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/05 20:42:21 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/05 20:52:31 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void update()
 
 	float x = cos(g_myplayer.rotationAngle) * (g_myplayer.move_speed * g_myplayer.walkDirection);
 	float y = sin(g_myplayer.rotationAngle) * (g_myplayer.move_speed * g_myplayer.walkDirection);
-	// if (g_myplayer.sidewalk != 0)
-	// 	{
-	// 		x = cos(d2r(90) * g_myplayer.sidewalk) * (g_myplayer.move_speed * g_myplayer.sidewalk);
-	// 		y = sin(d2r(90) * g_myplayer.sidewalk ) * (g_myplayer.move_speed * g_myplayer.sidewalk);
-	// 	}
+	if (g_myplayer.sidewalk != 0)
+		{
+			x = cos(g_myplayer.rotationAngle + d2r(90 * g_myplayer.sidewalk))  * g_myplayer.move_speed;
+			y = sin(g_myplayer.rotationAngle + d2r(90 * g_myplayer.sidewalk)) *  g_myplayer.move_speed ;
+		}
 	if (iswall(g_myplayer.x + x, g_myplayer.y + y) != 1)
 	{
 		g_myplayer.x += x;
@@ -55,11 +55,11 @@ int ft_key_input(int key)
 		g_myplayer.turnDirection = 1;
 	if (key == LEFT_l)
 		{g_myplayer.sidewalk = 1;
-		g_myplayer.walkDirection = 1;
+		
 		}
 	if (key == RIGHT_l)
 		{g_myplayer.sidewalk = -1;
-		g_myplayer.walkDirection = 1;
+		
 		}
 	if (key == 53)
 		exit(0);
