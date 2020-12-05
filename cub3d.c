@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 20:37:11 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/04 10:11:42 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/05 20:42:21 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void ft_init(void)
 	g_myplayer.turnDirection = 0; // -1 left && +1 right
 	g_myplayer.walkDirection = 0; // -1 down && +1 up
 	g_myplayer.move_speed = 50;
+	g_myplayer.sidewalk = 0;
 	g_myplayer.radius = 10;
 	g_myplayer.rotation_speed = 5 * (M_PI / 180);
 }
@@ -26,7 +27,11 @@ void update()
 
 	float x = cos(g_myplayer.rotationAngle) * (g_myplayer.move_speed * g_myplayer.walkDirection);
 	float y = sin(g_myplayer.rotationAngle) * (g_myplayer.move_speed * g_myplayer.walkDirection);
-
+	// if (g_myplayer.sidewalk != 0)
+	// 	{
+	// 		x = cos(d2r(90) * g_myplayer.sidewalk) * (g_myplayer.move_speed * g_myplayer.sidewalk);
+	// 		y = sin(d2r(90) * g_myplayer.sidewalk ) * (g_myplayer.move_speed * g_myplayer.sidewalk);
+	// 	}
 	if (iswall(g_myplayer.x + x, g_myplayer.y + y) != 1)
 	{
 		g_myplayer.x += x;
@@ -35,6 +40,7 @@ void update()
 
 	g_myplayer.turnDirection = 0;
 	g_myplayer.walkDirection = 0;
+	g_myplayer.sidewalk = 0;
 }
 int ft_key_input(int key)
 {
@@ -43,15 +49,20 @@ int ft_key_input(int key)
 		g_myplayer.walkDirection = 1;
 	if (key == DOWN || key == DOWN_l)
 		g_myplayer.walkDirection = -1;
-	if (key == RIGHT || key == RIGHT_l)
+	if (key == RIGHT)
 		g_myplayer.turnDirection = -1;
-	if (key == LEFT || key == LEFT_l)
+	if (key == LEFT)
 		g_myplayer.turnDirection = 1;
+	if (key == LEFT_l)
+		{g_myplayer.sidewalk = 1;
+		g_myplayer.walkDirection = 1;
+		}
+	if (key == RIGHT_l)
+		{g_myplayer.sidewalk = -1;
+		g_myplayer.walkDirection = 1;
+		}
 	if (key == 53)
 		exit(0);
-	//update();
-	//ft_map();
-
 	return key;
 }
 void get_data_textures ()
@@ -62,7 +73,6 @@ void get_data_textures ()
   *  
   ************/
     //void    *img;
- 
 
     int bbp;
     int size, end;
@@ -74,30 +84,21 @@ void get_data_textures ()
 	g_txt[2].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, g_file.ea_t, &g_txt[2].img_width, &g_txt[2].img_height);
 	g_txt[2].data = (int*)mlx_get_data_addr(g_txt[2].img,&bbp, &size, &end ); 
 	g_txt[3].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, g_file.we_t, &g_txt[3].img_width, &g_txt[3].img_height);
-	g_txt[3].data = (int*)mlx_get_data_addr(g_txt[3].img,&bbp, &size, &end ); 
-
-
-	
-
-	
+	g_txt[3].data = (int*)mlx_get_data_addr(g_txt[3].img,&bbp, &size, &end ); 	
 }
 int check()
 {
 
 	/**************************/
 	get_data_textures();
-
 	/****************************/
-
 	mlx_hook(g_mymlx.win_ptr, 2, 1L << 0, ft_key_input, (void *)0);
 	/*********
 	 * put here the hooked fuctions
 	 * *********/
 	update();
 	ft_map();
-	//ft_drw_player();
 	cast_rays();
-	// ft_map();
 
 	/***********************/
 	mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);
@@ -129,9 +130,13 @@ void ft_openfile(char *r_file)
 
 int main(int ac, char **av)
 {
-	if (ac == 2)
+	if (ac == 2 || ac == 3)
 	{
+		ft_map_arg_check(av[1]);
+		if (ac == 3)
+			ft_save_arg_check(av[2]);
 		ft_init();
+		
 		ft_openfile(av[1]);
 		g_mymlx.mlx_ptr = mlx_init();
 		g_mymlx.win_ptr = mlx_new_window(g_mymlx.mlx_ptr, g_file.width_resolution, g_file.height_resolution, av[1]);
@@ -141,4 +146,16 @@ int main(int ac, char **av)
 		mlx_loop(g_mymlx.mlx_ptr);
 		return (0);
 	}
+	else if (ac > 3)
+		{
+			perror("ERORR\nYou've Entereed More then one Arguments.\n Please Try Again");
+			//exit(0);
+		}
+		else 
+			{
+				perror("Error\nNo map file Provided.\n");
+				//exit(0);
+			}
+		
+	
 }

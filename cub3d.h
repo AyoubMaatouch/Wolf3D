@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/04 12:03:31 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/05 19:52:53 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef struct
     float radius;
     int turnDirection;
     int walkDirection;
+    int sidewalk;
     float rotationAngle;
     float move_speed;
     float rotation_speed;
@@ -206,5 +207,14 @@ void ft_rayCaster(int i, double rayAngle);
 double d2r(double angle);
 void ft_drw_player(void);
 void get_data_textures ();
+
+
+
+/****************************
+ *  Error handling Functions
+ ***************************/
+
+void    ft_map_arg_check(char *arg);
+void    ft_save_arg_check(char *arg);
 
 #endif
