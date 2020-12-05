@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/04 12:04:02 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/05 16:53:28 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void cast_rays(void)
     int i = 0;
     ray_angle = g_myplayer.rotationAngle - d2r(30);
 
-    while (i < g_file.width_resolution)
+    while (i <= g_file.width_resolution)
     {
         //  ft_rayCaster(i, ray_angle);
         ft_ray(i, ray_angle);
@@ -137,9 +137,8 @@ void cast_rays(void)
     while (i < g_file.width_resolution)
     {
         ft_wall_data(i);
-        // ft_draw_celling(i);
-        // get_texture_data2(i);
-       // BuildWall(i);
+    //     ft_draw_celling(i);
+    //    BuildWall(i);
         i++;
     }
 }
@@ -173,7 +172,7 @@ void ft_ray(int i, double rayAngle)
     ft_init_var();
     g_cast.isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
     g_cast.isRayFacingUp = !g_cast.isRayFacingDown;
-    g_cast.isRayFacingRight = rayAngle < (0.5 * M_PI) || rayAngle > (1.5 * M_PI);
+    g_cast.isRayFacingRight = rayAngle < (0.5 * M_PI) || rayAngle >= (1.5 * M_PI);
     g_cast.isRayFacingLeft = !g_cast.isRayFacingRight;
 
     
@@ -209,12 +208,14 @@ void ft_horizntale_inter(double rayAngle)
            yinterse >= 0 && yinterse <= (g_file.hight * TILE))
     {
         float x_checkh = xinterse;
-        float y_checkh = yinterse + ((g_cast.isRayFacingUp == 1) ? -1 : 0);
-
+        float y_checkh = yinterse - ((g_cast.isRayFacingUp == 1) ? 1 : 0);
+         if (g_cast.isRayFacingUp && g_cast.isRayFacingLeft)
+        {
+        }
         if (iswall(x_checkh, y_checkh) == 1)
         {
             g_wallhits.HorizWallHitX = x_checkh;
-            g_wallhits.HorizWallHitY = y_checkh;
+            g_wallhits.HorizWallHitY = yinterse;
             g_wallhits.HorizWallHit = 1;
             break;
         }
@@ -254,10 +255,10 @@ void ft_verticale_inter(double rayAngle)
     {
         float x_check = xinterse - ((g_cast.isRayFacingLeft == 1) ? 1 : 0);
         float y_check = yinterse;
-
+       
         if (iswall(x_check, y_check) == 1)
         {
-            g_wallhits.VertWallHitX = x_check;
+            g_wallhits.VertWallHitX = xinterse;
             g_wallhits.VertWallHitY = y_check;
             g_wallhits.VertWallHit = 1;
             break;

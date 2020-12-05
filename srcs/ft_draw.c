@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 12:03:12 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/04 12:07:12 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:55:48 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void draw_line(int x0, int y0, int x1, int y1, int color)
       p += dy;
       x0 += sx;
     } 
+  
     if (p2 <= dx)
     {
       p += dx;
