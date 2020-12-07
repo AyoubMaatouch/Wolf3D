@@ -21,18 +21,51 @@ void ft_get_resolution(int hight, int width)
 
 void ft_get_texture(char c, char *value)
 {
-    if (c == 'N')
+    if (c == 'N'){
+         if (!(ft_xmp_check(value)))
+            {
+            perror("Error\nPlease Check 'NO' texture File\n");
+            exit(0);
+            }
+        else
         g_file.no_t = value;
-    else if (c == 'W')
+        }
+    else if (c == 'W'){
+         if (!ft_xmp_check(value))
+            {
+            perror("Error\nPlease Check 'WE' texture File\n");
+            exit(0);
+            }
+        else
         g_file.we_t = value;
-    else if (c == 'E')
+        }
+    else if (c == 'E'){
+         if (!ft_xmp_check(value) )
+            {
+            perror("Error\nPlease Check 'EA' texture File\n");
+            exit(0);
+            }
+        else
         g_file.ea_t = value;
-    else
-        g_file.so_t = value;
+        }
+    else{
+        if (!ft_xmp_check(value))
+            {
+            perror("Error\nPlease Check 'SO' texture File\n");
+            exit(0);
+            }
+        else
+         g_file.so_t = value;
+        }
 }
 
 void ft_get_sprit(char *value)
 {
+    if (!ft_xmp_check(value))
+            {
+            perror("Error\nPlease Check 'Sprite' XPM File\n");
+            exit(0);
+            }
     g_file.sprit = value;
 }
 

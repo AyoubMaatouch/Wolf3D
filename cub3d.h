@@ -216,5 +216,6 @@ void get_data_textures ();
 
 void    ft_map_arg_check(char *arg);
 void    ft_save_arg_check(char *arg);
+int ft_xmp_check(char *arg);
 
 #endif

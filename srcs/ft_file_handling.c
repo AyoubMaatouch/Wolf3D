@@ -28,4 +28,12 @@ void    ft_save_arg_check(char *arg)
             perror("ERROR\nWrong Argument Name!\nTry : --save :)\n");
             exit (0);
       }
-}   
+} 
+int ft_xmp_check(char *arg)
+{
+       if (strcmp(&arg[strlen(arg) - 4], ".xpm") != 0)
+      { 
+           return (0);
+      }
+      return (1);
+}  
