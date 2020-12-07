@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:49:26 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/04 10:24:01 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/07 19:52:41 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void ft_get_resolution(int hight, int width)
 void ft_get_texture(char c, char *value)
 {
     if (c == 'N'){
-         if (!(ft_xmp_check(value)))
+         if (g_file.no_t || !(ft_xmp_check(value)) )
             {
             perror("Error\nPlease Check 'NO' texture File\n");
             exit(0);
@@ -31,7 +31,7 @@ void ft_get_texture(char c, char *value)
         g_file.no_t = value;
         }
     else if (c == 'W'){
-         if (!ft_xmp_check(value))
+         if ( g_file.we_t || !ft_xmp_check(value))
             {
             perror("Error\nPlease Check 'WE' texture File\n");
             exit(0);
@@ -40,7 +40,7 @@ void ft_get_texture(char c, char *value)
         g_file.we_t = value;
         }
     else if (c == 'E'){
-         if (!ft_xmp_check(value) )
+         if (g_file.ea_t || !ft_xmp_check(value) )
             {
             perror("Error\nPlease Check 'EA' texture File\n");
             exit(0);
@@ -49,7 +49,7 @@ void ft_get_texture(char c, char *value)
         g_file.ea_t = value;
         }
     else{
-        if (!ft_xmp_check(value))
+        if (g_file.so_t || !ft_xmp_check(value))
             {
             perror("Error\nPlease Check 'SO' texture File\n");
             exit(0);

@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/05 19:52:53 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/07 20:18:15 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,5 +217,6 @@ void get_data_textures ();
 void    ft_map_arg_check(char *arg);
 void    ft_save_arg_check(char *arg);
 int ft_xmp_check(char *arg);
+
 
 #endif
