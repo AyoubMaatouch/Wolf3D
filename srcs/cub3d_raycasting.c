@@ -6,21 +6,15 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/05 20:53:49 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:20:13 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "textures.h"
-
-void ft_ray(int i, double rayAngle);
-void ft_horizntale_inter(double rayAngle);
-void ft_verticale_inter(double rayAngle);
-void ft_get_distance(double rayAngle, int i);
 
 /**********************************
  *          3D RENDERING 
- * ******************/
+ * ********************************/
 
 void ft_wall_data(int i)
 {

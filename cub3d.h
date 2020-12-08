@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/07 20:18:15 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:22:53 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #define CUB3D_H
 
 /*********
- * Library
- * ***/
+ * Libs
+ * *********/
 #include "mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,8 +28,9 @@
 ///////////////////
 
 /*************
- *  DEFINE
+ *  DEFINED VALUES
  * * */
+
 /////////////////////COLORS////////////////
 #define WHITE 0xFFFFFF
 #define RED 0xFF0000
@@ -39,7 +40,7 @@
 #define GRAY 0x808080
 #define BLACK 0x000000
 
-/////////////////////////////
+//////////////Bouton////////////
 #define UP 126
 #define UP_l 13
 #define DOWN 125
@@ -53,9 +54,9 @@
 #define BUFFER_SIZE 1024
 #define TILE 64
 
-/********
+/**************
  * Structs
- * *****/
+ * **********/
 typedef struct
 {
     int isRayFacingDown;
@@ -187,7 +188,7 @@ void *ft_bzero(void *b, size_t len);
 
 /***********
  * file handele
- * ****/
+ * *********/
 
 void ft_map_handle(char *r_file, int map_size);
 void ft_openfile(char *r_file);
@@ -199,6 +200,7 @@ void ft_get_resolution(int v, int h);
 /*********
  * Draw Functions
  * ********/
+
 void ft_map();
 void draw_line(int x0, int y0, int x1, int y1, int color);
 int iswall(float x, float y);
@@ -208,7 +210,14 @@ double d2r(double angle);
 void ft_drw_player(void);
 void get_data_textures ();
 
+/***********************
+ *  RayCating Functions
+ * ********************/
 
+void ft_ray(int i, double rayAngle);
+void ft_horizntale_inter(double rayAngle);
+void ft_verticale_inter(double rayAngle);
+void ft_get_distance(double rayAngle, int i);
 
 /****************************
  *  Error handling Functions
@@ -216,7 +225,7 @@ void get_data_textures ();
 
 void    ft_map_arg_check(char *arg);
 void    ft_save_arg_check(char *arg);
-int ft_xmp_check(char *arg);
-
+int     ft_xmp_check(char *arg);
+void    ft_map_error_check();
 
 #endif
