@@ -55,7 +55,7 @@ void ft_map_error_check()
                         puts("Error\nMAP ERROR\n");
                         exit(0);
                   }
-                  // if (g_file.map[i][j] == ' ' && g_file.map[i][j - 1] == '0')
+                  // if (g_file.map[i][j] == ' ' && g_file.map[i][j - 1] != '1')
                   //  {
                   //       printf ("[%d] [%d] \n", i , j);
                   //       puts("Error\nMAP ERROR\n");

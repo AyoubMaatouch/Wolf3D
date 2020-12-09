@@ -16,10 +16,10 @@ void ft_init(void)
 {
 	g_myplayer.turnDirection = 0; // -1 left && +1 right
 	g_myplayer.walkDirection = 0; // -1 down && +1 up
-	g_myplayer.move_speed = 50;
+	g_myplayer.move_speed = 25;
 	g_myplayer.sidewalk = 0;
-	g_myplayer.radius = 10;
-	g_myplayer.rotation_speed = 5 * (M_PI / 180);
+	g_myplayer.radius = 5;
+	g_myplayer.rotation_speed = 2.5 * (M_PI / 180);
 	
 }
 void 		ft_init_mlx()
@@ -112,17 +112,30 @@ void ft_openfile(char *r_file)
 	int fd = open(r_file, O_RDONLY);
 	static int map_count;
 	char *line;
+
+	int i = 0;
 	while ((get_next_line(fd, &line)))
 	{
 		if (ft_isalpha(ft_strtrim(line, " ")[0]))
-			ft_get_handle(ft_strtrim(line, " "));
+			{
+				ft_get_handle(ft_strtrim(line, " "));
+				i++;
+			}
 		if (ft_isalnum(ft_strtrim(line, " ")[0]))
 			map_count++;
 	}
 	if (ft_isdigit(ft_strtrim(line, " ")[0]))
-		map_count++;
+		{
+			map_count++;
+			i++;
+		}		
 	free(line);
 	close(fd);
+	if (i != 9 )
+		{
+			ft_putstr("Error\nFile Error\n");
+			exit(0);
+		}
 	ft_map_handle(r_file, map_count);
 }
 

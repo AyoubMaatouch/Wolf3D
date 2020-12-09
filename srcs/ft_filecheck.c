@@ -75,7 +75,7 @@ void ft_get_cf(char c, char *value)
     {
         char **temp = ft_split(value , ',');
         g_file.flor = 65536 * ft_atoi(temp[0]) + 256 *ft_atoi(temp[1]) + ft_atoi(temp[2]);;
-        }
+    }
     else
        {
         char **temp = ft_split(value , ',');
