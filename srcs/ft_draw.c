@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 12:03:12 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/08 18:18:16 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/08 18:54:35 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void df_player_angle(char position)
 }
 void ft_map()
 {
+  ft_map_error_check();
+
   int i;
   size_t j;
 
