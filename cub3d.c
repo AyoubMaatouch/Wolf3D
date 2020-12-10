@@ -12,6 +12,8 @@
 
 #include "cub3d.h"
 
+int g_bmp;
+
 void ft_init(void)
 {
 	g_myplayer.turnDirection = 0; // -1 left && +1 right
@@ -25,7 +27,8 @@ void ft_init(void)
 void 		ft_init_mlx()
 {
 	g_mymlx.mlx_ptr = mlx_init();
-	g_mymlx.win_ptr = mlx_new_window(g_mymlx.mlx_ptr, g_file.width_resolution, g_file.height_resolution, "cub3D");
+	if (!g_bmp)
+		g_mymlx.win_ptr = mlx_new_window(g_mymlx.mlx_ptr, g_file.width_resolution, g_file.height_resolution, "cub3D");
 	g_data.img = mlx_new_image(g_mymlx.mlx_ptr, g_file.width_resolution, g_file.height_resolution);
 	g_data.addr = mlx_get_data_addr(g_data.img, &g_data.bits_per_pixel, &g_data.line_length, &g_data.endian);
 }
@@ -99,18 +102,24 @@ int check()
 	/**************************/
 	get_data_textures();
 	/****************************/
-	mlx_hook(g_mymlx.win_ptr, 2, 1L << 0, ft_key_input, (void *)0);
+	if (!g_bmp)
+		mlx_hook(g_mymlx.win_ptr, 2, 1L << 0, ft_key_input, (void *)0);
 	/*********
 	 * The looping Functions
 	 * *********/
 	update();
 	ft_map();
 	cast_rays();
-	creat_screenshot();
+	if (g_bmp)
+		creat_screenshot();
 	/**************************************************************/
-	mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);
-	mlx_put_image_to_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr, g_data.img, 0, 0);
-	mlx_destroy_image(g_mymlx.mlx_ptr, g_data.img);
+
+	if (!g_bmp)
+	{
+		mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);
+		mlx_put_image_to_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr, g_data.img, 0, 0);
+		mlx_destroy_image(g_mymlx.mlx_ptr, g_data.img);
+	}
 	g_data.img = mlx_new_image(g_mymlx.mlx_ptr, g_file.width_resolution, g_file.height_resolution);
 	g_data.addr = mlx_get_data_addr(g_data.img, &g_data.bits_per_pixel, &g_data.line_length, &g_data.endian);
 
@@ -155,7 +164,10 @@ int main(int ac, char **av)
 	{
 		ft_map_arg_check(av[1]);
 		if (ac == 3)
-			ft_save_arg_check(av[2]);
+			{
+				ft_save_arg_check(av[2]);
+				g_bmp = 1;
+			}
 		ft_init();
 		ft_openfile(av[1]);
 		ft_init_mlx();
@@ -167,6 +179,6 @@ int main(int ac, char **av)
 			perror("ERORR\nYou've Entereed More then one Arguments.\n Please Try Again");
 		else 
 			perror("Error\nNo map file Provided.\n");
-		
 	return (0);
+		
 }
