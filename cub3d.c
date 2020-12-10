@@ -78,12 +78,20 @@ void get_data_textures ()
     int size, end;
   
 	g_txt[0].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, g_file.so_t, &g_txt[0].img_width, &g_txt[0].img_height);
+	if (!g_txt[0].img)
+		ft_error("Error\n'SO' file texture is correpted Or Not Found!");
 	g_txt[0].data = (int*)mlx_get_data_addr(g_txt[0].img,&bbp, &size, &end ); 
 	g_txt[1].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr,g_file.no_t, &g_txt[1].img_width, &g_txt[1].img_height);
+	if (!g_txt[1].img)
+		ft_error("Error\n'NO' file texture is correpted Or Not Found!");
 	g_txt[1].data = (int*)mlx_get_data_addr(g_txt[1].img,&bbp, &size, &end ); 
 	g_txt[2].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, g_file.ea_t, &g_txt[2].img_width, &g_txt[2].img_height);
+	if (!g_txt[2].img)
+		ft_error("Error\n'EA' file texture is correpted Or Not Found!");
 	g_txt[2].data = (int*)mlx_get_data_addr(g_txt[2].img,&bbp, &size, &end ); 
 	g_txt[3].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, g_file.we_t, &g_txt[3].img_width, &g_txt[3].img_height);
+	if (!g_txt[3].img)
+		ft_error("Error\n'WE' file texture is correpted Or Not Found!");
 	g_txt[3].data = (int*)mlx_get_data_addr(g_txt[3].img,&bbp, &size, &end ); 	
 }
 int check()
@@ -98,12 +106,14 @@ int check()
 	update();
 	ft_map();
 	cast_rays();
+	creat_screenshot();
 	/**************************************************************/
 	mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);
 	mlx_put_image_to_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr, g_data.img, 0, 0);
 	mlx_destroy_image(g_mymlx.mlx_ptr, g_data.img);
 	g_data.img = mlx_new_image(g_mymlx.mlx_ptr, g_file.width_resolution, g_file.height_resolution);
 	g_data.addr = mlx_get_data_addr(g_data.img, &g_data.bits_per_pixel, &g_data.line_length, &g_data.endian);
+
 	return (0);
 }
 

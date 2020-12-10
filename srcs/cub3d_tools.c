@@ -28,3 +28,9 @@ int iswall(float x, float y)
 		return (1);
 	return (g_file.map[(int)(y / TILE)][(int)(x / TILE)] - '0');
 }
+
+void 	*ft_error(char *str)
+{
+	ft_putstr(str);
+	exit(0);
+}

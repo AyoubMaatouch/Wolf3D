@@ -22,38 +22,26 @@ void ft_get_resolution(int hight, int width)
 void ft_get_texture(char c, char *value)
 {
     if (c == 'N'){
-         if (g_file.no_t || !(ft_xmp_check(value)) )
-            {
-            perror("Error\nPlease Check 'NO' texture File\n");
-            exit(0);
-            }
+         if (g_file.no_t)
+            ft_error("Error\nDuplicated 'NO' Texture File\n");
         else
         g_file.no_t = value;
         }
     else if (c == 'W'){
-         if ( g_file.we_t || !ft_xmp_check(value))
-            {
-            perror("Error\nPlease Check 'WE' texture File\n");
-            exit(0);
-            }
+         if ( g_file.we_t)
+            ft_error("Error\nDuplicated 'WE' Texture File\n");
         else
         g_file.we_t = value;
         }
     else if (c == 'E'){
-         if (g_file.ea_t || !ft_xmp_check(value) )
-            {
-            perror("Error\nPlease Check 'EA' texture File\n");
-            exit(0);
-            }
+         if (g_file.ea_t)
+            ft_error("Error\nDuplicated 'EA' Texture File\n");
         else
         g_file.ea_t = value;
         }
     else{
-        if (g_file.so_t || !ft_xmp_check(value))
-            {
-            perror("Error\nPlease Check 'SO' texture File\n");
-            exit(0);
-            }
+        if (g_file.so_t)
+            ft_error("Error\nDuplicated 'SO' Texture File\n");
         else
          g_file.so_t = value;
         }
@@ -91,7 +79,11 @@ void ft_get_handle(char *g_value)
     if (g_value[0] == 'R')
         ft_get_resolution(ft_atoi(temp[2]), ft_atoi(temp[1]));
     if (g_value[0] == 'W' || g_value[0] == 'N' || (g_value[0] == 'S' && g_value[1] == 'O') || g_value[0] == 'E')
-        ft_get_texture(g_value[0], temp[1]);
+        {
+            if (temp[2])
+                ft_error("Error\nPlease Check Your Texture input!");
+            ft_get_texture(g_value[0], temp[1]);
+        }
     if (g_value[0] == 'F' || g_value[0] == 'C')
         ft_get_cf(g_value[0], temp[1]);
     if (g_value[0] == 'S' && g_value[1] != 'O')
