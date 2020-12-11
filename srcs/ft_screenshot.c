@@ -13,7 +13,7 @@
 
 #include "../cub3d.h"
 
-void creat_screenshot(void)
+void    creat_screenshot(void)
 {
     int fd = open("first_rendered_image.bmp", O_RDWR| O_TRUNC |O_CREAT, 0666);
     int i = 0;
@@ -51,12 +51,12 @@ void creat_screenshot(void)
          j = 0;
          while (j < g_file.width_resolution)
          {
-                pos =  (j + g_file.width_resolution * i) * 4;
-              write (fd, (unsigned int *)(g_data.addr + pos)  ,4);
-             j++;
+            pos =  (j + g_file.width_resolution * i) * 4;
+            write (fd, (unsigned int *)(g_data.addr + pos)  ,4);
+            j++;
          }
         i--;
      }
      close (fd);
     exit(0);
-    }
+}

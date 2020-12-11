@@ -6,12 +6,11 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 12:17:36 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/25 10:00:37 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/11 17:12:57 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
 
 size_t	ft_strlen(const char *str)
 {

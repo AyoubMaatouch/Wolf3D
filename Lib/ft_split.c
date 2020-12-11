@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 18:02:04 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/11/05 13:40:31 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/11 17:57:48 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char		**ft_split(char const *s, char c)
 	char			**g_ptr;
 	int				nb_words;
 	int				nb_c;
-	int		j;
+	int				j;
 
 	j = 0;
 	if (!s)

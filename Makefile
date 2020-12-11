@@ -26,14 +26,16 @@ $(NAME):
 	@$(CC) cub3d.c $(LIB) $(SRC) -o cub3D
 	
 clean :
-	@rm -fr $(NAME) cub3D.dSYM
+	@rm -fr $(NAME) cub3D.dSYM *.
 
 fclean : clean
-	@rm -fr $(NAME) cub3D.dSYM
+	@rm -fr $(NAME) cub3D.dSYM first_rendered_image.bmp
 
 re : fclean all
 
 run : 
 	@./$(NAME) *.cub
 
+save : 
+	@./$(NAME) *.cub --save
 #.PHONY : all clean fclean re $(NAME)
