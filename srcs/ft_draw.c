@@ -49,7 +49,8 @@ void ft_map()
     {
       int tx = j * TILE + TILE / 2;
       int ty = i * TILE + TILE / 2;
-      
+      if (g_file.map[i][j] == '2')
+        g_nsprite++;
       if (g_file.map[i][j] == 'N' || g_file.map[i][j] == 'S' || g_file.map[i][j] == 'E' || g_file.map[i][j] == 'W')
       {
         df_player_angle(g_file.map[i][j]);

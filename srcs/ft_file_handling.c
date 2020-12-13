@@ -55,6 +55,16 @@ void  ft_first_last_line(void)
                   ft_error("Error\nCheck Your MAP!");
             i++;
       }
+
+      i = 0;
+      while (i < g_file.hight)
+      {
+            if (ft_strtrim(g_file.map[i], " ")[0] != '1' )
+                  ft_error("Error\nCheck Your MAP!");
+            // if (g_file.map[i][ft_strlen(g_file.map[i]) - 1] != '1' )
+            //       ft_error("Error\nCheck Your MAP!");
+            i++;
+      }
 }     
 void ft_map_error_check()
 {

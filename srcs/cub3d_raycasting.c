@@ -131,6 +131,15 @@ void cast_rays(void)
         BuildWall(i);
         i++;
     }
+    
+    i = 0;
+    get_sprite_pos();
+	get_spriteimage();
+	while (i < g_nsprite)
+	{
+		render_sprite(i);
+		i++;
+	}
 }
 
 double ft_distance_between(double x1, double y1, double x2, double y2)
