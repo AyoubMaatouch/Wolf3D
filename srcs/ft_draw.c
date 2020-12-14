@@ -42,6 +42,7 @@ void ft_map()
   size_t j;
 
   i = 0;
+  g_nsprite = 0;
   while (i < g_file.hight)
   {
     j = 0;
@@ -70,4 +71,7 @@ void ft_map()
        puts ("NO PLAYER IN MAP");
        exit(0); 
       }
+
+      get_sprite_pos();
+
 }

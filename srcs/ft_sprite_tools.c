@@ -69,16 +69,20 @@ void	render_sprite(int id)
 {
 	float angle;
 
+	g_sprite[id].dst = (float)sqrt((g_sprite[id].x - g_myplayer.x) *
+			(g_sprite[id].x - g_myplayer.x) +
+			(g_sprite[id].y - g_myplayer.y) *
+			(g_sprite[id].y - g_myplayer.y));
+			
 	angle = atan2(g_sprite[id].y - g_myplayer.y, g_sprite[id].x - g_myplayer.x);
-	while (angle - to_rad(g_myplayer.rotationAngle) > M_PI)
+	while (angle - g_myplayer.rotationAngle > M_PI)
 		angle -= 2 * M_PI;
-	while (angle - to_rad(g_myplayer.rotationAngle) < -M_PI)
+	while (angle - g_myplayer.rotationAngle < -M_PI)
 		angle += 2 * M_PI;
-	angle = angle - to_rad(g_myplayer.rotationAngle);
-	angle = to_deg(angle);
+	angle = angle - g_myplayer.rotationAngle;
+	//angle = to_deg(angle);
 	g_sprite[id].size = (g_file.width_resolution / g_sprite[id].dst) * TILE;
 	g_sprite[id].y_ofst = (g_file.height_resolution / 2) - (g_sprite[id].size / 2);
-	g_sprite[id].x_ofst = ((angle * g_file.width) / 60) +
+	g_sprite[id].x_ofst = ((angle * g_file.width) / d2r(60)) +
 		((g_file.width_resolution / 2) - (g_sprite[id].size / 2));
-	draw_sprite(id);
 }

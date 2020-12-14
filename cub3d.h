@@ -187,9 +187,9 @@ typedef struct    s_sprite {
     float size;
     float x_ofst;
     float y_ofst;
-}                t_sprite[3500];
+}                t_sprite;
 
-t_sprite	g_sprite;
+t_sprite	g_sprite[3500];
 int			g_nsprite;
 t_sptexture g_sptexture;
 ///////////////////////////
@@ -275,7 +275,7 @@ void 	*ft_error(char *str);
 ****************/
 void creat_screenshot(void);
 
-
+void	sort(void);
 
 
 #endif

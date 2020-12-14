@@ -17,9 +17,11 @@ void	sort(void)
 		{
 			if (g_sprite[j].dst < g_sprite[j + 1].dst)
 			{
-				tmp[0] = g_sprite[j];
+				printf("B %f,%f ,%f \n",g_sprite[j].dst, g_sprite[j].x, g_sprite[j].y);
+				tmp = g_sprite[j];
 				g_sprite[j] = g_sprite[j + 1];
-				g_sprite[j + 1] = tmp[0];
+				g_sprite[j + 1] = tmp;
+				printf("A %f,%f ,%f \n",g_sprite[j].dst, g_sprite[j].x, g_sprite[j].y);
 			}
 		}
 	}
@@ -28,12 +30,9 @@ void	sort(void)
 
 void	save_cordinate(int i, int j, int id)
 {
-	g_sprite[id].x = j * TILE + 30;
-	g_sprite[id].y = i * TILE + 30;
-	g_sprite[id].dst = (float)sqrt((g_sprite[id].x - g_myplayer.x) *
-			(g_sprite[id].x - g_myplayer.x) +
-			(g_sprite[id].y - g_myplayer.y) *
-			(g_sprite[id].y - g_myplayer.y));
+	g_sprite[id].x = j * TILE + 32;
+	g_sprite[id].y = i * TILE + 32;
+	
 }
 
 
@@ -60,5 +59,5 @@ void	get_sprite_pos(void)
 		}
 		i++;
 	}
-	sort();
+	
 }

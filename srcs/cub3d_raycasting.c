@@ -133,13 +133,19 @@ void cast_rays(void)
     }
     
     i = 0;
-    get_sprite_pos();
-	get_spriteimage();
+	
 	while (i < g_nsprite)
 	{
 		render_sprite(i);
 		i++;
 	}
+    sort();
+    i = 0;
+    while (i < g_nsprite)
+    {
+     draw_sprite(i);
+     i++;
+    }
 }
 
 double ft_distance_between(double x1, double y1, double x2, double y2)
