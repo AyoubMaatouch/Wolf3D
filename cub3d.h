@@ -165,7 +165,7 @@ typedef struct
     
 } t_txt;
 
-t_txt g_txt[4];
+t_txt g_txt[5];
 /**************************************
  *              Functions
  * ****************************/
@@ -186,6 +186,8 @@ char **ft_split(char const *s, char c);
 void *ft_calloc(size_t count, size_t size);
 void *ft_bzero(void *b, size_t len);
 void	ft_putstr(char *s);
+int	ft_memcmp(const void *s1, const void *s2, size_t n);
+
 
 /***********
  * file handele
@@ -219,6 +221,7 @@ void ft_ray(int i, double rayAngle);
 void ft_horizntale_inter(double rayAngle);
 void ft_verticale_inter(double rayAngle);
 void ft_get_distance(double rayAngle, int i);
+double ft_distance_between(double x1, double y1, double x2, double y2);
 
 /****************************
  *  Error handling Functions
@@ -237,5 +240,18 @@ void creat_screenshot(void);
 
 
 
+/****************************
+        Sprite
+*********************************/
+void    ft_get_sp_pos(float x, float y, int i);
+int     g_sp_index;
+typedef struct {
+    float x;
+    float y;
+    float dis;
+    
+}t_sprite_info;
 
+t_sprite_info g_sprite[3200];
+void	sort(void);
 #endif

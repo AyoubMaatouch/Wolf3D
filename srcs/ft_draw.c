@@ -42,6 +42,7 @@ void ft_map()
   size_t j;
 
   i = 0;
+  g_sp_index = 0;
   while (i < g_file.hight)
   {
     j = 0;
@@ -49,7 +50,9 @@ void ft_map()
     {
       int tx = j * TILE + TILE / 2;
       int ty = i * TILE + TILE / 2;
-      
+     
+      if (iswall(tx, ty) == 2)
+        g_sp_index++;
       if (g_file.map[i][j] == 'N' || g_file.map[i][j] == 'S' || g_file.map[i][j] == 'E' || g_file.map[i][j] == 'W')
       {
         df_player_angle(g_file.map[i][j]);
@@ -69,4 +72,5 @@ void ft_map()
        puts ("NO PLAYER IN MAP");
        exit(0); 
       }
+
 }

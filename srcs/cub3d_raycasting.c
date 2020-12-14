@@ -131,6 +131,29 @@ void cast_rays(void)
         BuildWall(i);
         i++;
     }
+
+      int index = 0;
+      puts("============================NOT SORTED================================");
+    while (index < g_sp_index)
+    {
+        
+        printf ("SP %d x[%f] y[%f] distance[%f]\n", index, g_sprite[index].x, g_sprite[index].y,g_sprite[index].dis );
+       
+        index++;
+    }
+    puts("===========================================================================");
+    sort();
+      index = 0;
+      puts("===============================SORTED================================");
+    while (index < g_sp_index)
+    {
+        
+        printf ("SP %d x[%f] y[%f] distance[%f]\n", index, g_sprite[index].x, g_sprite[index].y,g_sprite[index].dis );
+       
+        index++;
+    }
+    puts("===========================================================================");
+
 }
 
 double ft_distance_between(double x1, double y1, double x2, double y2)
@@ -160,6 +183,7 @@ void ft_ray(int i, double rayAngle)
 {
     rayAngle = Normlize_anlge(rayAngle);
     ft_init_var();
+ 
     g_cast.isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
     g_cast.isRayFacingUp = !g_cast.isRayFacingDown;
     g_cast.isRayFacingRight = rayAngle < (0.5 * M_PI) || rayAngle >= (1.5 * M_PI);
@@ -168,11 +192,21 @@ void ft_ray(int i, double rayAngle)
     ft_horizntale_inter(rayAngle);
     ft_verticale_inter(rayAngle);
     ft_get_distance(rayAngle, i);
+
+    /*
+    *   printing sprite data 
+    */
+  
+
+
 }
 void ft_horizntale_inter(double rayAngle)
 {
     float yinterse, xinterse;
     float xstep, ystep;
+    int s_index;
+
+    s_index = -1;
     g_wallhits.HorizWallHit = 0;
     /********
      * This part is Responsible for the Horizntale INTERSECTIONS.
@@ -195,9 +229,8 @@ void ft_horizntale_inter(double rayAngle)
     {
         float x_checkh = xinterse;
         float y_checkh = yinterse - ((g_cast.isRayFacingUp == 1) ? 1 : 0);
-        if (g_cast.isRayFacingUp && g_cast.isRayFacingLeft)
-        {
-        }
+         if (iswall(x_checkh, y_checkh) == 2 && ++s_index <= g_sp_index)
+            ft_get_sp_pos(x_checkh, y_checkh, s_index);
         if (iswall(x_checkh, y_checkh) == 1)
         {
             g_wallhits.HorizWallHitX = x_checkh;
@@ -216,7 +249,7 @@ void ft_verticale_inter(double rayAngle)
     float yinterse = 0;
     float xstep = 0;
     float ystep = 0;
-
+   int s_index = 0;
     /********
      * This part is Responsible for the Vertical INTERSECTIONS.
      * 
@@ -241,7 +274,8 @@ void ft_verticale_inter(double rayAngle)
     {
         float x_check = xinterse - ((g_cast.isRayFacingLeft == 1) ? 1 : 0);
         float y_check = yinterse;
-
+        if (iswall(x_check, y_check) == 2 && ++s_index <= g_sp_index)
+            ft_get_sp_pos(x_check, y_check, s_index);
         if (iswall(x_check, y_check) == 1)
         {
             g_wallhits.VertWallHitX = xinterse;
