@@ -249,9 +249,13 @@ typedef struct {
     float x;
     float y;
     float dis;
-    
+    float y_off;
+    float x_off;
+    float size;
 }t_sprite_info;
 
 t_sprite_info g_sprite[3200];
 void	sort(void);
+void	draw_sprite(int id);
+void	ft_sp_data (int i);
 #endif

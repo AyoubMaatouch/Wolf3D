@@ -98,7 +98,6 @@ void BuildWall(int i)
 
 double Normlize_anlge(double angle)
 {
-    //angle = angle % ((double)(2 * M_PI));
     angle = remainder(angle, (2 * M_PI));
     if (angle < 0)
         angle = (2 * M_PI) + angle;
@@ -133,27 +132,44 @@ void cast_rays(void)
     }
 
       int index = 0;
-      puts("============================NOT SORTED================================");
-    while (index < g_sp_index)
-    {
+    //   puts("============================NOT SORTED================================");
+    // while (index < g_sp_index)
+    // {
         
-        printf ("SP %d x[%f] y[%f] distance[%f]\n", index, g_sprite[index].x, g_sprite[index].y,g_sprite[index].dis );
+    //     printf ("SP %d x[%f] y[%f] distance[%f] size[%f]\n", index, g_sprite[index].x, g_sprite[index].y,g_sprite[index].dis, g_sprite[i].size );
        
-        index++;
-    }
-    puts("===========================================================================");
-    sort();
+    //     index++;
+    // }
+    // puts("===========================================================================");
+    
       index = 0;
-      puts("===============================SORTED================================");
-    while (index < g_sp_index)
+     
+   i = 0;
+    while (i < 2)
+    {
+        printf ("a SIZE[%f]\n",  g_sprite[i].size);
+        ft_sp_data (i);
+        i++;
+    }
+    //sort();
+//     puts("===============================SORTED================================");
+//     while (index < g_sp_index)
+//     {
+        
+//         printf ("SP %d x[%f] y[%f] distance[%f] size[%f]\n", index, g_sprite[index].x, g_sprite[index].y,g_sprite[index].dis, g_sprite[i].size);
+       
+//         index++;
+//     }
+//     puts("===========================================================================");
+    i = 0;
+	
+
+    while (i < 2)
     {
         
-        printf ("SP %d x[%f] y[%f] distance[%f]\n", index, g_sprite[index].x, g_sprite[index].y,g_sprite[index].dis );
-       
-        index++;
+        draw_sprite(i);
+        i++;
     }
-    puts("===========================================================================");
-
 }
 
 double ft_distance_between(double x1, double y1, double x2, double y2)

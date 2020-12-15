@@ -18,7 +18,6 @@
 */
 
 
-// void ft_sprite_data(int i)
 // {
 //     float correct_dis = g_sprit.sprit_dis * cos(g_ray[i].ray_angle - g_myplayer.rotationAngle);
 //     float projection = (g_file.width_resolution / 2) / tan(d2r(30));
@@ -59,8 +58,64 @@ void    ft_get_sp_pos(float x, float y, int i)
     /*
     * Getting RAW distance
     */
+	
     g_sprite[i].dis = ft_distance_between (g_myplayer.x, g_sprite[i].x, g_myplayer.y, g_sprite[i].y);
     
 }
 
+void	ft_sp_data (int i)
+{
+	/*
+	*	Preparing sprite data for drawing the wall
+	*/
+	g_sprite[i].dis = ft_distance_between (g_myplayer.x, g_sprite[i].x, g_myplayer.y, g_sprite[i].y);
+	float angle = atan2(g_sprite[i].y - g_myplayer.y, g_sprite[i].x - g_myplayer.x);
+	float cor_dis = g_sprite[i].dis * cos(angle - g_myplayer.rotationAngle);
+    float pr = (g_file.width_resolution / 2) / tan(d2r(30));
+    g_sprite[i].size = (TILE / cor_dis) * pr;
+   	g_sprite[i].y_off = (g_file.height_resolution / 2) - (g_sprite[i].size/ 2);
+    g_sprite[i].x_off = ((angle * g_file.width) / d2r(60)) + ((g_file.width_resolution / 2) - (g_sprite[i].size / 2)); //g_sprite[i].start + (int)g_sprite[i].size;	
+}
 
+
+/**************************
+ * 
+ * *********************/
+
+void	sprite_put_pixels(int id, int i, int j)
+{
+	int *add;
+	int color;
+
+	add = g_txt[4].data;
+	color = add[((int)g_txt[4].img_width * (j * (int)g_txt[4].img_height /(int)g_sprite[id].size)) + (i * (int)g_txt[4].img_width / (int)g_sprite[id].size)];
+	if (color != 0)
+	{
+		my_mlx_pixel_put(&g_data, g_sprite[id].x_off + i, g_sprite[id].y_off + j, color);
+	}
+}
+
+void	draw_sprite(int id)
+{
+	int i;
+	int j;
+
+	i = -1;
+	j = -1;
+	
+	while (++i < g_sprite[id].size - 1)
+	{
+		if (g_sprite[id].x_off + i < 0 || g_sprite[id].x_off + i > g_file.width_resolution)
+			continue;
+		if (g_sprite[id].dis > g_ray[(int)g_sprite[id].x_off + i].distance)
+			continue;
+		j = -1;
+		while (++j < g_sprite[id].size - 1)
+		{
+			if (g_sprite[id].y + j < 0 || g_sprite[id].y_off + j > g_file.height_resolution)
+				continue;
+			sprite_put_pixels(id, i, j);
+		}
+	}
+	
+}
