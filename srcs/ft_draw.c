@@ -42,7 +42,11 @@ void ft_map()
   size_t j;
 
   i = 0;
+<<<<<<< HEAD
   g_sp_index = 0;
+=======
+  g_nsprite = 0;
+>>>>>>> a52948a5221f470d8eb409215f0969e8cee39f4b
   while (i < g_file.hight)
   {
     j = 0;
@@ -50,9 +54,14 @@ void ft_map()
     {
       int tx = j * TILE + TILE / 2;
       int ty = i * TILE + TILE / 2;
+<<<<<<< HEAD
      
       if (iswall(tx, ty) == 2)
         g_sp_index++;
+=======
+      if (g_file.map[i][j] == '2')
+        g_nsprite++;
+>>>>>>> a52948a5221f470d8eb409215f0969e8cee39f4b
       if (g_file.map[i][j] == 'N' || g_file.map[i][j] == 'S' || g_file.map[i][j] == 'E' || g_file.map[i][j] == 'W')
       {
         df_player_angle(g_file.map[i][j]);
@@ -73,4 +82,9 @@ void ft_map()
        exit(0); 
       }
 
+<<<<<<< HEAD
+=======
+      get_sprite_pos();
+
+>>>>>>> a52948a5221f470d8eb409215f0969e8cee39f4b
 }
