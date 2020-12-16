@@ -68,13 +68,28 @@ void	ft_sp_data (int i)
 	/*
 	*	Preparing sprite data for drawing the wall
 	*/
-	g_sprite[i].dis = ft_distance_between (g_myplayer.x, g_sprite[i].x, g_myplayer.y, g_sprite[i].y);
+	///g_sprite[i].dis = ft_distance_between (g_myplayer.x, g_sprite[i].x, g_myplayer.y, g_sprite[i].y);
 	float angle = atan2(g_sprite[i].y - g_myplayer.y, g_sprite[i].x - g_myplayer.x);
-	float cor_dis = g_sprite[i].dis * cos(angle - g_myplayer.rotationAngle);
-    float pr = (g_file.width_resolution / 2) / tan(d2r(30));
-    g_sprite[i].size = (TILE / cor_dis) * pr;
-   	g_sprite[i].y_off = (g_file.height_resolution / 2) - (g_sprite[i].size/ 2);
-    g_sprite[i].x_off = ((angle * g_file.width) / d2r(60)) + ((g_file.width_resolution / 2) - (g_sprite[i].size / 2)); //g_sprite[i].start + (int)g_sprite[i].size;	
+	while (angle - g_myplayer.rotationAngle > M_PI)
+		angle -= 2 * M_PI;
+	while (angle - g_myplayer.rotationAngle < -M_PI)
+		angle += 2 * M_PI;
+	angle = angle - g_myplayer.rotationAngle;
+	
+	if (g_file.height_resolution > g_file.width_resolution)
+		g_sprite[i].size = (g_file.height_resolution / g_sprite[i].dis) * TILE;
+	else
+		g_sprite[i].size = (g_file.width_resolution / g_sprite[i].dis) * TILE;
+	
+	
+	
+	//float cor_dis = g_sprite[i].dis * cos(angle);
+    // float pr = (g_file.width_resolution / 2) / tan(d2r(30));
+    // g_sprite[i].size = (TILE / cor_dis) * pr;
+
+
+   	g_sprite[i].y_off = (g_file.height_resolution / 2) - (g_sprite[i].size / 2);
+    g_sprite[i].x_off = ((angle * g_file.width_resolution) / d2r(60)) + ((g_file.width_resolution / 2) - (g_sprite[i].size / 2)); //g_sprite[i].start + (int)g_sprite[i].size;	
 }
 
 
@@ -102,7 +117,6 @@ void	draw_sprite(int id)
 
 	i = -1;
 	j = -1;
-	
 	while (++i < g_sprite[id].size - 1)
 	{
 		if (g_sprite[id].x_off + i < 0 || g_sprite[id].x_off + i > g_file.width_resolution)
@@ -118,4 +132,4 @@ void	draw_sprite(int id)
 		}
 	}
 	
-}
+}   

@@ -209,9 +209,6 @@ void ft_ray(int i, double rayAngle)
     ft_verticale_inter(rayAngle);
     ft_get_distance(rayAngle, i);
 
-    /*
-    *   printing sprite data 
-    */
   
 
 
