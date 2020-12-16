@@ -71,13 +71,9 @@ void BuildWall(int i)
 
     int offeset_y, offeset_x;
     if (g_ray[i].wasVerticale)
-    {
         offeset_x = (int)g_ray[i].wallHity % TILE;
-    }
     else
-    {
         offeset_x = (int)g_ray[i].wallHitx % TILE;
-    }
 
     int nb = get_side(i);
     /************************************************/
@@ -142,16 +138,17 @@ void cast_rays(void)
     // }
     // puts("===========================================================================");
     
+    sort();
       index = 0;
      
    i = 0;
-    while (i < 2)
+    while (i < g_sp_index)
     {
-        printf ("a SIZE[%f]\n",  g_sprite[i].size);
+        printf ("sp[%d][%f]\n", i,g_sprite[i].dis);
         ft_sp_data (i);
         i++;
     }
-    //sort();
+    sort();
 //     puts("===============================SORTED================================");
 //     while (index < g_sp_index)
 //     {
@@ -164,9 +161,8 @@ void cast_rays(void)
     i = 0;
 	
 
-    while (i < 2)
-    {
-        
+    while (i < g_sp_index)
+    { 
         draw_sprite(i);
         i++;
     }
@@ -242,8 +238,8 @@ void ft_horizntale_inter(double rayAngle)
     {
         float x_checkh = xinterse;
         float y_checkh = yinterse - ((g_cast.isRayFacingUp == 1) ? 1 : 0);
-         if (iswall(x_checkh, y_checkh) == 2 && ++s_index <= g_sp_index)
-            ft_get_sp_pos(x_checkh, y_checkh, s_index);
+        //  if (iswall(x_checkh, y_checkh) == 2 && ++s_index <= g_sp_index)
+        //     ft_get_sp_pos(x_checkh, y_checkh, s_index);
         if (iswall(x_checkh, y_checkh) == 1)
         {
             g_wallhits.HorizWallHitX = x_checkh;
@@ -262,7 +258,7 @@ void ft_verticale_inter(double rayAngle)
     float yinterse = 0;
     float xstep = 0;
     float ystep = 0;
-   int s_index = 0;
+  // int s_index = 0;
     /********
      * This part is Responsible for the Vertical INTERSECTIONS.
      * 
@@ -287,8 +283,8 @@ void ft_verticale_inter(double rayAngle)
     {
         float x_check = xinterse - ((g_cast.isRayFacingLeft == 1) ? 1 : 0);
         float y_check = yinterse;
-        if (iswall(x_check, y_check) == 2 && ++s_index <= g_sp_index)
-            ft_get_sp_pos(x_check, y_check, s_index);
+        // if (iswall(x_check, y_check) == 2 && ++s_index <= g_sp_index)
+        //     ft_get_sp_pos(x_check, y_check, s_index);
         if (iswall(x_check, y_check) == 1)
         {
             g_wallhits.VertWallHitX = xinterse;

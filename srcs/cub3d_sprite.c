@@ -59,7 +59,7 @@ void    ft_get_sp_pos(float x, float y, int i)
     * Getting RAW distance
     */
 	
-    g_sprite[i].dis = ft_distance_between (g_myplayer.x, g_sprite[i].x, g_myplayer.y, g_sprite[i].y);
+    g_sprite[i].dis = ft_distance_between (g_sprite[i].x, g_myplayer.x,  g_sprite[i].y, g_myplayer.y);
     
 }
 
@@ -68,7 +68,8 @@ void	ft_sp_data (int i)
 	/*
 	*	Preparing sprite data for drawing the wall
 	*/
-	///g_sprite[i].dis = ft_distance_between (g_myplayer.x, g_sprite[i].x, g_myplayer.y, g_sprite[i].y);
+	//g_sprite[i].dis = ft_distance_between (g_myplayer.x, g_sprite[i].x, g_myplayer.y, g_sprite[i].y);
+	g_sprite[i].dis = ft_distance_between (g_sprite[i].x, g_myplayer.x,  g_sprite[i].y, g_myplayer.y);
 	float angle = atan2(g_sprite[i].y - g_myplayer.y, g_sprite[i].x - g_myplayer.x);
 	while (angle - g_myplayer.rotationAngle > M_PI)
 		angle -= 2 * M_PI;
@@ -94,7 +95,7 @@ void	ft_sp_data (int i)
 
 
 /**************************
- * 
+ * 	Drawing Sprite
  * *********************/
 
 void	sprite_put_pixels(int id, int i, int j)
