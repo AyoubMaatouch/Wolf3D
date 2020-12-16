@@ -130,7 +130,6 @@ void cast_rays(void)
         BuildWall(i);
         i++;
     }
-<<<<<<< HEAD
 
       int index = 0;
     //   puts("============================NOT SORTED================================");
@@ -170,22 +169,6 @@ void cast_rays(void)
         
         draw_sprite(i);
         i++;
-=======
-    
-    i = 0;
-	
-	while (i < g_nsprite)
-	{
-		render_sprite(i);
-		i++;
-	}
-    sort();
-    i = 0;
-    while (i < g_nsprite)
-    {
-     draw_sprite(i);
-     i++;
->>>>>>> a52948a5221f470d8eb409215f0969e8cee39f4b
     }
 }
 

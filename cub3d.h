@@ -54,8 +54,6 @@
 #define BUFFER_SIZE 1024
 #define TILE 64
 
-
-
 /**************
  * Structs
  * **********/
@@ -167,49 +165,7 @@ typedef struct
     
 } t_txt;
 
-<<<<<<< HEAD
 t_txt g_txt[5];
-=======
-t_txt g_txt[4];
-
-/*************
- *  sprite
- * *********/
-typedef struct    s_sptexture
-{
-    void    *img_sprite;
-    int        *data;
-    int        width;
-    int        height;
-}                t_sptexture;
-
-typedef struct    s_sprite {
-    float x;
-    float y;
-    float dst;
-    float size;
-    float x_ofst;
-    float y_ofst;
-}                t_sprite;
-
-t_sprite	g_sprite[3500];
-int			g_nsprite;
-t_sptexture g_sptexture;
-///////////////////////////
-void	get_sprite_pos(void);
-void	save_cordinate(int i, int j, int id);
-void	sort(void);
-float	to_rad(float angle);
-float	to_deg(float angle);
-void	get_spriteimage(void);
-void	sprite_put_pixels(int id, int i, int j);
-void	draw_sprite(int id);
-void	render_sprite(int id);
-
-
-////////////////////////////////////////
-
->>>>>>> a52948a5221f470d8eb409215f0969e8cee39f4b
 /**************************************
  *              Functions
  * ****************************/
@@ -282,7 +238,7 @@ void 	*ft_error(char *str);
 ****************/
 void creat_screenshot(void);
 
-void	sort(void);
+
 
 /****************************
         Sprite

@@ -97,16 +97,10 @@ void get_data_textures ()
 		ft_error("Error\n'WE' file texture is correpted Or Not Found!");
 	g_txt[3].data = (int*)mlx_get_data_addr(g_txt[3].img,&bbp, &size, &end );
 
-<<<<<<< HEAD
 		g_txt[4].img = mlx_xpm_file_to_image(g_mymlx.mlx_ptr, g_file.sprit, &g_txt[4].img_width, &g_txt[4].img_height);
 	if (!g_txt[4].img)
 		ft_error("Error\n'WE' file texture is correpted Or Not Found!");
 	g_txt[4].data = (int*)mlx_get_data_addr(g_txt[4].img,&bbp, &size, &end ); 	
-=======
-	get_spriteimage();
-
-
->>>>>>> a52948a5221f470d8eb409215f0969e8cee39f4b
 }
 int check()
 {
