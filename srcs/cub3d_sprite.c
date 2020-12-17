@@ -93,8 +93,8 @@ void	ft_sp_data (int i)
     // g_sprite[i].size = (TILE / cor_dis) * pr;
 
 
-   	g_sprite[i].y_off = (g_file.height_resolution / 2) - (g_sprite[i].size / 2);
-    g_sprite[i].x_off = ((angle / d2r(60) * g_file.width_resolution)) + ((g_file.width_resolution / 2) - (g_sprite[i].size / 2)); //g_sprite[i].start + (int)g_sprite[i].size;	
+   	g_sprite[i].y_off = (g_file.height_resolution / 2) - (g_sprite[i].size / 2)  + g_myplayer.look; // Here you can add the up and down
+    g_sprite[i].x_off = ((angle / d2r(60) * g_file.width_resolution)) + ((g_file.width_resolution / 2) - (g_sprite[i].size / 2)); 
 }
 
 

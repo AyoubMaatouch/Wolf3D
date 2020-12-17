@@ -22,6 +22,7 @@ void ft_init(void)
 	g_myplayer.sidewalk = 0;
 	g_myplayer.radius = 5;
 	g_myplayer.rotation_speed = 2.5 * (M_PI / 180);
+	g_myplayer.look = 0;
 	
 }
 void 		ft_init_mlx()
@@ -53,12 +54,17 @@ void update()
 	g_myplayer.turnDirection = 0;
 	g_myplayer.walkDirection = 0;
 	g_myplayer.sidewalk = 0;
+	
 }
 int ft_key_input(int key)
 {
-	if (key == UP || key == UP_l)
+	if (key == UP)
+		g_myplayer.look += 35;
+	if (key == UP_l)
 		g_myplayer.walkDirection = 1;
-	if (key == DOWN || key == DOWN_l)
+	if (key == DOWN)
+		g_myplayer.look -= 35;
+	if (key == DOWN_l)
 		g_myplayer.walkDirection = -1;
 	if (key == RIGHT)
 		g_myplayer.turnDirection = -1;

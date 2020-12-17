@@ -21,9 +21,9 @@ void ft_wall_data(int i)
     float correct_dis = g_ray[i].distance * cos(g_ray[i].ray_angle - g_myplayer.rotationAngle);
     float projection = (g_file.width_resolution / 2) / tan(d2r(30));
     float wallHeight = (TILE / correct_dis) * projection;
-    int top = (g_file.height_resolution / 2) - ((int)wallHeight / 2);
+    int top = (g_file.height_resolution / 2) - ((int)wallHeight / 2 )  + g_myplayer.look; // here yo can add the up and down configuration
     int bottom = top + (int)wallHeight;
-    g_ray[i].top = top;
+    g_ray[i].top = top > 0 ? top : g_ray[i].top;
     g_ray[i].bottom = bottom;
     g_ray[i].wallheight = wallHeight;
 }

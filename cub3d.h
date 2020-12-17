@@ -152,6 +152,7 @@ typedef struct
     float move_speed;
     float rotation_speed;
     int ishere;
+    int look;
 } t_player;
 
 t_player g_myplayer;
