@@ -112,8 +112,9 @@ int check()
 	/*********
 	 * The looping Functions
 	 * *********/
-	update();
 	ft_map();
+	update();
+
 	cast_rays();
 	if (g_bmp)
 		creat_screenshot();
