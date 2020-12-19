@@ -12,103 +12,11 @@
 
 #include "../cub3d.h"
 
-/**********************************
- *          3D RENDERING 
- * ********************************/
 
-void ft_wall_data(int i)
-{
-    float correct_dis = g_ray[i].distance * cos(g_ray[i].ray_angle - g_myplayer.rotationAngle);
-    float projection = (g_file.width_resolution / 2) / tan(d2r(30));
-    float wallHeight = (TILE / correct_dis) * projection;
-    int top = (g_file.height_resolution / 2) - ((int)wallHeight / 2 )  + g_myplayer.look; // here yo can add the up and down configuration
-    int bottom = top + (int)wallHeight;
-    g_ray[i].top = top > 0 ? top : g_ray[i].top;
-    g_ray[i].bottom = bottom;
-    g_ray[i].wallheight = wallHeight;
-}
 
-void ft_draw_celling(int i)
-{
-    int a = 0;
-
-    while (a < g_ray[i].top)
-    {
-        my_mlx_pixel_put(&g_data, i, a, g_file.cilng);
-        a++;
-    }
-    a = g_ray[i].bottom;
-
-    while (a < g_file.height_resolution)
-    {
-        my_mlx_pixel_put(&g_data, i, a, g_file.flor);
-        a++;
-    }
-}
-
-int get_side(int i)
-{
-    int nb = 0;
-    if (g_ray[i].rayfacingUP && !g_ray[i].wasVerticale)
-        nb = 0;
-    if (g_ray[i].rayfacingDown && !g_ray[i].wasVerticale)
-        nb = 1;
-    if (g_ray[i].rayfacingLeft && g_ray[i].wasVerticale)
-        nb = 2;
-    if (g_ray[i].rayfacingRight && g_ray[i].wasVerticale)
-        nb = 3;
-    return (nb);
-}
-
-void BuildWall(int i)
-{
-    int t = g_ray[i].top;
-    int b = g_ray[i].bottom;
-
-    //     /************
-    //      *  playing around with textures
-    //      * ***********/
-
-    int offeset_y, offeset_x;
-    if (g_ray[i].wasVerticale)
-    {
-        offeset_x = (int)g_ray[i].wallHity % TILE;
-    }
-    else
-    {
-        offeset_x = (int)g_ray[i].wallHitx % TILE;
-    }
-
-    int nb = get_side(i);
-    /************************************************/
-    if (t < 0)
-        t = 0;
-    if (b > g_file.height_resolution)
-        b = g_file.height_resolution;
-    while (t < b)
-    {
-        offeset_y = (t - g_ray[i].top) * ((float)TILE / g_ray[i].wallheight);
-        unsigned int color = g_txt[nb].data[(g_txt[nb].img_width * offeset_y) + offeset_x];
-
-        my_mlx_pixel_put(&g_data, i, t, color);
-        t++;
-    }
-}
 /***********************************************************************************************************************/
 
-double Normlize_anlge(double angle)
-{
-    //angle = angle % ((double)(2 * M_PI));
-    angle = remainder(angle, (2 * M_PI));
-    if (angle < 0)
-        angle = (2 * M_PI) + angle;
-    return (angle);
-}
 
-double d2r(double degree)
-{
-    return (degree * (M_PI / 180));
-}
 
 void cast_rays(void)
 {
@@ -185,90 +93,7 @@ void ft_ray(int i, double rayAngle)
     ft_verticale_inter(rayAngle);
     ft_get_distance(rayAngle, i);
 }
-void ft_horizntale_inter(double rayAngle)
-{
-    float yinterse, xinterse;
-    float xstep, ystep;
-    g_wallhits.HorizWallHit = 0;
-    /********
-     * This part is Responsible for the Horizntale INTERSECTIONS.
-     * *************/
 
-    //Calculating the Y cordination
-    yinterse = floor(g_myplayer.y / TILE) * TILE;
-    yinterse += (g_cast.isRayFacingDown) ? TILE : 0;
-    xinterse = g_myplayer.x + (yinterse - g_myplayer.y) / tan(rayAngle);
-    //ystep , xstep for the Horizontale part
-    ystep = TILE;
-    ystep *= (g_cast.isRayFacingUp) ? -1 : 1;
-    xstep = TILE / tan(rayAngle);
-    xstep *= (g_cast.isRayFacingLeft && xstep > 0) ? -1 : 1;
-    xstep *= (g_cast.isRayFacingRight && xstep < 0) ? -1 : 1;
-
-    //Finding Wall Hits at X && Y
-    while (xinterse >= 0 && xinterse <= (g_file.width * TILE) &&
-           yinterse >= 0 && yinterse <= (g_file.hight * TILE))
-    {
-        float x_checkh = xinterse;
-        float y_checkh = yinterse - ((g_cast.isRayFacingUp == 1) ? 1 : 0);
-        if (g_cast.isRayFacingUp && g_cast.isRayFacingLeft)
-        {
-        }
-        if (iswall(x_checkh, y_checkh) == 1)
-        {
-            g_wallhits.HorizWallHitX = x_checkh;
-            g_wallhits.HorizWallHitY = yinterse;
-            g_wallhits.HorizWallHit = 1;
-            break;
-        }
-        xinterse += xstep;
-        yinterse += ystep;
-    }
-}
-
-void ft_verticale_inter(double rayAngle)
-{
-    float xinterse = 0;
-    float yinterse = 0;
-    float xstep = 0;
-    float ystep = 0;
-
-    /********
-     * This part is Responsible for the Vertical INTERSECTIONS.
-     * 
-     * *************/
-
-    //Calculating the X cordination
-    xinterse = floor(g_myplayer.x / TILE) * TILE;
-    xinterse += (g_cast.isRayFacingRight) ? TILE : 0;
-    //Calculating the Y cordination
-    yinterse = g_myplayer.y + (xinterse - g_myplayer.x) * tan(rayAngle);
-
-    //ystep , xstep for the Vertical part
-    xstep = TILE;
-    xstep *= (g_cast.isRayFacingLeft) ? -1 : 1;
-    ystep = TILE * tan(rayAngle);
-    ystep *= (g_cast.isRayFacingUp && ystep > 0) ? -1 : 1;
-    ystep *= (g_cast.isRayFacingDown && ystep < 0) ? -1 : 1;
-
-    //Finding Wall Hits at X && Y
-    while (xinterse >= 0 && xinterse <= (g_file.width * TILE) &&
-           yinterse >= 0 && yinterse <= (g_file.hight * TILE))
-    {
-        float x_check = xinterse - ((g_cast.isRayFacingLeft == 1) ? 1 : 0);
-        float y_check = yinterse;
-
-        if (iswall(x_check, y_check) == 1)
-        {
-            g_wallhits.VertWallHitX = xinterse;
-            g_wallhits.VertWallHitY = y_check;
-            g_wallhits.VertWallHit = 1;
-            break;
-        }
-        xinterse += xstep;
-        yinterse += ystep;
-    }
-}
 
 void ft_get_distance(double rayAngle, int i)
 {

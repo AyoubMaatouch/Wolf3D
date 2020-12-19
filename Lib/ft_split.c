@@ -6,7 +6,7 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 18:02:04 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/11 17:57:48 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/18 22:55:50 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ char		**ft_split(char const *s, char c)
 	int				j;
 
 	j = 0;
-	if (!s)
-		return (NULL);
 	nb_words = ft_nb_words(s, c);
 	if (!(g_ptr = (char**)ft_calloc((nb_words + 1), sizeof(char*))))
 		return (NULL);

@@ -20,17 +20,41 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int iswall(float x, float y)
+
+int	iswall(float x, float y)
 {
-	
-	if ((int)x >= g_file.width * TILE || (int)x <= 0 ||
-		(int)y >= g_file.hight * TILE || (int)y <= 0)
+	int int_x;
+	int int_y;
+
+	int_x = x / TILE;
+	int_y = y / TILE;
+	if (int_y < 0 || int_y >= g_file.hight || int_x < 0 || int_x >
+			(int)ft_strlen(g_file.map[int_y]))
 		return (1);
-	return (g_file.map[(int)(y / TILE)][(int)(x / TILE)] - '0');
+	if (g_file.map[int_y][int_x] == '1')
+		return (1);
+	else if (g_file.map[int_y][int_x] == '2')
+		return (2);
+	else if (g_file.map[int_y][int_x] == ' ')
+		return (1);
+	return (0);
 }
 
 void 	*ft_error(char *str)
 {
 	ft_putstr(str);
 	exit(0);
+}
+double Normlize_anlge(double angle)
+{
+    //angle = angle % ((double)(2 * M_PI));
+    angle = remainder(angle, (2 * M_PI));
+    if (angle < 0)
+        angle = (2 * M_PI) + angle;
+    return (angle);
+}
+
+double d2r(double degree)
+{
+    return (degree * (M_PI / 180));
 }

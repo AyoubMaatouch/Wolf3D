@@ -18,11 +18,13 @@ void    ft_map_arg_check(char *arg)
     if (ft_memcmp(&arg[strlen(arg) - 4], ".cub", 5) != 0)
             ft_error("Error\nWrong File Name!\nTry Again :)\n");
 }
+
 void    ft_save_arg_check(char *arg)
 {
     if (ft_memcmp(arg, "--save", 5) != 0)
             ft_error("Error\nWrong Argument Name!\nTry : --save :)\n");
 } 
+
 int ft_xmp_check(char *arg)
 {
        if (ft_memcmp(&arg[strlen(arg) - 4], ".xpm", 5) != 0)
@@ -31,6 +33,7 @@ int ft_xmp_check(char *arg)
       }
       return (1);
 }
+
 void  ft_first_last_line(void)
 {
       int i;
@@ -52,28 +55,12 @@ void  ft_first_last_line(void)
       }
 }
 
-int ft_check_sides (int index)
-{
-      return (index);
-      
-}
-int ft_check_up_down (int index)
-{
-    
-      return (index);
-}
+
 void ft_map_error_check()
 {
       ft_first_last_line();
       int i;
 
       i  = 1;
-     while ( i < g_file.hight - 1)
-      {
-            if (!ft_check_sides(i))
-                  ft_error("Error\nCheck Your MAP sides!");
-            if (!ft_check_up_down(i))
-                  ft_error("Error\nCheck Your MAP up down!");
-            i++;
-      }
+   
 }

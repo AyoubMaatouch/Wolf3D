@@ -188,7 +188,16 @@ void *ft_calloc(size_t count, size_t size);
 void *ft_bzero(void *b, size_t len);
 void	ft_putstr(char *s);
 int	ft_memcmp(const void *s1, const void *s2, size_t n);
-
+/****************************
+ *   mlx looping functions
+ * *************************/
+int ft_key_input(int key);
+int ft_mouse(int x, int key, int y);
+int check(void);
+void update();
+void get_data_textures(void);
+void ft_init_mlx(void);
+void ft_init(void);
 
 /***********
  * file handele
@@ -212,8 +221,8 @@ void cast_rays(void);
 void ft_rayCaster(int i, double rayAngle);
 double d2r(double angle);
 void ft_drw_player(void);
-void get_data_textures ();
-
+void get_data_textures (void);
+double Normlize_anlge(double angle);
 /***********************
  *  RayCating Functions
  * ********************/
@@ -223,6 +232,10 @@ void ft_horizntale_inter(double rayAngle);
 void ft_verticale_inter(double rayAngle);
 void ft_get_distance(double rayAngle, int i);
 double ft_distance_between(double x1, double y1, double x2, double y2);
+void ft_wall_data(int i);
+void ft_draw_celling(int i);
+int get_side(int i);
+void BuildWall(int i);
 
 /****************************
  *  Error handling Functions
@@ -237,6 +250,7 @@ void 	*ft_error(char *str);
 /***********************
 *   Screenshot function
 ****************/
+int g_bmp;
 void creat_screenshot(void);
 
 

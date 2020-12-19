@@ -15,7 +15,7 @@ NAME = cub3D
 
 LIB = Lib/*.c
 SRC = srcs/*.c
-CC = gcc  -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror -g
+CC = gcc  -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror -g -fsanitize=address 
 
 #CC = gcc -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror
 
@@ -33,7 +33,7 @@ fclean : clean
 
 re : fclean all
 
-run : 
+run : re
 	@./$(NAME) *.cub
 
 save : 
