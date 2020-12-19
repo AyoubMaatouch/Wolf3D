@@ -47,37 +47,4 @@ int ft_mouse(int x, int key, int y)
 	return (y);
 }
 
-int check()
-{
-	/**************************/
-	get_data_textures();
-	/****************************/
 
-	//mlx_mouse_move(g_mymlx.win_ptr, xx, y);
-	//mlx_mouse_get_pos( g_mymlx.win_ptr , &xx, &y );
-
-	mlx_hook(g_mymlx.win_ptr, 6, (1L << 6), ft_mouse, (void *)0);
-	if (!g_bmp)
-		mlx_hook(g_mymlx.win_ptr, 2, 1L << 0, ft_key_input, (void *)0);
-	/*********
-	 * The looping Functions
-	 * *********/
-	ft_map();
-	update();
-
-	cast_rays();
-	if (g_bmp)
-		creat_screenshot();
-	/**************************************************************/
-
-	if (!g_bmp)
-	{
-		mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);
-		mlx_put_image_to_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr, g_data.img, 0, 0);
-		mlx_destroy_image(g_mymlx.mlx_ptr, g_data.img);
-	}
-	g_data.img = mlx_new_image(g_mymlx.mlx_ptr, g_file.width_resolution, g_file.height_resolution);
-	g_data.addr = mlx_get_data_addr(g_data.img, &g_data.bits_per_pixel, &g_data.line_length, &g_data.endian);
-
-	return (0);
-}

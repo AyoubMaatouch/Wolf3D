@@ -6,20 +6,19 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 09:51:27 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/08 18:19:27 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/19 05:05:42 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char *dst;
-	
+
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
-
 
 int	iswall(float x, float y)
 {
@@ -40,21 +39,21 @@ int	iswall(float x, float y)
 	return (0);
 }
 
-void 	*ft_error(char *str)
+void	*ft_error(char *str)
 {
 	ft_putstr(str);
 	exit(0);
 }
-double Normlize_anlge(double angle)
+
+double	normlize_anlge(double angle)
 {
-    //angle = angle % ((double)(2 * M_PI));
-    angle = remainder(angle, (2 * M_PI));
-    if (angle < 0)
-        angle = (2 * M_PI) + angle;
-    return (angle);
+	angle = remainder(angle, (2 * M_PI));
+	if (angle < 0)
+		angle = (2 * M_PI) + angle;
+	return (angle);
 }
 
-double d2r(double degree)
+double	d2r(double degree)
 {
-    return (degree * (M_PI / 180));
+	return (degree * (M_PI / 180));
 }

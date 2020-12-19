@@ -22,14 +22,7 @@ void ft_init(void)
 	g_myplayer.rotation_speed = 2.5 * (M_PI / 180);
 	g_myplayer.look = 0;
 }
-void ft_init_mlx(void)
-{
-	g_mymlx.mlx_ptr = mlx_init();
-	if (!g_bmp)
-		g_mymlx.win_ptr = mlx_new_window(g_mymlx.mlx_ptr, g_file.width_resolution, g_file.height_resolution, "cub3D");
-	g_data.img = mlx_new_image(g_mymlx.mlx_ptr, g_file.width_resolution, g_file.height_resolution);
-	g_data.addr = mlx_get_data_addr(g_data.img, &g_data.bits_per_pixel, &g_data.line_length, &g_data.endian);
-}
+
 
 void update(void)
 {
@@ -42,7 +35,7 @@ void update(void)
 		x = cos(g_myplayer.rotationAngle + d2r(90 * g_myplayer.sidewalk)) * g_myplayer.move_speed;
 		y = sin(g_myplayer.rotationAngle + d2r(90 * g_myplayer.sidewalk)) * g_myplayer.move_speed;
 	}
-	if (iswall(g_myplayer.x + x, g_myplayer.y + y) != 1)
+	if (iswall(g_myplayer.x + x, g_myplayer.y + y) != 1 && iswall(g_myplayer.x + x, g_myplayer.y + y) != 2)
 	{
 		g_myplayer.x += x;
 		g_myplayer.y += y;

@@ -222,7 +222,7 @@ void ft_rayCaster(int i, double rayAngle);
 double d2r(double angle);
 void ft_drw_player(void);
 void get_data_textures (void);
-double Normlize_anlge(double angle);
+double normlize_anlge(double angle);
 /***********************
  *  RayCating Functions
  * ********************/
@@ -251,7 +251,7 @@ void 	*ft_error(char *str);
 *   Screenshot function
 ****************/
 int g_bmp;
-void creat_screenshot(void);
+void ft_create_screenshot(void);
 
 
 

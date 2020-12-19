@@ -12,20 +12,11 @@
 
 #include "../cub3d.h"
 /*
-    getting x, y hits and calculating the distance from player to sprite,
-    then sorting them according to the farthest to the closest one.
-    after you that DRAW  
+*    getting x, y hits and calculating the distance from player to sprite,
+*    then sorting them according to the farthest to the closest one.
+*    after you that DRAW  
 */
 
-
-// {
-//     float correct_dis = g_sprit.sprit_dis * cos(g_ray[i].ray_angle - g_myplayer.rotationAngle);
-//     float projection = (g_file.width_resolution / 2) / tan(d2r(30));
-//     float wallHeight = (TILE / correct_dis) * projection;
-//     int top = (g_file.height_resolution / 2) - ((int)wallHeight / 2);
-//     int bottom = top + (int)wallHeight;
-
-// }
 
 
 
@@ -57,19 +48,12 @@ void    ft_get_sp_pos(float x, float y, int i)
     */
     g_sprite[i].x = x;
     g_sprite[i].y = y;
-
-    /*
-    * Getting RAW distance
-    */
-	
-    // g_sprite[i].dis = ft_distance_between (g_sprite[i].x, g_myplayer.x,  g_sprite[i].y, g_myplayer.y);
-    
+ 
 }
 
 void	ft_sp_data (int i)
 {
 	/*
-	g_sprite[i].dis = ft_distance_between (g_sprite[i].x, g_myplayer.x,  g_sprite[i].y, g_myplayer.y);
 	*	Preparing sprite data for drawing the wall
 	*/
 	g_sprite[i].dis = ft_distance_between (g_myplayer.x, g_myplayer.y, g_sprite[i].x, g_sprite[i].y);
@@ -85,14 +69,6 @@ void	ft_sp_data (int i)
 		g_sprite[i].size = (g_file.height_resolution / g_sprite[i].dis) * TILE;
 	else
 		g_sprite[i].size = (g_file.width_resolution / g_sprite[i].dis) * TILE;
-	
-	
-	
-	//float cor_dis = g_sprite[i].dis * cos(angle);
-    // float pr = (g_file.width_resolution / 2) / tan(d2r(30));
-    // g_sprite[i].size = (TILE / cor_dis) * pr;
-
-
    	g_sprite[i].y_off = (g_file.height_resolution / 2) - (g_sprite[i].size / 2)  + g_myplayer.look; // Here you can add the up and down
     g_sprite[i].x_off = ((angle / d2r(60) * g_file.width_resolution)) + ((g_file.width_resolution / 2) - (g_sprite[i].size / 2)); 
 }

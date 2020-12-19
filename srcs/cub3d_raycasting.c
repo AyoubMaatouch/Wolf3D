@@ -82,7 +82,7 @@ void ft_init_var(void)
 
 void ft_ray(int i, double rayAngle)
 {
-    rayAngle = Normlize_anlge(rayAngle);
+    rayAngle = normlize_anlge(rayAngle);
     ft_init_var();
     g_cast.isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
     g_cast.isRayFacingUp = !g_cast.isRayFacingDown;
