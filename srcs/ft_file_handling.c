@@ -58,7 +58,7 @@ void  ft_first_last_line(void)
 
 void ft_map_error_check()
 {
-      ft_first_last_line();
+    //  ft_first_last_line();
       int i;
 
       i  = 1;

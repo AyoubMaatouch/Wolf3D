@@ -22,7 +22,7 @@ void ft_wall_data(int i)
     int top = (g_file.height_resolution / 2) - ((int)wallHeight / 2 )  + (g_myplayer.look ); // here yo can add the up and down configuration
     int bottom = top + (int)wallHeight;
   //  printf("T[%d]\n", top);
-      printf ("look [%d]\n", g_myplayer.look);
+    //   printf ("look [%d]\n", g_myplayer.look);
 
     g_ray[i].top = top > 0 || top < g_file.height_resolution ? top :  g_ray[i].top;
     g_ray[i].bottom = bottom;
