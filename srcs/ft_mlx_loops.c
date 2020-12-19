@@ -15,11 +15,20 @@
 int ft_key_input(int key)
 {
 	if (key == UP)
-		g_myplayer.look += 20;
+		{
+			g_myplayer.look += 20;
+			if ( g_myplayer.look > 960)
+				g_myplayer.look = 960;
+
+		}
 	if (key == UP_l)
 		g_myplayer.walkDirection = 1;
 	if (key == DOWN)
-		g_myplayer.look -= 20;
+		{
+			g_myplayer.look -= 20;
+			if ( g_myplayer.look < -960)
+				g_myplayer.look = -960;
+		}
 	if (key == DOWN_l)
 		g_myplayer.walkDirection = -1;
 	if (key == RIGHT)

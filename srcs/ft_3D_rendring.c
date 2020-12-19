@@ -22,6 +22,8 @@ void ft_wall_data(int i)
     int top = (g_file.height_resolution / 2) - ((int)wallHeight / 2 )  + (g_myplayer.look ); // here yo can add the up and down configuration
     int bottom = top + (int)wallHeight;
   //  printf("T[%d]\n", top);
+      printf ("look [%d]\n", g_myplayer.look);
+
     g_ray[i].top = top > 0 || top < g_file.height_resolution ? top :  g_ray[i].top;
     g_ray[i].bottom = bottom;
     g_ray[i].wallheight = wallHeight;
@@ -30,12 +32,13 @@ void ft_wall_data(int i)
 void ft_draw_celling(int i)
 {
     int a = 0;
-
     while (a < g_ray[i].top)
     {
+        
         my_mlx_pixel_put(&g_data, i, a, g_file.cilng);
         a++;
     }
+    
     a = g_ray[i].bottom;
 
     while (a < g_file.height_resolution)
