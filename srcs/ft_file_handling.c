@@ -36,21 +36,28 @@ int ft_xmp_check(char *arg)
 
 void  ft_first_last_line(void)
 {
-      int i;
-
-      i = 0;
-      while (i < (int)ft_strlen(g_file.map[0]))
+      int i = 0;
+      int j;
+      while (i < g_file.hight)
       {
-            if (g_file.map[0][i] == '0' || g_file.map[0][i] == '2' || ft_isalpha(g_file.map[0][i]))
-                  ft_error("Error\nCheck Your MAP!");
-            i++;
-      }
-      i = 0;
-         while (i < (int)ft_strlen(g_file.map[0]))
-      {
-            if (g_file.map[g_file.hight - 1][i] == '0' || g_file.map[g_file.hight - 1][i] == '2' 
-                  || ft_isalpha(g_file.map[g_file.hight - 1][i]))
-                  ft_error("Error\nCheck Your MAP!");
+            j = 0;
+            while (j < (int)ft_strlen(g_file.map[g_file.hight - 1]))
+            {
+                  if (g_file.map[0][j] != '1' && g_file.map[0][j] != ' ')
+                       { 
+                             ft_error("Error\nCheck your Map");
+                                                  
+                        }
+                          if (j == (g_file.hight - 1 ) && g_file.map[g_file.hight - 1][j] != '1' 
+                              && g_file.map[g_file.hight - 1][j] != ' ')
+                       { 
+                             ft_error("Error\nCheck your Map");
+                                                  
+                        }
+                        j++;
+            }            
+           // printf("[%d]=|%s|\n", i, g_file.map[i]);
+           
             i++;
       }
 }
@@ -58,7 +65,8 @@ void  ft_first_last_line(void)
 
 void ft_map_error_check()
 {
-    //  ft_first_last_line();
+      ft_first_last_line();
+      
       int i;
 
       i  = 1;

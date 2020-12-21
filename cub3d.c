@@ -92,7 +92,6 @@ void ft_openfile(char *r_file)
 		ft_error("Error\nFile Error\n");
 	ft_map_handle(r_file, map_count);
 }
-
 int ft_close (int key)
 {
 	exit(0);

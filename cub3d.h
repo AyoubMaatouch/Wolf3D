@@ -16,7 +16,7 @@
 /*********
  * Libs
  * *********/
-#include "mlx.h"
+#include "mlx_beta/mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

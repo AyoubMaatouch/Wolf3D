@@ -15,20 +15,26 @@ NAME = cub3D
 
 LIB = Lib/*.c
 SRC = srcs/*.c
-CC = gcc  -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror 
+CC = gcc  -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit  -Wall -Wextra -Werror libmlx.dylib
 #CC = gcc -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror
 
 
 all : $(NAME)
 
 $(NAME):
+	@make -C mlx_beta/.
+	@echo "\nCompilation of MLX lib:	[\033[1;32mDONE\033[m]"
+	@cp -r mlx_beta/libmlx.dylib .
 	@$(CC) cub3d.c $(LIB) $(SRC) -o cub3D
+	@echo "Compilation of $(NAME):	[\033[1;32mDONE\033[m]"
 	
 clean :
+	@make clean -C mlx_beta/.
 	@rm -fr $(NAME) cub3D.dSYM *.
+	@echo "Deleting Files:	[\033[1;31mDONE\033[m]"
 
 fclean : clean
-	@rm -fr $(NAME) cub3D.dSYM first_rendered_image.bmp
+	@rm -fr $(NAME) cub3D.dSYM first_rendered_image.bmp libmlx.dylib
 
 re : fclean all
 
@@ -37,4 +43,6 @@ run : re
 
 save : 
 	@./$(NAME) *.cub --save
-#.PHONY : all clean fclean re $(NAME)
+	@echo "Rendring image $(NAME):	[\033[1;32mDONE\033[m]"
+
+.PHONY : all clean fclean re $(NAME)
