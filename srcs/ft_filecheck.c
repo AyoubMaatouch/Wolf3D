@@ -14,10 +14,18 @@
 
 void ft_get_resolution(int hight, int width)
 {
-    g_file.height_resolution = hight;
+    if (hight > 3200)
+         g_file.height_resolution = 3200;
+    else
+     g_file.height_resolution = hight;
+   
+   if (width > 1800)
+     g_file.height_resolution = 1800;
+   else
     g_file.width_resolution = width;
-    g_file.counter++;
+
 }
+
 
 void ft_get_texture(char c, char *value)
 {
@@ -49,16 +57,31 @@ void ft_get_texture(char c, char *value)
 
 void ft_get_sprit(char *value)
 {
-    if (!ft_xmp_check(value))
-            {
-            perror("Error\nPlease Check 'Sprite' XPM File\n");
-            exit(0);
-            }
+    if (g_file.sprit)
+            ft_error("Error\nDuplicated 'Sprite' File\n");
     g_file.sprit = value;
 }
+void ft_check_color (char *value)
+{
+    int i;
+    int check;
 
+    i = 0;
+    check = 0;
+    while (value[i])
+    {
+        if (!ft_isdigit(value[i]) && value[i] != ',')
+            ft_error ("Error\nWrong 'C' or 'F' Color Value!");
+        if (value[i] == ',')
+            check++;
+        i++;
+    }
+    if (check != 2)
+        ft_error ("Error\nWrong 'C' or 'F' Color Value!");
+}
 void ft_get_cf(char c, char *value)
 {
+    ft_check_color(value);
     if (c == 'F')
     {
         char **temp = ft_split(value , ',');
@@ -77,7 +100,11 @@ void ft_get_handle(char *g_value)
 
     temp = ft_split(g_value, ' ');
     if (g_value[0] == 'R')
-        ft_get_resolution(ft_atoi(temp[2]), ft_atoi(temp[1]));
+      {
+          if (temp[3])
+                ft_error("Error\nPlease Check Your Resolution input!");
+            ft_get_resolution(ft_atoi(temp[2]), ft_atoi(temp[1]));
+        }
     if (g_value[0] == 'W' || g_value[0] == 'N' || (g_value[0] == 'S' && g_value[1] == 'O') || g_value[0] == 'E')
         {
             if (temp[2])
@@ -85,9 +112,17 @@ void ft_get_handle(char *g_value)
             ft_get_texture(g_value[0], temp[1]);
         }
     if (g_value[0] == 'F' || g_value[0] == 'C')
-        ft_get_cf(g_value[0], temp[1]);
+       { 
+           if (temp[2])
+                ft_error("Error\nPlease Check Your 'C' or 'F' input!");
+           ft_get_cf(g_value[0], temp[1]);
+       }
     if (g_value[0] == 'S' && g_value[1] != 'O')
-        ft_get_sprit(temp[1]);
+       {
+          if (temp[2])
+                ft_error("Error\nPlease Check Your Texture input!");
+         ft_get_sprit(temp[1]);
+       }
     free(temp);
 }
 

@@ -89,12 +89,10 @@ void ft_openfile(char *r_file)
 	free(line);
 	close(fd);
 	if (i != 9)
-	{
-		ft_putstr("Error\nFile Error\n");
-		exit(0);
-	}
+		ft_error("Error\nFile Error\n");
 	ft_map_handle(r_file, map_count);
 }
+
 int ft_close (int key)
 {
 	exit(0);
