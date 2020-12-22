@@ -16,11 +16,7 @@ void df_player_angle(char position)
 {
   g_myplayer.ishere += 1;
   if (g_myplayer.ishere > 1)
-      {
-        puts("MORE THEN ONE PLAYER IN MAP");
-        exit(0);
-      }
- 
+        ft_error("Error\nMORE THEN ONE PLAYER IN MAP");
   if (g_myplayer.ishere == 1)
     {if (position == 'N')
       g_myplayer.rotationAngle = 270.0 * (M_PI / 180);
@@ -68,9 +64,6 @@ void ft_map()
     i++;
   }
   if (g_myplayer.ishere == 0)
-      {
-       puts ("NO PLAYER IN MAP");
-       exit(0); 
-      }
+       ft_error("Error\nNO PLAYER IN MAP");
 //sort();
 }
