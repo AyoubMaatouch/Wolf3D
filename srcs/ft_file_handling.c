@@ -43,21 +43,20 @@ void  ft_first_last_line(void)
             j = 0;
             while (j < (int)ft_strlen(g_file.map[g_file.hight - 1]))
             {
+                  if (i > 0 && g_file.map[i][j] == '0' && g_file.map[i + 1][j] == ' ')
+                        ft_error("Error\nCheck Your Map! 1\n");
                   if (g_file.map[0][j] != '1' && g_file.map[0][j] != ' ')
-                       { 
-                             ft_error("Error\nCheck your Map");
-                                                  
-                        }
-                          if (j == (g_file.hight - 1 ) && g_file.map[g_file.hight - 1][j] != '1' 
+                             ft_error("Error\nCheck your Map! 2\n");
+                       if (g_file.map[i][j] == ' ' && (g_file.map[i][j + 1] == '0' || g_file.map[i][j + 1] == '2'))
+                             ft_error ("Error\nCheck Your Map! 3\n");
+                       if   ( i > 0 && (g_file.map[i + 1]) != NULL  && g_file.map[i][j] == ' ' 
+                               && (g_file.map[i + 1][j] == '0' || g_file.map[i][j + 1] == '2'))
+                               ft_error ("Error\nCheck Your Map! 4\n");
+                        if (j == (g_file.hight - 1 ) && g_file.map[g_file.hight - 1][j] != '1' 
                               && g_file.map[g_file.hight - 1][j] != ' ')
-                       { 
-                             ft_error("Error\nCheck your Map");
-                                                  
-                        }
+                             ft_error("Error\nCheck your Map 5\n");
                         j++;
-            }            
-           // printf("[%d]=|%s|\n", i, g_file.map[i]);
-           
+            }                      
             i++;
       }
 }
