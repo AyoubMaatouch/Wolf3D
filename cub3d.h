@@ -6,16 +6,17 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 21:08:43 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/08 18:31:52 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/23 18:28:52 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 #define CUB3D_H
 
-/*********
- * Libs
- * *********/
+/*
+ * Library
+ */
+
 #include "mlx_beta/mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,22 +26,9 @@
 #include <limits.h>
 #include <errno.h>
 #include <string.h>
-///////////////////
-
-/******************
- *  DEFINED VALUES
- ******************/
-
-/////////////////////COLORS////////////////
-#define WHITE 0xFFFFFF
-#define RED 0xFF0000
-#define GREEN 0x008000
-#define PURPLE 0x800080
-#define YELLOW 0xFFFF00
-#define GRAY 0x808080
-#define BLACK 0x000000
-
-//////////////Bouton////////////
+/*
+ *Defined Values
+ */
 #define UP 126
 #define UP_l 13
 #define DOWN 125
