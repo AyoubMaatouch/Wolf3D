@@ -19,6 +19,8 @@ void ft_get_resolution(int hight, int width)
     int sizey;
     mlx_get_screen_size(g_mymlx.mlx_ptr, &sizex, &sizey);
     g_file.height_resolution = hight;
+    if (hight < 0 || width < 0)
+        ft_error("Error\nNegative Resolution Values!");
     if (hight > sizey)
         g_file.height_resolution = sizey;
     else  
@@ -92,14 +94,13 @@ void ft_get_cf(char c, char *value)
     {
         char **temp = ft_split(value, ',');
         g_file.flor = 65536 * ft_atoi(temp[0]) + 256 * ft_atoi(temp[1]) + ft_atoi(temp[2]);
-        ;
+        
     }
     else
     {
         char **temp = ft_split(value, ',');
         g_file.cilng = 65536 * ft_atoi(temp[0]) + 256 * ft_atoi(temp[1]) + ft_atoi(temp[2]);
-        ;
-        ;
+       
     }
 }
 
@@ -108,13 +109,13 @@ void ft_get_handle(char *g_value)
     char **temp;
 
     temp = ft_split(g_value, ' ');
-    if (g_value[0] == 'R')
+    if (!ft_memcmp(g_value, "R", 1))
     {
         if (temp[3])
             ft_error("Error\nPlease Check Your Resolution input!");
         ft_get_resolution(ft_atoi(temp[2]), ft_atoi(temp[1]));
     }
-    if (g_value[0] == 'W' || g_value[0] == 'N' || (g_value[0] == 'S' && g_value[1] == 'O') || g_value[0] == 'E')
+    if (!ft_memcmp(g_value, "WE", 2)|| !ft_memcmp(g_value, "NO", 2) || !ft_memcmp(g_value, "SO", 2) || !ft_memcmp(g_value, "EA", 2))
     {
         if (temp[2])
             ft_error("Error\nPlease Check Your Texture input!");

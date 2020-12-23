@@ -66,11 +66,13 @@ int check()
 
 void ft_openfile(char *r_file)
 {
-	int fd = open(r_file, O_RDONLY);
+	int fd;
 	static int map_count;
 	char *line;
-
-	int i = 0;
+	int i ;
+	
+	i = 0;
+	fd = open(r_file, O_RDONLY);
 	while ((get_next_line(fd, &line)))
 	{
 		if (ft_isalpha(ft_strtrim(line, " ")[0]))
@@ -78,20 +80,25 @@ void ft_openfile(char *r_file)
 			ft_get_handle(ft_strtrim(line, " "));
 			i++;
 		}
+		if (line[0]==' ' && ft_strtrim(line, " ")[0] == '\0')
+				ft_error("Error\nOne Or more Empty Lines in The File!");
 		if (ft_isalnum(ft_strtrim(line, " ")[0]))
-			map_count++;
+			{	if (i != 8)
+					ft_error ("Error\nWrong Data Order!");
+				map_count++;}
 	}
-	if (ft_isdigit(ft_strtrim(line, " ")[0]))
-	{
-		map_count++;
-		i++;
-	}
+	if (ft_isdigit(ft_strtrim(line, " ")[0]) && map_count++ && i++)
+
 	free(line);
 	close(fd);
 	if (i != 9)
 		ft_error("Error\nFile Error\n");
 	ft_map_handle(r_file, map_count);
 }
+
+
+
+
 int ft_close (int key)
 {
 	exit(0);
