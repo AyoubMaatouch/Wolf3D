@@ -16,23 +16,16 @@ void ft_horizntale_inter(double rayAngle)
 {
     float yinterse, xinterse;
     float xstep, ystep;
+    
     g_wallhits.HorizWallHit = 0;
-    /********
-     * This part is Responsible for the Horizntale INTERSECTIONS.
-     * *************/
-
-    //Calculating the Y cordination
     yinterse = floor(g_myplayer.y / TILE) * TILE;
     yinterse += (g_cast.isRayFacingDown) ? TILE : 0;
     xinterse = g_myplayer.x + (yinterse - g_myplayer.y) / tan(rayAngle);
-    //ystep , xstep for the Horizontale part
     ystep = TILE;
     ystep *= (g_cast.isRayFacingUp) ? -1 : 1;
     xstep = TILE / tan(rayAngle);
     xstep *= (g_cast.isRayFacingLeft && xstep > 0) ? -1 : 1;
     xstep *= (g_cast.isRayFacingRight && xstep < 0) ? -1 : 1;
-
-    //Finding Wall Hits at X && Y
     while (xinterse >= 0 && xinterse <= (g_file.width * TILE) &&
            yinterse >= 0 && yinterse <= (g_file.hight * TILE))
     {
@@ -53,30 +46,19 @@ void ft_horizntale_inter(double rayAngle)
 
 void ft_verticale_inter(double rayAngle)
 {
-    float xinterse = 0;
-    float yinterse = 0;
-    float xstep = 0;
-    float ystep = 0;
+    float xinterse;
+    float yinterse;
+    float xstep;
+    float ystep;
 
-    /********
-     * This part is Responsible for the Vertical INTERSECTIONS.
-     * 
-     * *************/
-
-    //Calculating the X cordination
     xinterse = floor(g_myplayer.x / TILE) * TILE;
     xinterse += (g_cast.isRayFacingRight) ? TILE : 0;
-    //Calculating the Y cordination
     yinterse = g_myplayer.y + (xinterse - g_myplayer.x) * tan(rayAngle);
-
-    //ystep , xstep for the Vertical part
     xstep = TILE;
     xstep *= (g_cast.isRayFacingLeft) ? -1 : 1;
     ystep = TILE * tan(rayAngle);
     ystep *= (g_cast.isRayFacingUp && ystep > 0) ? -1 : 1;
     ystep *= (g_cast.isRayFacingDown && ystep < 0) ? -1 : 1;
-
-    //Finding Wall Hits at X && Y
     while (xinterse >= 0 && xinterse <= (g_file.width * TILE) &&
            yinterse >= 0 && yinterse <= (g_file.hight * TILE))
     {

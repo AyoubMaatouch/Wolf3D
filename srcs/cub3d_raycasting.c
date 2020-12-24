@@ -6,121 +6,117 @@
 /*   By: aymaatou <aymaatou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:53:52 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/08 18:20:13 by aymaatou         ###   ########.fr       */
+/*   Updated: 2020/12/24 16:03:57 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-
-
-/***********************************************************************************************************************/
-
-
-
-void cast_rays(void)
+void	ft_sprit_rendring(void)
 {
-    float ray_angle = 0;
-    int i = 0;
-    ray_angle = g_myplayer.rotationAngle - d2r(30);
+	int i;
 
-    while (i <= g_file.width_resolution)
-    {
-        //  ft_rayCaster(i, ray_angle);
-        ft_ray(i, ray_angle);
-        ray_angle += d2r(60) / g_file.width_resolution;
-        i++;
-    }
-    i = 0;
-    while (i < g_file.width_resolution)
-    {
-        ft_wall_data(i);
-        ft_draw_celling(i);
-        BuildWall(i);
-        i++;
-    }
-    
-    i = 0;
-	
+	i = 0;
 	while (i < g_sp_index)
 	{
-        
 		ft_sp_data(i);
 		i++;
 	}
-    sort();
-    i = 0;
-    while (i < g_sp_index)
-    {
-         draw_sprite(i);
-        i++;
-    }
+	sort();
+	i = 0;
+	while (i < g_sp_index)
+	{
+		draw_sprite(i);
+		i++;
+	}
 }
 
-double ft_distance_between(double x1, double y1, double x2, double y2)
+void	cast_rays(void)
 {
-    return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
+	float	ray_angle;
+	int		i;
+
+	i = 0;
+	ray_angle = g_myplayer.rotationAngle - d2r(30);
+	while (i <= g_file.width_resolution)
+	{
+		ft_ray(i, ray_angle);
+		ray_angle += d2r(60) / g_file.width_resolution;
+		i++;
+	}
+	i = 0;
+	while (i < g_file.width_resolution)
+	{
+		ft_wall_data(i);
+		ft_draw_celling(i);
+		ft_buildwall(i);
+		i++;
+	}
+	ft_sprit_rendring();
 }
 
-/********************************************************************************************
- *                                        Function Normé
- * **************************************************************************************/
-
-void ft_init_var(void)
+double	ft_distance_between(double x1, double y1, double x2, double y2)
 {
-    g_cast.isRayFacingDown = 0;
-    g_cast.isRayFacingUp = 0;
-    g_cast.isRayFacingRight = 0;
-    g_cast.isRayFacingLeft = 0;
-    g_wallhits.HorizWallHitX = 0;
-    g_wallhits.HorizWallHitY = 0;
-    g_wallhits.HorizWallHit = 0;
-    g_wallhits.VertWallHitX = 0;
-    g_wallhits.VertWallHitY = 0;
-    g_wallhits.VertWallHit = 0;
+	return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
 }
 
-void ft_ray(int i, double rayAngle)
+void	ft_init_var(void)
 {
-    rayAngle = normlize_anlge(rayAngle);
-    ft_init_var();
-    g_cast.isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
-    g_cast.isRayFacingUp = !g_cast.isRayFacingDown;
-    g_cast.isRayFacingRight = rayAngle < (0.5 * M_PI) || rayAngle >= (1.5 * M_PI);
-    g_cast.isRayFacingLeft = !g_cast.isRayFacingRight;
-
-    ft_horizntale_inter(rayAngle);
-    ft_verticale_inter(rayAngle);
-    ft_get_distance(rayAngle, i);
+	g_cast.isRayFacingDown = 0;
+	g_cast.isRayFacingUp = 0;
+	g_cast.isRayFacingRight = 0;
+	g_cast.isRayFacingLeft = 0;
+	g_wallhits.HorizWallHitX = 0;
+	g_wallhits.HorizWallHitY = 0;
+	g_wallhits.HorizWallHit = 0;
+	g_wallhits.VertWallHitX = 0;
+	g_wallhits.VertWallHitY = 0;
+	g_wallhits.VertWallHit = 0;
 }
 
-
-void ft_get_distance(double rayAngle, int i)
+void	ft_ray(int i, double rayangle)
 {
-    float HorizDistance = g_wallhits.HorizWallHit ? ft_distance_between(g_myplayer.x, g_myplayer.y,
-     g_wallhits.HorizWallHitX, g_wallhits.HorizWallHitY) : INT_MAX;
+	rayangle = normlize_anlge(rayangle);
+	ft_init_var();
+	g_cast.isRayFacingDown = rayangle > 0 && rayangle < M_PI;
+	g_cast.isRayFacingUp = !g_cast.isRayFacingDown;
+	g_cast.isRayFacingRight = rayangle < (0.5 * M_PI)
+		|| rayangle >= (1.5 * M_PI);
+	g_cast.isRayFacingLeft = !g_cast.isRayFacingRight;
+	ft_horizntale_inter(rayangle);
+	ft_verticale_inter(rayangle);
+	ft_get_distance(i);
+	g_ray[i].ray_angle = rayangle;
+	g_ray[i].rayfacingUP = g_cast.isRayFacingUp;
+	g_ray[i].rayfacingDown = g_cast.isRayFacingDown;
+	g_ray[i].rayfacingRight = g_cast.isRayFacingRight;
+	g_ray[i].rayfacingLeft = g_cast.isRayFacingLeft;
+}
 
-    float VertDistance = g_wallhits.VertWallHit ? ft_distance_between(g_myplayer.x, g_myplayer.y,
-     g_wallhits.VertWallHitX, g_wallhits.VertWallHitY) : INT_MAX;
+void	ft_get_distance(int i)
+{
+	float horizdistance;
+	float vertdistance;
 
-
-    if (HorizDistance < VertDistance)
-    {
-        g_ray[i].distance  = HorizDistance;
-        g_ray[i].wasVerticale = 0;
-        g_ray[i].wallHitx = g_wallhits.HorizWallHitX;
-        g_ray[i].wallHity = g_wallhits.HorizWallHitY;
-    }
-    else
-    {
-        g_ray[i].distance  = VertDistance;
-        g_ray[i].wasVerticale = 1;
-        g_ray[i].wallHitx = g_wallhits.VertWallHitX;
-        g_ray[i].wallHity = g_wallhits.VertWallHitY;
-    }
-    g_ray[i].ray_angle = rayAngle;
-    g_ray[i].rayfacingUP = g_cast.isRayFacingUp;
-    g_ray[i].rayfacingDown = g_cast.isRayFacingDown;
-    g_ray[i].rayfacingRight = g_cast.isRayFacingRight;
-    g_ray[i].rayfacingLeft = g_cast.isRayFacingLeft;
+	horizdistance = g_wallhits.HorizWallHit ? ft_distance_between(g_myplayer.x,
+		g_myplayer.y,
+			g_wallhits.HorizWallHitX, g_wallhits.HorizWallHitY)
+				: INT_MAX;
+	vertdistance = g_wallhits.VertWallHit ? ft_distance_between(g_myplayer.x,
+		g_myplayer.y, g_wallhits.VertWallHitX, g_wallhits.VertWallHitY)
+			: INT_MAX;
+	if (horizdistance < vertdistance)
+	{
+		g_ray[i].distance = horizdistance;
+		g_ray[i].wasVerticale = 0;
+		g_ray[i].wallHitx = g_wallhits.HorizWallHitX;
+		g_ray[i].wallHity = g_wallhits.HorizWallHitY;
+	}
+	else
+	{
+		g_ray[i].distance = vertdistance;
+		g_ray[i].wasVerticale = 1;
+		g_ray[i].wallHitx = g_wallhits.VertWallHitX;
+		g_ray[i].wallHity = g_wallhits.VertWallHitY;
+	}
 }

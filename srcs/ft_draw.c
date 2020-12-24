@@ -11,59 +11,54 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#define TXY TILE + TILE / 2
 
-void df_player_angle(char position)
+void	df_player_angle(char position)
 {
-  g_myplayer.ishere += 1;
-  if (g_myplayer.ishere > 1)
-        ft_error("Error\nMORE THEN ONE PLAYER IN MAP");
-  if (g_myplayer.ishere == 1)
-    {if (position == 'N')
-      g_myplayer.rotationAngle = 270.0 * (M_PI / 180);
-    if (position == 'S')
-      g_myplayer.rotationAngle = 90.0 * (M_PI / 180);
-    if (position == 'E')
-      g_myplayer.rotationAngle = 0.0 * (M_PI / 180);
-    if (position == 'W')
-      g_myplayer.rotationAngle = 180.0 * (M_PI / 180);
-      }
-      
-      
+	g_myplayer.ishere += 1;
+	if (g_myplayer.ishere > 1)
+		ft_error("Error\nMORE THEN ONE PLAYER IN MAP");
+	if (g_myplayer.ishere == 1)
+	{
+		if (position == 'N')
+			g_myplayer.rotationAngle = 270.0 * (M_PI / 180);
+		if (position == 'S')
+			g_myplayer.rotationAngle = 90.0 * (M_PI / 180);
+		if (position == 'E')
+			g_myplayer.rotationAngle = 0.0 * (M_PI / 180);
+		if (position == 'W')
+			g_myplayer.rotationAngle = 180.0 * (M_PI / 180);
+		if (position != 'N' && position != 'S'
+				&& position != 'E' && position != 'W')
+			ft_error("Error\nWrong Player Value.");
+	}
 }
-void ft_map()
+
+void	ft_map(void)
 {
-  ft_map_error_check();
+	int		i;
+	size_t	j;
 
-  int i;
-  size_t j;
-
-  i = 0;
-  g_sp_index = 0;
-  while (i < g_file.hight)
-  {
-    j = 0;
-    while (j < ft_strlen(g_file.map[i]))
-    {
-      int tx = j * TILE + TILE / 2;
-      int ty = i * TILE + TILE / 2;
-     
-      if (iswall(tx, ty) == 2)
-          ft_get_sp_pos(tx, ty, g_sp_index++);
-      if (g_file.map[i][j] == 'N' || g_file.map[i][j] == 'S' || g_file.map[i][j] == 'E' || g_file.map[i][j] == 'W')
-      {
-        df_player_angle(g_file.map[i][j]);
-        if (!g_myplayer.x && !g_myplayer.y)
-        {
-          g_myplayer.x = tx;
-          g_myplayer.y = ty;
-        }
-        g_file.map[i][j] = '0';
-      };
-      j++;
-    }
-    i++;
-  }
-  if (g_myplayer.ishere == 0)
-       ft_error("Error\nNO PLAYER IN MAP");
-//sort();
+	i = 0;
+	g_sp_index = 0;
+	ft_map_error_check();
+	while (i < g_file.hight)
+	{
+		j = -1;
+		while (++j < ft_strlen(g_file.map[i]))
+		{
+			if (iswall(j * TXY, i * TXY) == 2)
+				ft_get_sp_pos(j * TXY, i * TXY, g_sp_index++);
+			if (ft_isalpha(g_file.map[i][j]))
+			{
+				df_player_angle(g_file.map[i][j]);
+				g_myplayer.x = j * TXY;
+				g_myplayer.y = i * TXY;
+				g_file.map[i][j] = '0';
+			}
+		}
+		i++;
+	}
+	if (g_myplayer.ishere == 0)
+		ft_error("Error\nNO PLAYER IN MAP");
 }

@@ -210,20 +210,21 @@ void ft_rayCaster(int i, double rayAngle);
 double d2r(double angle);
 void ft_drw_player(void);
 void get_data_textures (void);
+void	ft_get_data_textures_2(void);
 double normlize_anlge(double angle);
 /***********************
  *  RayCating Functions
  * ********************/
 
-void ft_ray(int i, double rayAngle);
+void ft_ray(int i, double rayangle);
 void ft_horizntale_inter(double rayAngle);
 void ft_verticale_inter(double rayAngle);
-void ft_get_distance(double rayAngle, int i);
+void ft_get_distance(int i);
 double ft_distance_between(double x1, double y1, double x2, double y2);
 void ft_wall_data(int i);
 void ft_draw_celling(int i);
 int get_side(int i);
-void BuildWall(int i);
+void ft_buildwall(int i);
 
 /****************************
  *  Error handling Functions
