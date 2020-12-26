@@ -83,7 +83,7 @@ void	ft_buildwall(int i)
 	t = g_ray[i].top;
 	b = g_ray[i].bottom;
 	if (g_ray[i].wasVerticale)
-		 offeset_x = (int)g_ray[i].wallHity % TILE;
+		offeset_x = (int)g_ray[i].wallHity % TILE;
 	else
 		offeset_x = (int)g_ray[i].wallHitx % TILE;
 	if (t < 0)

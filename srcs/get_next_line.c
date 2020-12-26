@@ -25,56 +25,6 @@ int		s_strlen(char *r_buffer)
 	return (0);
 }
 
-char	*ft_strjoin(char   *s1, char *s2)
-{
-	char	*str;
-	int		i;
-	int		f_len;
-
-	i = 0;
-	if (s1 == NULL)
-		f_len = 0;
-	else
-		f_len = ft_strlen(s1);
-	if (!(str = (char *)malloc((f_len + ft_strlen(s2)) * sizeof(char) + 1)))
-		return (NULL);
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	if (s1)
-		free(s1);
-	while (ft_strlen(s2))
-	{
-		str[i] = *s2++;
-		i++;
-	}
-	str[i] = 0;
-	return (str);
-}
-
-
-
-char	*ft_strdup(char const *s1)
-{
-	char	*r_value;
-	int		i;
-
-	i = 0;
-	if (!s1)
-		return (NULL);
-	if (!(r_value = (char *)malloc(ft_strlen(s1) * sizeof(char) + 1)))
-		return (NULL);
-	while (s1[i])
-	{
-		r_value[i] = s1[i];
-		i++;
-	}
-	r_value[i] = '\0';
-	return (r_value);
-}
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*ptr;
@@ -97,7 +47,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ptr[i] = 0;
 	return (ptr);
 }
-int	ft_check(char *r_buffer)
+
+int		ft_check(char *r_buffer)
 {
 	int i;
 
@@ -111,7 +62,7 @@ int	ft_check(char *r_buffer)
 	return (1);
 }
 
-int	ft_free(char **p1, char **p2, int r_value)
+int		ft_free(char **p1, char **p2, int r_value)
 {
 	free(*p1);
 	free(*p2);
@@ -122,7 +73,7 @@ int	ft_free(char **p1, char **p2, int r_value)
 	return (0);
 }
 
-int	get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
 	int			r_value;
 	char		*r_buffer;

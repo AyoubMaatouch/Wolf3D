@@ -12,23 +12,20 @@
 
 #include "../cub3d.h"
 
-int ft_key_input(int key)
+int	ft_key_input(int key)
 {
 	if (key == UP)
-		{
-			g_myplayer.look += 20;
-			if ( g_myplayer.look > 800)
-				g_myplayer.look = 800;
-
-		}
+	{
+		g_myplayer.look += 20;
+		g_myplayer.look = g_myplayer.look > 800 ? 800 : g_myplayer.look;
+	}
 	if (key == UP_l)
 		g_myplayer.walkDirection = 1;
 	if (key == DOWN)
-		{
-			g_myplayer.look -= 20;
-			if ( g_myplayer.look < -800)
-				g_myplayer.look = -800;
-		}
+	{
+		g_myplayer.look -= 20;
+		g_myplayer.look = g_myplayer.look < -800 ? -800 : g_myplayer.look;
+	}
 	if (key == DOWN_l)
 		g_myplayer.walkDirection = -1;
 	if (key == RIGHT)
@@ -41,12 +38,13 @@ int ft_key_input(int key)
 		g_myplayer.sidewalk = -1;
 	if (key == 53)
 		exit(0);
-	return key;
+	return (key);
 }
 
-int ft_mouse(int x, int key, int y)
+int	ft_mouse(int x, int key, int y)
 {
-	if (x > 0 && x < g_file.width_resolution && key > 0 && key < g_file.height_resolution)
+	if (x > 0 && x < g_file.width_resolution
+		&& key > 0 && key < g_file.height_resolution)
 	{
 		if (x > g_file.width_resolution / 2)
 			g_myplayer.turnDirection = 1;
@@ -55,5 +53,3 @@ int ft_mouse(int x, int key, int y)
 	}
 	return (y);
 }
-
-

@@ -12,67 +12,70 @@
 
 #include "../cub3d.h"
 
-void ft_horizntale_inter(double rayAngle)
+void	init(void)
 {
-    float yinterse, xinterse;
-    float xstep, ystep;
-    
-    g_wallhits.HorizWallHit = 0;
-    yinterse = floor(g_myplayer.y / TILE) * TILE;
-    yinterse += (g_cast.isRayFacingDown) ? TILE : 0;
-    xinterse = g_myplayer.x + (yinterse - g_myplayer.y) / tan(rayAngle);
-    ystep = TILE;
-    ystep *= (g_cast.isRayFacingUp) ? -1 : 1;
-    xstep = TILE / tan(rayAngle);
-    xstep *= (g_cast.isRayFacingLeft && xstep > 0) ? -1 : 1;
-    xstep *= (g_cast.isRayFacingRight && xstep < 0) ? -1 : 1;
-    while (xinterse >= 0 && xinterse <= (g_file.width * TILE) &&
-           yinterse >= 0 && yinterse <= (g_file.hight * TILE))
-    {
-        float x_checkh = xinterse;
-        float y_checkh = yinterse - ((g_cast.isRayFacingUp == 1) ? 1 : 0);
-       
-        if (iswall(x_checkh, y_checkh) == 1)
-        {
-            g_wallhits.HorizWallHitX = x_checkh;
-            g_wallhits.HorizWallHitY = yinterse;
-            g_wallhits.HorizWallHit = 1;
-            break;
-        }
-        xinterse += xstep;
-        yinterse += ystep;
-    }
+	g_in.yinterse = 0;
+	g_in.xinterse = 0;
+	g_in.xstep = 0;
+	g_in.ystep = 0;
+	g_in.x_check = 0;
+	g_in.y_check = 0;
 }
 
-void ft_verticale_inter(double rayAngle)
+void	ft_horizntale_inter(double ray)
 {
-    float xinterse;
-    float yinterse;
-    float xstep;
-    float ystep;
+	init();
+	g_in.yinterse = floor(g_myplayer.y / TILE) * TILE;
+	g_in.yinterse += (g_cast.isRayFacingDown) ? TILE : 0;
+	g_in.xinterse = g_myplayer.x + (g_in.yinterse - g_myplayer.y) / tan(ray);
+	g_in.ystep = TILE;
+	g_in.ystep *= (g_cast.isRayFacingUp) ? -1 : 1;
+	g_in.xstep = TILE / tan(ray);
+	g_in.xstep *= (g_cast.isRayFacingLeft && g_in.xstep > 0) ? -1 : 1;
+	g_in.xstep *= (g_cast.isRayFacingRight && g_in.xstep < 0) ? -1 : 1;
+	while (g_in.xinterse >= 0 && g_in.xinterse <= (g_file.width * TILE) &&
+		g_in.yinterse >= 0 && g_in.yinterse <= (g_file.hight * TILE))
+	{
+		g_in.x_check = g_in.xinterse;
+		g_in.y_check = g_in.yinterse -
+			((g_cast.isRayFacingUp == 1) ? 1 : 0);
+		if (iswall(g_in.x_check, g_in.y_check) == 1)
+		{
+			g_wallhits.HorizWallHitX = g_in.x_check;
+			g_wallhits.HorizWallHitY = g_in.yinterse;
+			g_wallhits.HorizWallHit = 1;
+			break ;
+		}
+		g_in.xinterse += g_in.xstep;
+		g_in.yinterse += g_in.ystep;
+	}
+}
 
-    xinterse = floor(g_myplayer.x / TILE) * TILE;
-    xinterse += (g_cast.isRayFacingRight) ? TILE : 0;
-    yinterse = g_myplayer.y + (xinterse - g_myplayer.x) * tan(rayAngle);
-    xstep = TILE;
-    xstep *= (g_cast.isRayFacingLeft) ? -1 : 1;
-    ystep = TILE * tan(rayAngle);
-    ystep *= (g_cast.isRayFacingUp && ystep > 0) ? -1 : 1;
-    ystep *= (g_cast.isRayFacingDown && ystep < 0) ? -1 : 1;
-    while (xinterse >= 0 && xinterse <= (g_file.width * TILE) &&
-           yinterse >= 0 && yinterse <= (g_file.hight * TILE))
-    {
-        float x_check = xinterse - ((g_cast.isRayFacingLeft == 1) ? 1 : 0);
-        float y_check = yinterse;
-
-        if (iswall(x_check, y_check) == 1)
-        {
-            g_wallhits.VertWallHitX = xinterse;
-            g_wallhits.VertWallHitY = y_check;
-            g_wallhits.VertWallHit = 1;
-            break;
-        }
-        xinterse += xstep;
-        yinterse += ystep;
-    }
+void	ft_verticale_inter(double ray)
+{
+	init();
+	g_in.xinterse = floor(g_myplayer.x / TILE) * TILE;
+	g_in.xinterse += (g_cast.isRayFacingRight) ? TILE : 0;
+	g_in.yinterse = g_myplayer.y + (g_in.xinterse - g_myplayer.x) * tan(ray);
+	g_in.xstep = TILE;
+	g_in.xstep *= (g_cast.isRayFacingLeft) ? -1 : 1;
+	g_in.ystep = TILE * tan(ray);
+	g_in.ystep *= (g_cast.isRayFacingUp && g_in.ystep > 0) ? -1 : 1;
+	g_in.ystep *= (g_cast.isRayFacingDown && g_in.ystep < 0) ? -1 : 1;
+	while (g_in.xinterse >= 0 && g_in.xinterse <= (g_file.width * TILE) &&
+		g_in.yinterse >= 0 && g_in.yinterse <= (g_file.hight * TILE))
+	{
+		g_in.x_check = g_in.xinterse
+			- ((g_cast.isRayFacingLeft == 1) ? 1 : 0);
+		g_in.y_check = g_in.yinterse;
+		if (iswall(g_in.x_check, g_in.y_check) == 1)
+		{
+			g_wallhits.VertWallHitX = g_in.xinterse;
+			g_wallhits.VertWallHitY = g_in.y_check;
+			g_wallhits.VertWallHit = 1;
+			break ;
+		}
+		g_in.xinterse += g_in.xstep;
+		g_in.yinterse += g_in.ystep;
+	}
 }
