@@ -14,8 +14,8 @@
 
 void	ft_init(void)
 {
-	g_myplayer.turnDirection = 0;
-	g_myplayer.walkDirection = 0;
+	g_myplayer.turn_direction = 0;
+	g_myplayer.walk_direction = 0;
 	g_myplayer.move_speed = 25;
 	g_myplayer.sidewalk = 0;
 	g_myplayer.radius = 5;
@@ -28,17 +28,17 @@ void	update(void)
 	float x;
 	float y;
 
-	g_myplayer.rotationAngle += g_myplayer.turnDirection
+	g_myplayer.rotation_angle += g_myplayer.turn_direction
 		* g_myplayer.rotation_speed;
-	x = cos(g_myplayer.rotationAngle) *
-		(g_myplayer.move_speed * g_myplayer.walkDirection);
-	y = sin(g_myplayer.rotationAngle) * (g_myplayer.move_speed
-		* g_myplayer.walkDirection);
+	x = cos(g_myplayer.rotation_angle) *
+		(g_myplayer.move_speed * g_myplayer.walk_direction);
+	y = sin(g_myplayer.rotation_angle) * (g_myplayer.move_speed
+		* g_myplayer.walk_direction);
 	if (g_myplayer.sidewalk != 0)
 	{
-		x = cos(g_myplayer.rotationAngle + d2r(90 * g_myplayer.sidewalk))
+		x = cos(g_myplayer.rotation_angle + d2r(90 * g_myplayer.sidewalk))
 			* g_myplayer.move_speed;
-		y = sin(g_myplayer.rotationAngle + d2r(90 * g_myplayer.sidewalk))
+		y = sin(g_myplayer.rotation_angle + d2r(90 * g_myplayer.sidewalk))
 			* g_myplayer.move_speed;
 	}
 	if (iswall(g_myplayer.x + x, g_myplayer.y + y) != 1 &&
@@ -47,8 +47,8 @@ void	update(void)
 		g_myplayer.x += x;
 		g_myplayer.y += y;
 	}
-	g_myplayer.turnDirection = 0;
-	g_myplayer.walkDirection = 0;
+	g_myplayer.turn_direction = 0;
+	g_myplayer.walk_direction = 0;
 	g_myplayer.sidewalk = 0;
 }
 

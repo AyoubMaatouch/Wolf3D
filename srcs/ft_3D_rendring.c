@@ -25,7 +25,7 @@ void	ft_wall_data(int i)
 	int		bottom;
 
 	correct_dis = g_ray[i].distance *
-		cos(g_ray[i].ray_angle - g_myplayer.rotationAngle);
+		cos(g_ray[i].ray_angle - g_myplayer.rotation_angle);
 	projection = (g_file.width_resolution / 2) / tan(d2r(30));
 	wallheight = (TILE / correct_dis) * projection;
 	top = (g_file.height_resolution / 2)
@@ -60,13 +60,13 @@ int		get_side(int i)
 	int nb;
 
 	nb = 0;
-	if (g_ray[i].rayfacingUP && !g_ray[i].wasVerticale)
+	if (g_ray[i].rayfacing_up && !g_ray[i].was_verticale)
 		nb = 0;
-	if (g_ray[i].rayfacingDown && !g_ray[i].wasVerticale)
+	if (g_ray[i].rayfacing_down && !g_ray[i].was_verticale)
 		nb = 1;
-	if (g_ray[i].rayfacingLeft && g_ray[i].wasVerticale)
+	if (g_ray[i].rayfacing_left && g_ray[i].was_verticale)
 		nb = 2;
-	if (g_ray[i].rayfacingRight && g_ray[i].wasVerticale)
+	if (g_ray[i].rayfacing_right && g_ray[i].was_verticale)
 		nb = 3;
 	return (nb);
 }
@@ -82,10 +82,10 @@ void	ft_buildwall(int i)
 	nb = get_side(i);
 	t = g_ray[i].top;
 	b = g_ray[i].bottom;
-	if (g_ray[i].wasVerticale)
-		offeset_x = (int)g_ray[i].wallHity % TILE;
+	if (g_ray[i].was_verticale)
+		offeset_x = (int)g_ray[i].wall_hit_y % TILE;
 	else
-		offeset_x = (int)g_ray[i].wallHitx % TILE;
+		offeset_x = (int)g_ray[i].wall_hit_x % TILE;
 	if (t < 0)
 		t = 0;
 	if (b > g_file.height_resolution)

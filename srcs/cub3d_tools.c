@@ -16,8 +16,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char *dst;
 
-	if ((x > 0 && y > 0) && (x < g_file.height_resolution
-	&& y < g_file.width_resolution))
+	if ((x > 0 && y > 0) && (x < g_file.width_resolution
+	&& y < g_file.height_resolution))
 	{
 		dst = data->addr + (y * data->line_length + x *
 		(data->bits_per_pixel / 8));

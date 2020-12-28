@@ -54,9 +54,9 @@ void	ft_get_cf(char c, char *value)
 		g_file.cilng = 65536 * r + 256 * g + b;
 }
 
-void	ft_sprite_info(char **temp)
+void	ft_sprite_info(char *g_value, char **temp)
 {
-	if (temp[2])
+	if (g_value[1] != ' ' || temp[2])
 		ft_error("Error\nPlease Check Your Sprite input!");
 	ft_get_sprit(temp[1]);
 }
@@ -68,25 +68,25 @@ void	ft_get_handle(char *g_value)
 	temp = ft_split(g_value, ' ');
 	if (!ft_memcmp(g_value, "R", 1))
 	{
-		if (temp[3])
+		if (g_value[1] != ' ' || temp[3])
 			ft_error("Error\nPlease Check Your Resolution input!");
 		ft_get_resolution(ft_atoi(temp[2]), ft_atoi(temp[1]));
 	}
 	else if (!ft_memcmp(g_value, "WE", 2) || !ft_memcmp(g_value, "NO", 2)
 		|| !ft_memcmp(g_value, "SO", 2) || !ft_memcmp(g_value, "EA", 2))
 	{
-		if (temp[2])
+		if (g_value[2] != ' ' || temp[2])
 			ft_error("Error\nPlease Check Your Texture input!");
 		ft_get_texture(g_value[0], temp[1]);
 	}
 	else if (g_value[0] == 'F' || g_value[0] == 'C')
 	{
-		if (temp[2])
+		if (g_value[1] != ' ' || temp[2])
 			ft_error("Error\nPlease Check Your 'C' or 'F' input!");
 		ft_get_cf(g_value[0], temp[1]);
 	}
-	else if (g_value[0] == 'S' && g_value[1] != 'O')
-		ft_sprite_info(temp);
+	else if (!ft_memcmp(g_value, "S", 1))
+		ft_sprite_info(g_value, temp);
 	free(temp);
 }
 

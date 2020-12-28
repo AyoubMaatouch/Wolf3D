@@ -37,7 +37,7 @@ void	cast_rays(void)
 	int		i;
 
 	i = 0;
-	ray_angle = g_myplayer.rotationAngle - d2r(30);
+	ray_angle = g_myplayer.rotation_angle - d2r(30);
 	while (i <= g_file.width_resolution)
 	{
 		ft_ray(i, ray_angle);
@@ -57,35 +57,35 @@ void	cast_rays(void)
 
 void	ft_init_var(void)
 {
-	g_cast.isRayFacingDown = 0;
-	g_cast.isRayFacingUp = 0;
-	g_cast.isRayFacingRight = 0;
-	g_cast.isRayFacingLeft = 0;
-	g_wallhits.HorizWallHitX = 0;
-	g_wallhits.HorizWallHitY = 0;
-	g_wallhits.HorizWallHit = 0;
-	g_wallhits.VertWallHitX = 0;
-	g_wallhits.VertWallHitY = 0;
-	g_wallhits.VertWallHit = 0;
+	g_cast.israyfacing_down = 0;
+	g_cast.israyfacing_up = 0;
+	g_cast.israyfacing_right = 0;
+	g_cast.israyfacing_left = 0;
+	g_wallhits.horizwallhit_x = 0;
+	g_wallhits.horizwallhit_y = 0;
+	g_wallhits.horizwallhit = 0;
+	g_wallhits.vertwallhit_x = 0;
+	g_wallhits.vertwallhit_y = 0;
+	g_wallhits.vertwallhit = 0;
 }
 
 void	ft_ray(int i, double rayangle)
 {
 	rayangle = normlize_anlge(rayangle);
 	ft_init_var();
-	g_cast.isRayFacingDown = rayangle > 0 && rayangle < M_PI;
-	g_cast.isRayFacingUp = !g_cast.isRayFacingDown;
-	g_cast.isRayFacingRight = rayangle < (0.5 * M_PI)
+	g_cast.israyfacing_down = rayangle > 0 && rayangle < M_PI;
+	g_cast.israyfacing_up = !g_cast.israyfacing_down;
+	g_cast.israyfacing_right = rayangle < (0.5 * M_PI)
 		|| rayangle >= (1.5 * M_PI);
-	g_cast.isRayFacingLeft = !g_cast.isRayFacingRight;
+	g_cast.israyfacing_left = !g_cast.israyfacing_right;
 	ft_horizntale_inter(rayangle);
 	ft_verticale_inter(rayangle);
 	ft_get_distance(i);
 	g_ray[i].ray_angle = rayangle;
-	g_ray[i].rayfacingUP = g_cast.isRayFacingUp;
-	g_ray[i].rayfacingDown = g_cast.isRayFacingDown;
-	g_ray[i].rayfacingRight = g_cast.isRayFacingRight;
-	g_ray[i].rayfacingLeft = g_cast.isRayFacingLeft;
+	g_ray[i].rayfacing_up = g_cast.israyfacing_up;
+	g_ray[i].rayfacing_down = g_cast.israyfacing_down;
+	g_ray[i].rayfacing_right = g_cast.israyfacing_right;
+	g_ray[i].rayfacing_left = g_cast.israyfacing_left;
 }
 
 void	ft_get_distance(int i)
@@ -93,25 +93,25 @@ void	ft_get_distance(int i)
 	float horizdistance;
 	float vertdistance;
 
-	horizdistance = g_wallhits.HorizWallHit ? ft_distance_between(g_myplayer.x,
+	horizdistance = g_wallhits.horizwallhit ? ft_distance_between(g_myplayer.x,
 		g_myplayer.y,
-			g_wallhits.HorizWallHitX, g_wallhits.HorizWallHitY)
+			g_wallhits.horizwallhit_x, g_wallhits.horizwallhit_y)
 				: INT_MAX;
-	vertdistance = g_wallhits.VertWallHit ? ft_distance_between(g_myplayer.x,
-		g_myplayer.y, g_wallhits.VertWallHitX, g_wallhits.VertWallHitY)
+	vertdistance = g_wallhits.vertwallhit ? ft_distance_between(g_myplayer.x,
+		g_myplayer.y, g_wallhits.vertwallhit_x, g_wallhits.vertwallhit_y)
 			: INT_MAX;
 	if (horizdistance < vertdistance)
 	{
 		g_ray[i].distance = horizdistance;
-		g_ray[i].wasVerticale = 0;
-		g_ray[i].wallHitx = g_wallhits.HorizWallHitX;
-		g_ray[i].wallHity = g_wallhits.HorizWallHitY;
+		g_ray[i].was_verticale = 0;
+		g_ray[i].wall_hit_x = g_wallhits.horizwallhit_x;
+		g_ray[i].wall_hit_y = g_wallhits.horizwallhit_y;
 	}
 	else
 	{
 		g_ray[i].distance = vertdistance;
-		g_ray[i].wasVerticale = 1;
-		g_ray[i].wallHitx = g_wallhits.VertWallHitX;
-		g_ray[i].wallHity = g_wallhits.VertWallHitY;
+		g_ray[i].was_verticale = 1;
+		g_ray[i].wall_hit_x = g_wallhits.vertwallhit_x;
+		g_ray[i].wall_hit_y = g_wallhits.vertwallhit_y;
 	}
 }

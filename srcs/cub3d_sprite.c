@@ -59,11 +59,11 @@ void	ft_sp_data(int i)
 	g_sprite[i].dis = ft_distance_between(g_myplayer.x,
 		g_myplayer.y, g_sprite[i].x, g_sprite[i].y);
 	angle = atan2(g_sprite[i].y - g_myplayer.y, g_sprite[i].x - g_myplayer.x);
-	while (angle - g_myplayer.rotationAngle > M_PI)
+	while (angle - g_myplayer.rotation_angle > M_PI)
 		angle -= 2 * M_PI;
-	while (angle - g_myplayer.rotationAngle < -M_PI)
+	while (angle - g_myplayer.rotation_angle < -M_PI)
 		angle += 2 * M_PI;
-	angle = angle - g_myplayer.rotationAngle;
+	angle = angle - g_myplayer.rotation_angle;
 	g_sprite[i].size = (g_file.width_resolution / g_sprite[i].dis) * TILE;
 	g_sprite[i].y_off = (g_file.height_resolution / 2) -
 		(g_sprite[i].size / 2) + g_myplayer.look;

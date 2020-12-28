@@ -21,13 +21,13 @@ void	df_player_angle(char position)
 	if (g_myplayer.ishere == 1)
 	{
 		if (position == 'N')
-			g_myplayer.rotationAngle = 270.0 * (M_PI / 180);
+			g_myplayer.rotation_angle = 270.0 * (M_PI / 180);
 		if (position == 'S')
-			g_myplayer.rotationAngle = 90.0 * (M_PI / 180);
+			g_myplayer.rotation_angle = 90.0 * (M_PI / 180);
 		if (position == 'E')
-			g_myplayer.rotationAngle = 0.0 * (M_PI / 180);
+			g_myplayer.rotation_angle = 0.0 * (M_PI / 180);
 		if (position == 'W')
-			g_myplayer.rotationAngle = 180.0 * (M_PI / 180);
+			g_myplayer.rotation_angle = 180.0 * (M_PI / 180);
 		if (position != 'N' && position != 'S'
 				&& position != 'E' && position != 'W')
 			ft_error("Error\nWrong Player Value.");

@@ -12,43 +12,17 @@
 
 #include "cub3d.h"
 
-void	ft_init_mlx(void)
+int		ft_file_data(char *line)
 {
-	g_mymlx.mlx_ptr = mlx_init();
-	if (!g_bmp)
-		g_mymlx.win_ptr = mlx_new_window(g_mymlx.mlx_ptr,
-				g_file.width_resolution, g_file.height_resolution, "cub3D");
-	g_data.img = mlx_new_image(g_mymlx.mlx_ptr,
-			g_file.width_resolution, g_file.height_resolution);
-	g_data.addr = mlx_get_data_addr(g_data.img,
-			&g_data.bits_per_pixel, &g_data.line_length, &g_data.endian);
-}
+	int i;
 
-int		check(void)
-{
-	get_data_textures();
-	if (!g_bmp)
+	i = 0;
+	if (ft_isalpha(ft_strtrim(line, " ")[0]))
 	{
-		mlx_hook(g_mymlx.win_ptr, 2, 1L << 0, ft_key_input, (void *)0);
-		mlx_hook(g_mymlx.win_ptr, 6, (1L << 6), ft_mouse, (void *)0);
+		ft_get_handle(ft_strtrim(line, " "));
+		i++;
 	}
-	ft_map();
-	update();
-	cast_rays();
-	if (!g_bmp)
-	{
-		mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);
-		mlx_put_image_to_window(g_mymlx.mlx_ptr,
-				g_mymlx.win_ptr, g_data.img, 0, 0);
-		mlx_destroy_image(g_mymlx.mlx_ptr, g_data.img);
-	}
-	if (g_bmp)
-		ft_create_screenshot();
-	g_data.img = mlx_new_image(g_mymlx.mlx_ptr,
-			g_file.width_resolution, g_file.height_resolution);
-	g_data.addr = mlx_get_data_addr(g_data.img,
-			&g_data.bits_per_pixel, &g_data.line_length, &g_data.endian);
-	return (0);
+	return (i);
 }
 
 void	ft_openfile(char *r_file)
@@ -62,11 +36,7 @@ void	ft_openfile(char *r_file)
 	fd = open(r_file, O_RDONLY);
 	while ((get_next_line(fd, &line)))
 	{
-		if (ft_isalpha(ft_strtrim(line, " ")[0]))
-		{
-			ft_get_handle(ft_strtrim(line, " "));
-			i++;
-		}
+		i += ft_file_data(line);
 		if (line[0] == ' ' && ft_strtrim(line, " ")[0] == '\0')
 			ft_error("Error\nOne Or more Empty Lines in The File!");
 		if (ft_isalnum(ft_strtrim(line, " ")[0]))
