@@ -13,10 +13,9 @@
 
 NAME = cub3D
 
-LIB = Lib/*.c
-SRC = srcs/*.c
+LIB = Lib/{ft_atoi,ft_bzero,ft_calloc,ft_isalnum,ft_isalpha,ft_isdigit,ft_memcmp,ft_putstr,ft_split,ft_strdub_strjoin,ft_strlen,ft_strtrim}.c
+SRC = srcs/{cub3d_raycasting,cub3d_sprite,cub3d_tools,cub3d_tools_2,ft_3d_rendring,ft_draw,ft_file_handling,ft_filecheck,ft_filecheck_2,ft_game,ft_intersections,ft_mlx_loops,ft_screenshot,get_next_line}.c
 CC = gcc  -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit  -Wall -Wextra -Werror libmlx.dylib -fsanitize=address -g
-#CC = gcc -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror
 
 
 all : $(NAME)
@@ -42,7 +41,7 @@ run :
 	@./$(NAME) maps/map3.cub
 
 save : 
-	@./$(NAME) *.cub --save
+	@./$(NAME) *ub --save
 	@echo "Rendring image $(NAME):	[\033[1;32mDONE\033[m]"
 
 .PHONY : all clean fclean re $(NAME)
