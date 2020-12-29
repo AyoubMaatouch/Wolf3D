@@ -70,7 +70,7 @@ void	ft_get_handle(char *g_value)
 	{
 		if (g_value[1] != ' ' || !temp[1] || !temp[2] || temp[3])
 			ft_error("Error\nPlease Check Your Resolution input!");
-		ft_get_resolution(ft_atoi(temp[2]), ft_atoi(temp[1]));
+		ft_get_resolution(ft_atoi(ft_c(temp[2])), ft_atoi(ft_c(temp[1])));
 	}
 	else if (!ft_memcmp(g_value, "WE", 2) || !ft_memcmp(g_value, "NO", 2)
 		|| !ft_memcmp(g_value, "SO", 2) || !ft_memcmp(g_value, "EA", 2))

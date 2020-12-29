@@ -208,4 +208,5 @@ void			ft_get_sp_pos(float x, float y, int i);
 int				g_sp_index;
 int				g_bmp;
 void			sort(void);
+char			*ft_c(char *str);
 #endif

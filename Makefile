@@ -38,7 +38,7 @@ fclean : clean
 re : fclean all
 
 run :
-	@./$(NAME) maps/map4.cub
+	@./$(NAME) maps/map3.cub
 
 save : 
 	@./$(NAME) *.cub --save

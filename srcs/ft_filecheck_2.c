@@ -65,3 +65,17 @@ void	ft_get_sprit(char *value)
 		ft_error("Error\nDuplicated 'Sprite' File\n");
 	g_file.sprit = value;
 }
+
+char	*ft_c(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalpha(str[i]))
+			ft_error("Error\nPlease Check Your Resolution input!");
+		i++;
+	}
+	return (str);
+}
