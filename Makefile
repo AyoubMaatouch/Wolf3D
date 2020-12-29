@@ -38,10 +38,10 @@ fclean : clean
 re : fclean all
 
 run :
-	@./$(NAME) maps/map3.cub
+	@./$(NAME) maps/map4.cub
 
 save : 
-	@./$(NAME) *ub --save
+	@./$(NAME) *.cub --save
 	@echo "Rendring image $(NAME):	[\033[1;32mDONE\033[m]"
 
 .PHONY : all clean fclean re $(NAME)

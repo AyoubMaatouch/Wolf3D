@@ -37,7 +37,7 @@ void	ft_openfile(char *r_file)
 	while ((get_next_line(fd, &line)))
 	{
 		i += ft_file_data(line);
-		if (line[0] == ' ' && ft_strtrim(line, " ")[0] == '\0')
+		if (((line[0] == ' ' && ft_strtrim(line, " ")[0] == '\0')))
 			ft_error("Error\nOne Or more Empty Lines in The File!");
 		if (ft_isalnum(ft_strtrim(line, " ")[0]))
 		{

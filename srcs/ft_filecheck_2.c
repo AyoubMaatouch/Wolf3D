@@ -19,8 +19,10 @@ void	ft_get_resolution(int hight, int width)
 
 	mlx_get_screen_size(g_mymlx.mlx_ptr, &sizex, &sizey);
 	g_file.height_resolution = hight;
-	if (hight < 0 || width < 0)
-		ft_error("Error\nNegative Resolution Values!");
+	if (hight <= 0 || width <= 0)
+		ft_error("Error\nYour Resolution Value Sould be more then 10!");
+	if (hight < 10 || width < 10)
+		ft_error("Error\nYour Resolution Value Sould be more then 10!");
 	if (hight > sizey)
 		g_file.height_resolution = sizey;
 	else

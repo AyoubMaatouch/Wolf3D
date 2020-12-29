@@ -12,18 +12,6 @@
 
 #include "../cub3d.h"
 
-void	ft_map_arg_check(char *arg)
-{
-	if (ft_memcmp(&arg[strlen(arg) - 4], ".cub", 5) != 0)
-		ft_error("Error\nWrong File Name!\nTry Again :)\n");
-}
-
-void	ft_save_arg_check(char *arg)
-{
-	if (ft_memcmp(arg, "--save", 5) != 0)
-		ft_error("Error\nWrong Argument Name!\nTry : --save :)\n");
-}
-
 int		ft_while_one(char *value)
 {
 	int i;
@@ -38,7 +26,19 @@ int		ft_while_one(char *value)
 	return (1);
 }
 
-void	ft_first_last_line(void)
+size_t	ft_len_m(const char *str)
+{
+	size_t i;
+
+	if (!str)
+		ft_error("Error\nCheck Your Map");
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+void	ft_check_inside(void)
 {
 	int i;
 	int j;
@@ -56,9 +56,9 @@ void	ft_first_last_line(void)
 			{
 				if (g_file.map[i][j + 1] == ' ' || g_file.map[i][j - 1] == ' ')
 					ft_error("Error\nCheck your Map\n");
-				if ((g_file.map[i + 1] && (g_file.map[i + 1][j] == ' ' ||
-					g_file.map[i + 1][j] == '\0')) ||
-				(g_file.map[i - 1] && g_file.map[i - 1][j] == ' '))
+				if ((ft_len_m(g_file.map[i + 1]) >= ft_len_m(g_file.map[i]) &&
+				(g_file.map[i + 1][j] == ' ' || g_file.map[i + 1][j] == '\0'))
+				|| (g_file.map[i - 1] && g_file.map[i - 1][j] == ' '))
 					ft_error("Error\nCheck your Map\n");
 			}
 			j++;
@@ -67,7 +67,27 @@ void	ft_first_last_line(void)
 	}
 }
 
+void	ft_first_last_line(void)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	while (i < g_file.hight)
+	{
+		line = ft_strtrim(g_file.map[i], " ");
+		if (line[0] != '1')
+			ft_error("Error\nCheck Your Map\n");
+		if (line[(int)ft_strlen(line) - 1] != '1')
+			ft_error("Error\nCheck Your Map\n");
+		if (line)
+			free(line);
+		i++;
+	}
+}
+
 void	ft_map_error_check(void)
 {
 	ft_first_last_line();
+	ft_check_inside();
 }

@@ -68,7 +68,7 @@ void	ft_get_handle(char *g_value)
 	temp = ft_split(g_value, ' ');
 	if (!ft_memcmp(g_value, "R", 1))
 	{
-		if (g_value[1] != ' ' || temp[3])
+		if (g_value[1] != ' ' || !temp[1] || !temp[2] || temp[3])
 			ft_error("Error\nPlease Check Your Resolution input!");
 		ft_get_resolution(ft_atoi(temp[2]), ft_atoi(temp[1]));
 	}
@@ -110,6 +110,8 @@ void	ft_map_handle(char *r_file, int map_size)
 			g_file.map[i] = ft_strdup(line);
 			i++;
 		}
+		if ((*line == '\n' || *line == '\0' || *line == '\0') && i > 0)
+			ft_error("Error\nCheck your Map\n");
 		free(line);
 	}
 	if (ft_isdigit(ft_strtrim(line, " ")[0]))

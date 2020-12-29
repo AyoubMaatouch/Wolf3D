@@ -18,6 +18,8 @@ void	*ft_calloc(size_t count, size_t size)
 	int		i;
 
 	i = 0;
+	if (count <= 0 || size <= 0)
+		ft_error("Error\nWrong File value");
 	if (!(ptr = malloc(count * size)))
 		return (NULL);
 	ft_bzero(ptr, size * count);
