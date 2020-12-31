@@ -37,6 +37,7 @@
 # define LEFT_L 2
 # define BUFFER_SIZE 1024
 # define TILE 64
+# define TRUE 1
 
 typedef struct	s_inter{
 	float		xinterse;
@@ -207,6 +208,7 @@ void			ft_create_screenshot(void);
 void			ft_get_sp_pos(float x, float y, int i);
 int				g_sp_index;
 int				g_bmp;
+int				g_bonus;
 void			sort(void);
 char			*ft_c(char *str);
 #endif

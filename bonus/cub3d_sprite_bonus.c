@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_sprite.c                                     :+:      :+:    :+:   */
+/*   cub3d_sprite_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aymaatou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/12 20:49:03 by aymaatou          #+#    #+#             */
-/*   Updated: 2020/12/12 20:49:04 by aymaatou         ###   ########.fr       */
+/*   Created: 2020/12/31 16:42:13 by aymaatou          #+#    #+#             */
+/*   Updated: 2020/12/31 16:42:14 by aymaatou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	sort(void)
 
 void	ft_get_sp_pos(float x, float y, int i)
 {
+	g_bonus = TRUE;
 	g_sprite[i].x = x;
 	g_sprite[i].y = y;
 }
@@ -66,7 +67,7 @@ void	ft_sp_data(int i)
 	angle = angle - g_myplayer.rotation_angle;
 	g_sprite[i].size = (g_file.width_resolution / g_sprite[i].dis) * TILE;
 	g_sprite[i].y_off = (g_file.height_resolution / 2) -
-		(g_sprite[i].size / 2);
+		(g_sprite[i].size / 2) + g_myplayer.look;
 	g_sprite[i].x_off = ((angle / d2r(60) * g_file.width_resolution))
 	+ ((g_file.width_resolution / 2) - (g_sprite[i].size / 2));
 }

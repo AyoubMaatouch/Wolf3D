@@ -43,13 +43,16 @@ int		ft_key_input(int key)
 
 int		ft_mouse(int x, int key, int y)
 {
-	if (x > 0 && x < g_file.width_resolution
-		&& key > 0 && key < g_file.height_resolution)
+	if (g_bonus == TRUE)
 	{
-		if (x > g_file.width_resolution / 2)
-			g_myplayer.turn_direction = 1;
-		if (x < g_file.width_resolution / 2)
-			g_myplayer.turn_direction = -1;
+		if (x > 0 && x < g_file.width_resolution
+		&& key > 0 && key < g_file.height_resolution)
+		{
+			if (x > g_file.width_resolution / 2)
+				g_myplayer.turn_direction = 1;
+			if (x < g_file.width_resolution / 2)
+				g_myplayer.turn_direction = -1;
+		}
 	}
 	return (y);
 }
