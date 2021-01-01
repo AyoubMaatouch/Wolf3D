@@ -75,9 +75,9 @@ void	ft_get_handle(char *g_value)
 	else if (!ft_memcmp(g_value, "WE", 2) || !ft_memcmp(g_value, "NO", 2)
 		|| !ft_memcmp(g_value, "SO", 2) || !ft_memcmp(g_value, "EA", 2))
 	{
-		if (g_value[2] != ' ' || temp[2])
+		if (g_value[2] != ' ')
 			ft_error("Error\nPlease Check Your Texture input!");
-		ft_get_texture(g_value[0], temp[1]);
+		ft_get_texture(g_value[0], ft_strtrim(&g_value[3], " "));
 	}
 	else if (g_value[0] == 'F' || g_value[0] == 'C')
 	{

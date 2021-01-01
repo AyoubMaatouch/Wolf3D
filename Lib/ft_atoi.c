@@ -14,31 +14,24 @@
 
 long		g_i;
 long		g_number;
-int			g_sign;
 int			g_l_counter;
 
 int		ft_atoi(const char *str)
 {
 	g_l_counter = 0;
-	g_sign = 1;
 	g_i = 0;
 	g_number = 0;
 	if (!str)
 		ft_error("Error\nWrong or Missing Value");
 	while ((str[g_i] >= 9 && str[g_i] <= 13) || (str[g_i] == 32))
 		g_i++;
-	if (str[g_i] == '+' || str[g_i] == '-')
-		if (str[g_i++] == '-')
-			g_sign = -1;
 	while (str[g_i] != '\0')
 	{
-		if (g_l_counter > 13 && g_sign == -1)
-			return (0);
-		if (g_l_counter++ > 13 && g_sign == 1)
-			return (-1);
+		if (g_number > 9999)
+			ft_error("Error\nCheck Your Resolution input");
 		if (!(str[g_i] >= 48 && str[g_i] <= 57))
 			return (g_number * g_sign);
 		g_number = g_number * 10 + (str[g_i++] - 48);
 	}
-	return (g_number * g_sign);
+	return (g_number);
 }

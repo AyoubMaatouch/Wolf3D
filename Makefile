@@ -18,6 +18,7 @@ SRC = srcs/{cub3d_raycasting,cub3d_tools,cub3d_tools_2,ft_draw,ft_file_handling,
 CC = gcc  -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit  -Wall -Wextra -Werror libmlx.dylib -fsanitize=address -g
 REG = srcs/{cub3d_sprite,ft_3drendring}.c
 BONUS = bonus/{cub3d_sprite_bonus,ft_3drendring_bonus}.c
+
 all : $(NAME)
 
 $(NAME):
@@ -29,11 +30,11 @@ $(NAME):
 	
 clean :
 	@make clean -C mlx_beta/.
-	@rm -fr $(NAME) cub3D.dSYM *.
+	@rm -rf $(NAME) cub3D.dSYM *.
 	@echo "Deleting Files:	[\033[1;31mDONE\033[m]"
 
 fclean : clean
-	@rm -fr $(NAME) cub3D.dSYM first_rendered_image.bmp libmlx.dylib
+	@rm -rf $(NAME) cub3D.dSYM first_rendered_image.bmp libmlx.dylib
 
 re : fclean all
 
@@ -49,4 +50,5 @@ bonus : fclean
 	@cp -r mlx_beta/libmlx.dylib .
 	@$(CC) cub3d.c $(LIB) $(SRC) $(BONUS) -o cub3D
 	@echo "Compilation of $(NAME):	[\033[1;32mDONE\033[m][\033[1;36mBONUS\033[m]"
+
 .PHONY : all clean fclean re $(NAME)

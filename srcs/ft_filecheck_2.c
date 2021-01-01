@@ -73,7 +73,7 @@ char	*ft_c(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_isalpha(str[i]))
+		if (ft_isalpha(str[i]) || str[i] == '-')
 			ft_error("Error\nPlease Check Your Resolution input!");
 		i++;
 	}
