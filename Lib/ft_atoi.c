@@ -30,7 +30,7 @@ int		ft_atoi(const char *str)
 		if (g_number > 9999)
 			ft_error("Error\nCheck Your Resolution input");
 		if (!(str[g_i] >= 48 && str[g_i] <= 57))
-			return (g_number * g_sign);
+			return (g_number);
 		g_number = g_number * 10 + (str[g_i++] - 48);
 	}
 	return (g_number);

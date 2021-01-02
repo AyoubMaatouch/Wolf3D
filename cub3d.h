@@ -149,7 +149,7 @@ t_mlx			g_mymlx;
 t_file			g_file;
 t_player		g_myplayer;
 t_txt			g_txt[5];
-t_sprite_info	g_sprite[3200];
+t_sprite_info	g_sprite[10000];
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 size_t			ft_strlen(const char *str);
 char			*ft_strdup(char const *s1);

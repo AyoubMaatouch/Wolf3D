@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#define TXY TILE + TILE / 2
 
 /*
 ** getting x, y hits and calculating the distance from player to sprite,
@@ -30,7 +31,7 @@ void	sort(void)
 		j = -1;
 		while (++j < g_sp_index - i)
 		{
-			if (g_sprite[j].dis < g_sprite[j + 1].dis)
+			if (j + 1 < g_sp_index && g_sprite[j].dis < g_sprite[j + 1].dis)
 			{
 				tmp = g_sprite[j];
 				g_sprite[j] = g_sprite[j + 1];
@@ -42,6 +43,8 @@ void	sort(void)
 
 void	ft_get_sp_pos(float x, float y, int i)
 {
+	if (i >= 10000)
+		ft_error("Error\nCheck You Map!");
 	g_sprite[i].x = x;
 	g_sprite[i].y = y;
 }
