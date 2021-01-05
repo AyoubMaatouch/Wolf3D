@@ -57,17 +57,21 @@ int		ft_mouse(int x, int key, int y)
 	return (y);
 }
 
-int		check(void)
+int		check(int key)
 {
-	get_data_textures();
+	
 	if (!g_bmp)
 	{
-		mlx_hook(g_mymlx.win_ptr, 2, 1L << 0, ft_key_input, (void *)0);
+		//mlx_hook(g_mymlx.win_ptr, 2, 1L << 0, ft_key_input, (void *)0);
+		ft_key_input(key);
 		mlx_hook(g_mymlx.win_ptr, 6, (1L << 6), ft_mouse, (void *)0);
 	}
-	ft_map();
+	/***/
 	update();
 	cast_rays();
+
+	/***/
+	
 	if (!g_bmp)
 	{
 		mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);

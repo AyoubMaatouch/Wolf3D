@@ -43,8 +43,6 @@ void	sort(void)
 
 void	ft_get_sp_pos(float x, float y, int i)
 {
-	if (i >= 10000)
-		ft_error("Error\nCheck You Map!");
 	g_sprite[i].x = x;
 	g_sprite[i].y = y;
 }

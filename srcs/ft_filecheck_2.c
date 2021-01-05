@@ -19,18 +19,18 @@ void	ft_get_resolution(int hight, int width)
 
 	mlx_get_screen_size(g_mymlx.mlx_ptr, &sizex, &sizey);
 	g_file.height_resolution = hight;
-	if (hight <= 0 || width <= 0)
+	if (hight == 0 || width == 0)
 		ft_error("Error\nYour Resolution Value Sould be more then 10!");
-	if (hight < 10 || width < 10)
-		ft_error("Error\nYour Resolution Value Sould be more then 10!");
-	if (hight > sizey)
+	if (hight > sizey || hight == -1)
 		g_file.height_resolution = sizey;
 	else
 		g_file.height_resolution = hight;
-	if (width > sizex)
+	if (width > sizex || width == -1)
 		g_file.width_resolution = sizex;
 	else
 		g_file.width_resolution = width;
+	if (g_file.height_resolution < 100 || g_file.width_resolution < 100)
+		ft_error("Error\nYour Resolution Value Sould be more then 10!");
 }
 
 void	ft_get_texture(char c, char *value)
@@ -73,7 +73,7 @@ char	*ft_c(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_isalpha(str[i]) || str[i] == '-')
+		if (!ft_isdigit(str[i]))
 			ft_error("Error\nPlease Check Your Resolution input!");
 		i++;
 	}

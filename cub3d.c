@@ -73,8 +73,15 @@ int		main(int ac, char **av)
 		}
 		ft_init();
 		ft_openfile(av[1]);
+		
 		ft_init_mlx();
-		mlx_loop_hook(g_mymlx.mlx_ptr, check, 0);
+		ft_map();
+		//mlx_loop_hook(g_mymlx.mlx_ptr, check, 0);
+		get_data_textures();
+		check(0);
+		mlx_hook(g_mymlx.win_ptr, 2, 1L << 0, check, 0);
+		
+	
 		if (!g_bmp)
 			mlx_hook(g_mymlx.win_ptr, 17, 0, ft_close, (void *)0);
 		mlx_loop(g_mymlx.mlx_ptr);
