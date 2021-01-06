@@ -59,19 +59,13 @@ int		ft_mouse(int x, int key, int y)
 
 int		check(int key)
 {
-	
 	if (!g_bmp)
 	{
-		//mlx_hook(g_mymlx.win_ptr, 2, 1L << 0, ft_key_input, (void *)0);
 		ft_key_input(key);
 		mlx_hook(g_mymlx.win_ptr, 6, (1L << 6), ft_mouse, (void *)0);
 	}
-	/***/
 	update();
 	cast_rays();
-
-	/***/
-	
 	if (!g_bmp)
 	{
 		mlx_clear_window(g_mymlx.mlx_ptr, g_mymlx.win_ptr);

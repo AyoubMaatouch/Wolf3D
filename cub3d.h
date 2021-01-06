@@ -17,7 +17,6 @@
 ** Library
 */
 
-# include "mlx_beta/mlx.h"
 # include "mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -149,7 +148,7 @@ t_mlx			g_mymlx;
 t_file			g_file;
 t_player		g_myplayer;
 t_txt			g_txt[5];
-t_sprite_info	*g_sprite;
+t_sprite_info	g_sprite[32000];
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 size_t			ft_strlen(const char *str);
 char			*ft_strdup(char const *s1);
@@ -169,7 +168,6 @@ void			ft_putstr(char *s);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 int				ft_key_input(int key);
 int				ft_mouse(int x, int key, int y);
-//int				check(void);
 int				check(int key);
 void			update();
 void			get_data_textures(void);
@@ -212,4 +210,6 @@ int				g_bmp;
 int				g_bonus;
 void			sort(void);
 char			*ft_c(char *str);
+int				mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
+void			ft_check_con(void);
 #endif

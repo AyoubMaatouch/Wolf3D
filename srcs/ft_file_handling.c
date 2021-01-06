@@ -86,31 +86,6 @@ void	ft_first_last_line(void)
 	}
 }
 
-void	ft_map_char(char c)
-{
-	if (c != '0' && c != '1' && c != '2'&& c != ' ' &&
-	c != 'N' && c != 'S' && c != 'E' && c != 'W')
-	{
-		ft_error ("Error\nCheck Your Map!");
-	}
-}
-void 	ft_check_con(void)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < g_file.hight)
-	{
-		j = 0;
-		while (j < (int)ft_strlen(g_file.map[i]))
-		{
-			ft_map_char(g_file.map[i][j]);
-			j++;
-		}
-		i++;
-	}
-}
 void	ft_map_error_check(void)
 {
 	ft_check_con();

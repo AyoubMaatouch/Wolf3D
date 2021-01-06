@@ -11,26 +11,12 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-void ft_sprite_init()
-{
-	int i = 0, j;
-		while (i < g_file.hight)
-	{
-		j = -1;
-		while (++j < (int)ft_strlen(g_file.map[i]) && j < g_sp_index)
-		{
-			if (iswall(j * TILE + TILE / 2, i * TILE + TILE / 2) == 2)
-				ft_get_sp_pos(j * TILE + TILE / 2, i * TILE + TILE / 2,j);
-		}
-		i++;
-	}
-}
+
 void	ft_sprit_rendring(void)
 {
 	int i;
 
 	i = 0;
-	 ft_sprite_init();
 	while (i < g_sp_index)
 	{
 		ft_sp_data(i);
@@ -55,7 +41,7 @@ void	cast_rays(void)
 	ray_angle = g_myplayer.rotation_angle - d2r(30);
 	while (i <= g_file.width_resolution)
 	{
-		ft_ray(i, ray_angle);        
+		ft_ray(i, ray_angle);
 		ray_angle += d2r(60) / g_file.width_resolution;
 		i++;
 	}
@@ -67,10 +53,7 @@ void	cast_rays(void)
 		ft_buildwall(i);
 		i++;
 	}
-	g_sprite = malloc (sizeof(t_sprite_info) * (g_sp_index + 1));
 	ft_sprit_rendring();
-	g_sprite = NULL;
-	free(g_sprite);
 	g_ray = NULL;
 	free(g_ray);
 }

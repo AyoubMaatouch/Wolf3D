@@ -41,6 +41,8 @@ int		iswall(float x, float y)
 		return (2);
 	else if (g_file.map[int_y][int_x] == ' ')
 		return (1);
+	else if (!g_file.map[int_y][int_x])
+		return (1);
 	return (0);
 }
 

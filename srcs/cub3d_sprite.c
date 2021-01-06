@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#define TXY TILE + TILE / 2
+
 
 /*
 ** getting x, y hits and calculating the distance from player to sprite,

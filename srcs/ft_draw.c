@@ -48,8 +48,8 @@ void	ft_map(void)
 		while (++j < ft_strlen(g_file.map[i]))
 		{
 			if (iswall(j * TXY, i * TXY) == 2)
-				g_sp_index++;
-				// ft_get_sp_pos(j * TXY, i * TXY, g_sp_index++);
+				ft_get_sp_pos(j * TXY, i * TXY, g_sp_index++);
+				// g_sp_index++;
 			if (ft_isalpha(g_file.map[i][j]))
 			{
 				df_player_angle(g_file.map[i][j]);
